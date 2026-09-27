@@ -17,7 +17,7 @@ public class PlayerState : MonoBehaviour
     public TurnState currentState;
 
     private float currentCooldown = 0f;
-    private float maxCooldown = 5f;
+    private float maxCooldown = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
