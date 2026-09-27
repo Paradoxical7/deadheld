@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour
 {
     public TurnBasedPlayer player;
+    private BattleStateMachine BSM;
 
     public enum TurnState
     {
@@ -22,7 +23,9 @@ public class PlayerState : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         currentState = TurnState.PROCESSING;
+        
     }
 
     // Update is called once per frame
@@ -36,12 +39,12 @@ public class PlayerState : MonoBehaviour
                 break;
 
             case (TurnState.ADDTOLIST):
+                BSM.PlayersToManage.Add(this.gameObject);
+                currentState = TurnState.WAITING;
                 break;
 
             case (TurnState.WAITING):
-                break;
-
-            case (TurnState.SELECT):
+                //idle
                 break;
 
             case (TurnState.ACTION):
