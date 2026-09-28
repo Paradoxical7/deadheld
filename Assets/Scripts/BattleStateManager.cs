@@ -18,6 +18,14 @@ public class BattleStateMachine : MonoBehaviour
 
     public performAction battleState;
 
+    public enum BattlePhase
+    {
+        PLAYER_PHASE,
+        ENEMY_PHASE
+    }
+    public BattlePhase currentPhase;
+    private int currentEnemyIndex = 0;
+
     public List<HandleTurn> PerformList = new List<HandleTurn>();
     public List<GameObject> PlayerInBattle = new List<GameObject>();
     public List<GameObject> EnemyInBattle = new List<GameObject>();
@@ -46,13 +54,12 @@ public class BattleStateMachine : MonoBehaviour
         // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        playerInput = PlayerGUI.ACTIVATE;
 
         attackPanel.SetActive(false);
         enemySelectPanel.SetActive(false);
 
         EnemyButtons();
-
+        StartPlayerPhase();
     }
 
     // Update is called once per frame
@@ -106,6 +113,12 @@ public class BattleStateMachine : MonoBehaviour
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
+                else if (currentPhase == BattlePhase.PLAYER_PHASE)
+                {
+                    // have player choose their action here
+                    StartEnemyPhase();
+                }
+              
                 break;
 
             case (PlayerGUI.WAITING):
@@ -115,6 +128,48 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.DONE):
                 playerInputDone();
                 break;
+        }
+    }
+
+    void StartPlayerPhase()
+    {
+        currentPhase = BattlePhase.PLAYER_PHASE;
+        PlayersToManage.Clear();
+        PlayersToManage.AddRange(PlayerInBattle);
+        playerInput = PlayerGUI.ACTIVATE;
+    }
+
+    void StartEnemyPhase()
+    {
+        currentPhase = BattlePhase.ENEMY_PHASE;
+        currentEnemyIndex = 0;
+        TakeNextEnemyTurn();
+    }
+
+    void TakeNextEnemyTurn()
+    {
+        if (currentEnemyIndex >= EnemyInBattle.Count)
+        {
+            StartPlayerPhase();
+            return;
+        }
+
+        EnemyState ES = EnemyInBattle[currentEnemyIndex].GetComponent<EnemyState>();
+        ES.TakeTurn();
+    }
+
+    public void onActionComplete()
+    {
+        if (PerformList.Count > 0)
+        {
+            PerformList.RemoveAt(0);
+        }
+        battleState = performAction.WAIT;
+
+        if (currentPhase == BattlePhase.ENEMY_PHASE)
+        {
+            currentEnemyIndex++;
+            TakeNextEnemyTurn();
         }
     }
 
@@ -129,16 +184,11 @@ public class BattleStateMachine : MonoBehaviour
         {
             GameObject newButton = Instantiate(enemyButton) as GameObject;
             EnemySelectButton button = newButton.GetComponent<EnemySelectButton>();
-
             EnemyState currentEnemy = enemy.GetComponent<EnemyState>();
-
             TMP_Text buttonText = newButton.transform.Find("Text (TMP)").gameObject.GetComponent<TMP_Text>();
             buttonText.text = currentEnemy.enemy.name;
-
             button.EnemyPrefab = enemy;
-
             newButton.transform.SetParent(Spacer, false);
-
         }
     }
 
