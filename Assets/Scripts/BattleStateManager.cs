@@ -4,6 +4,7 @@ using UnityEditor.Networking.PlayerConnection;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class BattleStateMachine : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class BattleStateMachine : MonoBehaviour
     private HandleTurn playerChoice;
     public GameObject enemyButton;
     public Transform Spacer;
+    public GameObject attackPanel;
+    public GameObject enemySelectPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,8 +45,11 @@ public class BattleStateMachine : MonoBehaviour
         battleState = performAction.WAIT;
         // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        playerInput = PlayerGUI.ACTIVATE;
+
+        attackPanel.SetActive(false);
+        enemySelectPanel.SetActive(false);
 
         EnemyButtons();
 
@@ -74,16 +80,41 @@ public class BattleStateMachine : MonoBehaviour
 
                 if (PerformList[0].Type == "Player")
                 {
-
+                    //Debug.Log("Player is performing");
+                    PlayerState PS = performer.GetComponent<PlayerState>();
+                    PS.enemyToAttack = PerformList[0].AttackersTarget;
+                    PS.currentState = PlayerState.TurnState.ACTION;
                 }
+
                 battleState = performAction.PERFORMACTION;
 
                 break;
 
             case (performAction.PERFORMACTION):
+                //idle
 
                 break;
+        }
 
+        switch (playerInput)
+        {
+            case (PlayerGUI.ACTIVATE):
+                if (PlayersToManage.Count > 0)
+                {
+                    PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
+                    playerChoice = new HandleTurn();
+                    attackPanel.SetActive(true);
+                    playerInput = PlayerGUI.WAITING;
+                }
+                break;
+
+            case (PlayerGUI.WAITING):
+                //idle
+                break;
+
+            case (PlayerGUI.DONE):
+                playerInputDone();
+                break;
         }
     }
 
@@ -109,5 +140,30 @@ public class BattleStateMachine : MonoBehaviour
             newButton.transform.SetParent(Spacer, false);
 
         }
+    }
+
+    public void Input1() // attack button
+    {
+        playerChoice.Attacker = PlayersToManage[0].name;
+        playerChoice.AttackersGameObject = PlayersToManage[0];
+        playerChoice.Type = "Player";
+
+        attackPanel.SetActive(false);
+        enemySelectPanel.SetActive(true);
+    }
+
+    public void Input2(GameObject chosenEnemy) // enemy selection
+    {
+        playerChoice.AttackersTarget = chosenEnemy;
+        playerInput = PlayerGUI.DONE;
+    }
+
+    void playerInputDone()
+    {
+        PerformList.Add(playerChoice);
+        enemySelectPanel.SetActive(false);
+        PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(false);
+        PlayersToManage.RemoveAt(0);
+        playerInput = PlayerGUI.ACTIVATE;
     }
 }

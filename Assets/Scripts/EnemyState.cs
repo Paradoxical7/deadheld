@@ -18,11 +18,13 @@ public class EnemyState : MonoBehaviour
     public TurnState currentState;
 
     private float currentCooldown = 0f;
-    private float maxCooldown = 2f;
+    private float maxCooldown = 10f;
+
+    // IeNumerator variables
     private Vector3 startPosition;
     private bool actionStarted = false;
     public GameObject playerToAttack;
-    private float animSpeed = 5f;
+    private float animSpeed = 0.3f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -120,11 +122,11 @@ public class EnemyState : MonoBehaviour
 
     private bool MoveTowardsEnemy(Vector3 target)
     {
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed * Time.deltaTime));
+        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
     }
 
     private bool MoveTowardsStart(Vector3 target)
     {
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed * Time.deltaTime));
+        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
     }
 }
