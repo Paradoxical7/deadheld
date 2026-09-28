@@ -8,17 +8,11 @@ public class EnemyState : MonoBehaviour
 
     public enum TurnState
     {
-        PROCESSING,
-        CHOOSEACTION,
         WAITING,
         ACTION,
         DEAD
     }
-
     public TurnState currentState;
-
-    private float currentCooldown = 0f;
-    private float maxCooldown = 10f;
 
     // IeNumerator variables
     private Vector3 startPosition;
@@ -29,7 +23,7 @@ public class EnemyState : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentState = TurnState.PROCESSING;
+        currentState = TurnState.WAITING;
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
     }
@@ -37,42 +31,13 @@ public class EnemyState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(currentState);
-        switch (currentState)
+        if (currentState == TurnState.ACTION)
         {
-            case (TurnState.PROCESSING):
-                UpdateState();
-                break;
-
-            case (TurnState.CHOOSEACTION):
-                ChooseAction();
-                currentState = TurnState.WAITING;
-                break;
-
-            case (TurnState.WAITING):
-                // idle state
-                break;
-
-            case (TurnState.ACTION):
-                StartCoroutine(TimeForAction());
-                break;
-
-            case (TurnState.DEAD):
-                break;
+            StartCoroutine(TimeForAction());
         }
     }
 
-    void UpdateState()
-    {
-        currentCooldown = currentCooldown + Time.deltaTime;
-
-        if (currentCooldown >= maxCooldown)
-        {
-            currentState = TurnState.CHOOSEACTION;
-        }
-    }
-
-    void ChooseAction()
+    public void TakeTurn()
     {
         HandleTurn myAttack = new HandleTurn();
         myAttack.Attacker = enemy.name;
@@ -106,18 +71,10 @@ public class EnemyState : MonoBehaviour
         while (MoveTowardsStart(firstPosition)) { yield return null; }
 
 
-        // remove the performer from the list in BSM
-        BSM.PerformList.RemoveAt(0);
-
-        // reset BSM -> wait
-        BSM.battleState = BattleStateMachine.performAction.WAIT;
-        // end of coroutine
-
         actionStarted = false;
+        currentState = TurnState.WAITING;
 
-        //resets enemy state
-        currentCooldown = 0f;
-        currentState = TurnState.PROCESSING;
+        BSM.onActionComplete(); 
     }
 
     private bool MoveTowardsEnemy(Vector3 target)

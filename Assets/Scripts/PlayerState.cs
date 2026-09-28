@@ -8,21 +8,13 @@ public class PlayerState : MonoBehaviour
 
     public enum TurnState
     {
-        PROCESSING,
-        ADDTOLIST,
         WAITING,
-        SELECT,
         ACTION,
         DEAD
     }
-
     public TurnState currentState;
 
-    private float currentCooldown = 0f;
-    private float maxCooldown = 1f;
     public GameObject selector;
-
-    // IeNumerator variables
     public GameObject enemyToAttack;
     private bool actionStarted = false;
     private Vector3 startPosition;
@@ -34,45 +26,16 @@ public class PlayerState : MonoBehaviour
         startPosition = transform.position;
         selector.SetActive(false);
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
-        currentState = TurnState.PROCESSING;
+        currentState = TurnState.WAITING;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(currentState);
-        switch(currentState)
+        if (currentState == TurnState.ACTION)
         {
-            case (TurnState.PROCESSING):
-                UpdateState();
-                break;
-
-            case (TurnState.ADDTOLIST):
-                BSM.PlayersToManage.Add(this.gameObject);
-                currentState = TurnState.WAITING;
-                break;
-
-            case (TurnState.WAITING):
-                //idle
-                break;
-
-            case (TurnState.ACTION):
-                StartCoroutine(TimeForAction());
-                break;
-
-            case (TurnState.DEAD):
-                break;
-        }
-    }
-
-    void UpdateState()
-    {
-        currentCooldown = currentCooldown + Time.deltaTime; 
-
-        if (currentCooldown >= maxCooldown)
-        {
-            currentState = TurnState.ADDTOLIST;
+            StartCoroutine(TimeForAction());
         }
     }
 
@@ -99,19 +62,10 @@ public class PlayerState : MonoBehaviour
         Vector3 firstPosition = startPosition;
         while (MoveTowardsStart(firstPosition)) { yield return null; }
 
-
-        // remove the performer from the list in BSM
-        BSM.PerformList.RemoveAt(0);
-
-        // reset BSM -> wait
-        BSM.battleState = BattleStateMachine.performAction.WAIT;
-        // end of coroutine
-
         actionStarted = false;
+        currentState = TurnState.WAITING;
 
-        //resets enemy state
-        currentCooldown = 0f;
-        currentState = TurnState.PROCESSING;
+        BSM.onActionComplete();
     }
 
     private bool MoveTowardsEnemy(Vector3 target)
