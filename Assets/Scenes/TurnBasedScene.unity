@@ -507,14 +507,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerState
   player:
     name: player
-    baseHP: 0
+    baseHP: 100
     currentHP: 0
-    baseNRG: 0
+    baseNRG: 5
     currentNRG: 0
+    baseATK: 25
+    currentATK: 0
     agility: 0
     nrgGain: 0
   currentState: 0
   selector: {fileID: 244922183}
+  enemyToAttack: {fileID: 0}
 --- !u!1 &416515909
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42763305, y: 0}
   m_AnchorMax: {x: 1, y: 0.36800003}
-  m_AnchoredPosition: {x: -2.4599304, y: 0.20603943}
+  m_AnchoredPosition: {x: -2.4599304, y: 0.20602417}
   m_SizeDelta: {x: 4.470001, y: 0.415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416515911
@@ -841,10 +844,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyState
   enemy:
     name: Enemy 4
-    baseHP: 0
+    baseHP: 60
     currentHP: 0
-    baseNRG: 0
+    baseNRG: 3
     currentNRG: 0
+    baseATK: 12
+    currentATK: 0
     agility: 0
     nrgGain: 0
   currentState: 0
@@ -873,6 +878,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 541708349558395173, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.8221016
+      objectReference: {fileID: 0}
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.41432804
@@ -896,6 +905,10 @@ PrefabInstance:
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.19998932
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830002421702142467, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.19999886
       objectReference: {fileID: 0}
     - target: {fileID: 3881435618483489076, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1188,10 +1201,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyState
   enemy:
     name: Enemy 3
-    baseHP: 0
+    baseHP: 60
     currentHP: 0
-    baseNRG: 0
+    baseNRG: 3
     currentNRG: 0
+    baseATK: 12
+    currentATK: 0
     agility: 0
     nrgGain: 0
   currentState: 0
@@ -1234,7 +1249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42763305, y: 0}
   m_AnchorMax: {x: 1, y: 0.36800003}
-  m_AnchoredPosition: {x: -2.4599304, y: 0.20603943}
+  m_AnchoredPosition: {x: -2.4599304, y: 0.20602417}
   m_SizeDelta: {x: 4.470001, y: 0.415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &968847624
@@ -1310,7 +1325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.423, y: 0.36800003}
-  m_AnchoredPosition: {x: 0.69958496, y: 0.20603943}
+  m_AnchoredPosition: {x: 0.69958496, y: 0.20602417}
   m_SizeDelta: {x: 1.3990936, y: 0.41499996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1020961331
@@ -1625,6 +1640,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 541708349558395173, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.8221016
+      objectReference: {fileID: 0}
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.41432804
@@ -1648,6 +1667,10 @@ PrefabInstance:
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.19999313
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830002421702142467, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.19999886
       objectReference: {fileID: 0}
     - target: {fileID: 3881435618483489076, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2690,6 +2713,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 541708349558395173, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.8220978
+      objectReference: {fileID: 0}
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.41432804
@@ -2713,6 +2740,14 @@ PrefabInstance:
     - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.19999123
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830002421702142467, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.19999886
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881435618483489076, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.32979774
       objectReference: {fileID: 0}
     - target: {fileID: 3882550956960323832, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_text
@@ -2860,7 +2895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7117251596804860672, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.15371418
+      value: -0.15371513
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3054,6 +3089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleStateMachine
   battleState: 0
+  currentPhase: 0
   PerformList: []
   PlayerInBattle: []
   EnemyInBattle: []
@@ -3097,10 +3133,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyState
   enemy:
     name: Enemy 1
-    baseHP: 0
+    baseHP: 60
     currentHP: 0
-    baseNRG: 0
+    baseNRG: 3
     currentNRG: 0
+    baseATK: 12
+    currentATK: 0
     agility: 0
     nrgGain: 0
   currentState: 0
@@ -3313,10 +3351,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyState
   enemy:
     name: Enemy 2
-    baseHP: 0
+    baseHP: 60
     currentHP: 0
-    baseNRG: 0
+    baseNRG: 3
     currentNRG: 0
+    baseATK: 12
+    currentATK: 0
     agility: 0
     nrgGain: 0
   currentState: 0
@@ -3486,9 +3526,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1020961330}
     m_Modifications:
+    - target: {fileID: 735510583248078540, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.19999886
+      objectReference: {fileID: 0}
     - target: {fileID: 1598382726922659505, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_Name
       value: PlayerBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2817864726604752722, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.8221016
       objectReference: {fileID: 0}
     - target: {fileID: 5058221736961053642, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_Pivot.x
@@ -3570,9 +3618,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6685051436039810287, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.32979774
+      objectReference: {fileID: 0}
     - target: {fileID: 7189246162449092232, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.59999657
+      value: -0.5999985
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3649,6 +3701,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 968847623}
     m_Modifications:
+    - target: {fileID: 541708349558395173, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.8221016
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807364625419689781, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.20000076
+      objectReference: {fileID: 0}
+    - target: {fileID: 3830002421702142467, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.20000076
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881435618483489076, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.32979584
+      objectReference: {fileID: 0}
     - target: {fileID: 5282065272585661889, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3733,9 +3801,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBar1
       objectReference: {fileID: 0}
+    - target: {fileID: 6427221947382040304, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.39999962
+      objectReference: {fileID: 0}
     - target: {fileID: 7117251596804860672, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.047592163
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117251596804860672, guid: 990bd94821adad746857dbc605f3aa42, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.043769836
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

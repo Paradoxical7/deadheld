@@ -27,6 +27,11 @@ public class PlayerState : MonoBehaviour
         selector.SetActive(false);
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         currentState = TurnState.WAITING;
+
+        // Initialize live stats from base values
+        player.currentHP = player.baseHP;
+        player.currentATK = player.baseATK;
+        player.currentNRG = player.baseNRG;
         
     }
 
@@ -57,6 +62,11 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // do dmg
+        EnemyState target = enemyToAttack.GetComponent<EnemyState>();
+        if (target != null)
+        {
+            target.TakeDamage(player.currentATK);
+        }
 
         // slide back
         Vector3 firstPosition = startPosition;
@@ -66,6 +76,22 @@ public class PlayerState : MonoBehaviour
         currentState = TurnState.WAITING;
 
         BSM.onActionComplete();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        player.currentHP -= amount;
+        Debug.Log(player.name + " took " + amount + " damage. HP now: " + player.currentHP);
+
+        if (player.currentHP <= 0)
+        {
+            player.currentHP = 0;
+            currentState = TurnState.DEAD;
+            Debug.Log(player.name + " has died.");
+            BSM.PlayerInBattle.Remove(this.gameObject);
+            BSM.PlayersToManage.Remove(this.gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private bool MoveTowardsEnemy(Vector3 target)
