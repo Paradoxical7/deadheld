@@ -26,6 +26,11 @@ public class EnemyState : MonoBehaviour
         currentState = TurnState.WAITING;
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
+
+        // Initialize live stats from base values
+        enemy.currentHP = enemy.baseHP;
+        enemy.currentATK = enemy.baseATK;
+        enemy.currentNRG = enemy.baseNRG;
     }
 
     // Update is called once per frame
@@ -39,8 +44,16 @@ public class EnemyState : MonoBehaviour
 
     public void TakeTurn()
     {
+
+        if (BSM.PlayerInBattle.Count == 0)
+        {
+            Debug.Log("All players are dead. Game over.");
+            return;
+        }
+
         HandleTurn myAttack = new HandleTurn();
-        myAttack.Attacker = enemy.name;
+        myAttack.Attacker = this.gameObject.name;
+
         myAttack.Type = "Enemy";
         myAttack.AttackersGameObject = this.gameObject;
         myAttack.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
@@ -66,6 +79,12 @@ public class EnemyState : MonoBehaviour
 
         // do dmg
 
+        PlayerState target = playerToAttack.GetComponent<PlayerState>();
+        if (target != null)
+        {
+            target.TakeDamage(enemy.currentATK);
+        }
+
         // slide back
         Vector3 firstPosition = startPosition;
         while (MoveTowardsStart(firstPosition)) { yield return null; }
@@ -75,6 +94,22 @@ public class EnemyState : MonoBehaviour
         currentState = TurnState.WAITING;
 
         BSM.onActionComplete(); 
+    }
+
+
+    public void TakeDamage(float amount)
+    {
+        enemy.currentHP -= amount;
+        Debug.Log(enemy.name + " took " + amount + " damage. HP now: " + enemy.currentHP);
+
+        if (enemy.currentHP <= 0)
+        {
+            enemy.currentHP = 0;
+            currentState = TurnState.DEAD;
+            Debug.Log(enemy.name + " has died.");
+            BSM.EnemyInBattle.Remove(this.gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private bool MoveTowardsEnemy(Vector3 target)
