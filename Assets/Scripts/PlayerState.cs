@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using Unity.Cinemachine;
 
 public class PlayerState : MonoBehaviour
 {
@@ -19,6 +22,16 @@ public class PlayerState : MonoBehaviour
     private bool actionStarted = false;
     private Vector3 startPosition;
     private float animSpeed = 0.3f;
+    public List<PlayerMove> attackMoves = new List<PlayerMove>();
+    public float focusExtraEnergy = 1f;
+    public float focusDamageIncrease = 0.15f;
+    public float guardDamageReduction = 0.5f;
+    private bool isGuarding = false;
+    private bool isFocusing = false;
+
+    // this gets set before attack animation plays
+    private float pendingDamageMultiplier = 1f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +44,7 @@ public class PlayerState : MonoBehaviour
         // Initialize live stats from base values
         player.currentHP = player.baseHP;
         player.currentATK = player.baseATK;
-        player.currentNRG = player.baseNRG;
+        player.currentNRG = 0;
     }
 
     // Update is called once per frame
@@ -41,6 +54,46 @@ public class PlayerState : MonoBehaviour
         {
             StartCoroutine(TimeForAction());
         }
+    }
+
+    public void OnTurnStart()
+    {
+        GainEnergy(1f);
+        isGuarding = false;
+        isFocusing = false;
+    }
+
+    public void GainEnergy(float amount)
+    {
+        player.currentNRG = Mathf.Min(player.currentNRG + amount, player.baseNRG);
+    }
+
+    public bool HasEnoughEnergy(float cost)
+    {
+        return player.currentNRG >= cost;
+    }
+
+    public void SpendEnergy(float amount)
+    {
+        player.currentNRG = Mathf.Max(0f, player.currentNRG -  amount);
+    }
+
+    public void SetPendingDamageMultiplier(float multiplier)
+    {
+        pendingDamageMultiplier = multiplier;
+    }
+
+    public void DoGuard()
+    {
+        isGuarding = true;
+        BSM.onActionComplete();
+    }
+
+    public void DoFocus()
+    {
+        isFocusing = true;
+        GainEnergy(focusExtraEnergy);
+        BSM.onActionComplete();
     }
 
     private IEnumerator TimeForAction()
@@ -61,7 +114,6 @@ public class PlayerState : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // do dmg
-
         EnemyState target = enemyToAttack.GetComponent<EnemyState>();
         if (target != null)
         {

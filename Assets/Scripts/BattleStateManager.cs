@@ -46,17 +46,20 @@ public class BattleStateMachine : MonoBehaviour
     public Transform Spacer;
     public GameObject attackPanel;
     public GameObject enemySelectPanel;
+    public GameObject moveSelectPanel;
+    public List<Button> attackMoveButtons;
+    public List<TMP_Text> attackMoveLabels;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battleState = performAction.WAIT;
-        // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
         attackPanel.SetActive(false);
         enemySelectPanel.SetActive(false);
+        moveSelectPanel.SetActive(false);
 
         EnemyButtons();
         StartPlayerPhase();
@@ -87,10 +90,26 @@ public class BattleStateMachine : MonoBehaviour
 
                 if (PerformList[0].Type == "Player")
                 {
-                    //Debug.Log("Player is performing");
+                    // Debug.Log("Player is performing");
                     PlayerState PS = performer.GetComponent<PlayerState>();
-                    PS.enemyToAttack = PerformList[0].AttackersTarget;
-                    PS.currentState = PlayerState.TurnState.ACTION;
+
+                    switch (PerformList[0].Action)
+                    {
+                        case "Attack":
+                            PS.SpendEnergy(PerformList[0].MoveEnergyCost);
+                            PS.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
+                            PS.enemyToAttack = PerformList[0].AttackersTarget;
+                            PS.currentState = PlayerState.TurnState.ACTION;
+                            break;
+
+                        case "Guard":
+                            PS.DoGuard();
+                            break;
+
+                        case "Focus":
+                            PS.DoFocus();
+                            break;
+                    }
                 }
 
                 battleState = performAction.PERFORMACTION;
@@ -108,6 +127,8 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.ACTIVATE):
                 if (PlayersToManage.Count > 0)
                 {
+                    PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
+                    PS.OnTurnStart();
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     playerChoice = new HandleTurn();
                     attackPanel.SetActive(true);
@@ -192,13 +213,48 @@ public class BattleStateMachine : MonoBehaviour
         }
     }
 
-    public void Input1() // attack button
+    public void OpenAttackMenu()
     {
+        attackPanel.SetActive(false);
+        moveSelectPanel.SetActive(true);
+
+        PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
+
+        for (int i = 0; i < attackMoveButtons.Count; i++)
+        {
+            if (i >= PS.attackMoves.Count)
+            {
+                attackMoveButtons[i].gameObject.SetActive(false); // hide unused slots
+                continue;
+            }
+
+            PlayerMove move = PS.attackMoves[i];
+            attackMoveButtons[i].gameObject.SetActive(true);
+            attackMoveButtons[i].interactable = PS.HasEnoughEnergy(move.energyCost);
+            attackMoveLabels[i].text = move.moveName + "\n(" + move.energyCost + " NRG)";
+        }
+    }
+
+    public void InputAttack(int moveIndex) // attack button
+    {
+        PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
+        PlayerMove move = PS.attackMoves[moveIndex];
+
+        if (!PS.HasEnoughEnergy(move.energyCost))
+        {
+            Debug.Log("Not enough energy for " + move.moveName);
+            return;
+        }
+
         playerChoice.Attacker = PlayersToManage[0].name;
         playerChoice.AttackersGameObject = PlayersToManage[0];
         playerChoice.Type = "Player";
+        playerChoice.Action = "Attack";
+        playerChoice.MoveEnergyCost = move.energyCost;
+        playerChoice.MoveDamageMultiplier = move.dmgMultiplier;
 
         attackPanel.SetActive(false);
+        moveSelectPanel.SetActive(false);
         enemySelectPanel.SetActive(true);
     }
 
