@@ -3,24 +3,63 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform[] patrolPoints;   // list of points to patrol between
+    public Transform[] patrolPoints;
+    public float catchDistance = 1.5f;   // how close counts as "reached" the player
+
     private NavMeshAgent agent;
-    private int currentPoint = 0;      // which point we're heading to right now
+    private EnemySight sight;             // reference to the sight script on this enemy
+    private int currentPoint = 0;
+    private bool combatStarted = false;  // so we only fire the stub once
+
+    private enum State { Patrol, Chase }   // the two behaviors
+    private State state = State.Patrol;    // start out patrolling
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        sight = GetComponent<EnemySight>();     // grab the sight component on the same object
         if (patrolPoints.Length > 0)
-            agent.SetDestination(patrolPoints[0].position);  // head to the first point
+            agent.SetDestination(patrolPoints[0].position);
     }
 
     void Update()
     {
-        // when we get close to the current point, pick the next one
+        // decide which state we should be in
+        if (sight.canSeePlayer)
+            state = State.Chase;
+        else
+            state = State.Patrol;
+
+        // act on the current state
+        if (state == State.Chase)
+            Chase();
+        else
+            Patrol();
+    }
+
+    void Patrol()
+    {
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             currentPoint = (currentPoint + 1) % patrolPoints.Length;
             agent.SetDestination(patrolPoints[currentPoint].position);
         }
+    }
+
+    void Chase()
+    {
+        agent.SetDestination(sight.player.position);  // walk straight at the player
+
+        float dist = Vector3.Distance(transform.position, sight.player.position);
+        if (dist <= catchDistance && !combatStarted)
+        {
+            StartCombat();
+        }
+    }
+
+    void StartCombat()
+    {
+        combatStarted = true;
+        Debug.Log("START COMBAT");   // stub: real turn-based transition hooks in here later
     }
 }
