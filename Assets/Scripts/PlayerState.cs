@@ -132,8 +132,19 @@ public class PlayerState : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        player.currentHP -= amount;
-        Debug.Log(player.name + " took " + amount + " damage. HP now: " + player.currentHP);
+        float finalDamage = amount;
+
+        if (isGuarding)
+        {
+            finalDamage *= (1f - guardDamageReduction);
+        }
+        if (isFocusing)
+        {
+            finalDamage *= (1f + focusDamageIncrease);
+        }
+
+        player.currentHP -= finalDamage;
+        Debug.Log(player.name + " took " + finalDamage + " damage. HP now: " + player.currentHP);
 
         if (player.currentHP <= 0)
         {

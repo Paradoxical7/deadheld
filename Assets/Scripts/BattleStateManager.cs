@@ -79,6 +79,8 @@ public class BattleStateMachine : MonoBehaviour
                 break;
 
             case (performAction.TAKEACTION):
+                battleState = performAction.PERFORMACTION;
+
                 GameObject performer = GameObject.Find(PerformList[0].Attacker);
 
                 if (PerformList[0].Type == "Enemy")
@@ -111,9 +113,6 @@ public class BattleStateMachine : MonoBehaviour
                             break;
                     }
                 }
-
-                battleState = performAction.PERFORMACTION;
-
                 break;
 
             case (performAction.PERFORMACTION):
@@ -134,11 +133,7 @@ public class BattleStateMachine : MonoBehaviour
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
-                else if (currentPhase == BattlePhase.PLAYER_PHASE)
-                {
-                    // have player choose their action here
-                    StartEnemyPhase();
-                }
+                
               
                 break;
 
@@ -191,6 +186,10 @@ public class BattleStateMachine : MonoBehaviour
         {
             currentEnemyIndex++;
             TakeNextEnemyTurn();
+        }
+        else if (currentPhase == BattlePhase.PLAYER_PHASE && PlayersToManage.Count == 0 && PerformList.Count == 0)
+        {
+            StartEnemyPhase();
         }
     }
 
@@ -256,6 +255,30 @@ public class BattleStateMachine : MonoBehaviour
         attackPanel.SetActive(false);
         moveSelectPanel.SetActive(false);
         enemySelectPanel.SetActive(true);
+    }
+
+    public void InputGuard()
+    {
+        playerChoice.Attacker = PlayersToManage[0].name;
+        playerChoice.AttackersGameObject = PlayersToManage[0];
+        playerChoice.Type = "Player";
+        playerChoice.Action = "Guard";
+        playerChoice.AttackersTarget = null;
+
+        attackPanel.SetActive(false);
+        playerInput = PlayerGUI.DONE;
+    }
+
+    public void InputFocus()
+    {
+        playerChoice.Attacker = PlayersToManage[0].name;
+        playerChoice.AttackersGameObject = PlayersToManage[0];
+        playerChoice.Type = "Player";
+        playerChoice.Action = "Focus";
+        playerChoice.AttackersTarget = null;
+
+        attackPanel.SetActive(false);
+        playerInput = PlayerGUI.DONE;
     }
 
     public void Input2(GameObject chosenEnemy) // enemy selection
