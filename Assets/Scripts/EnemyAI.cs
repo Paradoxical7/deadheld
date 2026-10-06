@@ -22,15 +22,20 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(patrolPoints[0].position);
     }
 
-    void Update()
+        void Update()
     {
-        // decide which state we should be in
+        // no player found yet, just patrol and skip the rest
+        if (sight == null || sight.player == null)
+        {
+            Patrol();
+            return;
+        }
+
         if (sight.canSeePlayer)
             state = State.Chase;
         else
             state = State.Patrol;
 
-        // act on the current state
         if (state == State.Chase)
             Chase();
         else
