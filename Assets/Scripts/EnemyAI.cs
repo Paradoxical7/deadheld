@@ -18,8 +18,12 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         sight = GetComponent<EnemySight>();     // grab the sight component on the same object
+
         if (patrolPoints.Length > 0)
             agent.SetDestination(patrolPoints[0].position);
+
+        if (sight == null)
+            Debug.LogWarning("EnemyAI: no EnemySight component found, enemy will only patrol.");
     }
 
         void Update()
@@ -44,6 +48,8 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol()
     {
+        if (patrolPoints.Length == 0) return;   // nothing to patrol, bail safely
+
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             currentPoint = (currentPoint + 1) % patrolPoints.Length;
