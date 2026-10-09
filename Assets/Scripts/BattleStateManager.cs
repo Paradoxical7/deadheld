@@ -81,13 +81,31 @@ public class BattleStateMachine : MonoBehaviour
             case (performAction.TAKEACTION):
                 battleState = performAction.PERFORMACTION;
 
+                //if (PerformList.Count == 0) break;
+
                 GameObject performer = GameObject.Find(PerformList[0].Attacker);
 
                 if (PerformList[0].Type == "Enemy")
                 {
                     EnemyState ES = performer.GetComponent<EnemyState>();
-                    ES.playerToAttack = PerformList[0].AttackersTarget;
-                    ES.currentState = EnemyState.TurnState.ACTION;
+
+                    switch (PerformList[0].Action)
+                    {
+                        case "Attack":
+                            ES.SpendEnergy(PerformList[0].MoveEnergyCost);
+                            ES.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
+                            ES.playerToAttack = PerformList[0].AttackersTarget;
+                            ES.currentState = EnemyState.TurnState.ACTION;
+                            break;
+
+                        case "Guard":
+                            ES.DoGuard();
+                            break;
+
+                        case "Focus":
+                            ES.DoFocus();
+                            break;
+                    }
                 }
 
                 if (PerformList[0].Type == "Player")

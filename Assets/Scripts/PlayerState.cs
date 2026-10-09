@@ -85,12 +85,14 @@ public class PlayerState : MonoBehaviour
 
     public void DoGuard()
     {
+        Debug.Log(gameObject.name + " used Guard");
         isGuarding = true;
         BSM.onActionComplete();
     }
 
     public void DoFocus()
     {
+        Debug.Log(gameObject.name + " used Focus");
         isFocusing = true;
         GainEnergy(focusExtraEnergy);
         BSM.onActionComplete();

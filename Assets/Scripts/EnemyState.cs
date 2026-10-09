@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyState : MonoBehaviour
@@ -20,6 +21,17 @@ public class EnemyState : MonoBehaviour
     public GameObject playerToAttack;
     private float animSpeed = 0.3f;
 
+    // using the player testing moveset for now, can change later once movesets are planned/made
+    public List<PlayerMove> attackMoves = new List<PlayerMove>();
+    public float focusExtraEnergy = 1f;
+    public float focusDamageIncrease = 0.15f;
+    public float guardDamageReduction = 0.5f;
+
+    private bool isGuarding = false;
+    private bool isFocusing = false;
+    private float pendingDamageMultiplier = 1f;
+    private PlayerMove currentMove;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,7 +42,7 @@ public class EnemyState : MonoBehaviour
         // Initialize live stats from base values
         enemy.currentHP = enemy.baseHP;
         enemy.currentATK = enemy.baseATK;
-        enemy.currentNRG = enemy.baseNRG;
+        enemy.currentNRG = 0f;
     }
 
     // Update is called once per frame
@@ -42,6 +54,23 @@ public class EnemyState : MonoBehaviour
         }
     }
 
+    // energy
+    public void GainEnergy(float amount)
+    {
+        enemy.currentNRG = Mathf.Min(enemy.currentNRG + amount, enemy.baseNRG);
+    }
+
+    public void SpendEnergy(float amount)
+    {
+        enemy.currentNRG = Mathf.Max(0f, enemy.currentNRG - amount);
+    }
+
+    public void SetPendingDamageMultiplier(float multiplier)
+    {
+        pendingDamageMultiplier = multiplier;
+    }
+
+    // turn decision
     public void TakeTurn()
     {
 
@@ -51,13 +80,55 @@ public class EnemyState : MonoBehaviour
             return;
         }
 
-        HandleTurn myAttack = new HandleTurn();
-        myAttack.Attacker = this.gameObject.name;
+        GainEnergy(1f);
+        isGuarding = false;
+        isFocusing = false;
 
-        myAttack.Type = "Enemy";
-        myAttack.AttackersGameObject = this.gameObject;
-        myAttack.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
-        BSM.CollectActions(myAttack);
+        HandleTurn myTurn = new HandleTurn();
+        myTurn.Attacker = this.gameObject.name;
+        myTurn.Type = "Enemy";
+        myTurn.AttackersGameObject = this.gameObject;
+
+        List<PlayerMove> affordable = new List<PlayerMove>();
+        foreach (PlayerMove move in attackMoves)
+        {
+            if (enemy.currentNRG >= move.energyCost)
+                affordable.Add(move);
+        }
+
+        if (affordable.Count > 0)
+        {
+            PlayerMove chosen = affordable[Random.Range(0, affordable.Count)];
+            currentMove = chosen;
+            myTurn.Action = "Attack";
+            myTurn.MoveEnergyCost = chosen.energyCost;
+            myTurn.MoveDamageMultiplier = chosen.dmgMultiplier;
+            myTurn.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
+        }
+        else
+        {
+            // this is if the enemy cant afford any moves.
+            // Im having them focus/guard to experiment and see if its good for the game or not
+            myTurn.Action = (Random.value < 0.5f) ? "Focus" : "Guard";
+            myTurn.AttackersTarget = null;
+        }
+
+        BSM.CollectActions(myTurn);
+    }
+
+    public void DoGuard()
+    {
+        Debug.Log(gameObject.name + " used Guard");
+        isGuarding = true;
+        BSM.onActionComplete();
+    }
+
+    public void DoFocus()
+    {
+        Debug.Log(gameObject.name + " used Focus");
+        isFocusing = true;
+        GainEnergy(focusExtraEnergy);
+        BSM.onActionComplete();
     }
 
     private IEnumerator TimeForAction()
@@ -70,19 +141,18 @@ public class EnemyState : MonoBehaviour
         actionStarted = true;
 
         //simple slide to player to animate attacking
-        Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x+1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
+        Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x + 1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
         while (MoveTowardsEnemy(playerPosition)){yield return null;}
 
         
         // wait 
         yield return new WaitForSeconds(0.5f);
 
-        // do dmg
-
         PlayerState target = playerToAttack.GetComponent<PlayerState>();
         if (target != null)
         {
-            target.TakeDamage(enemy.currentATK);
+            Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
+            target.TakeDamage(enemy.currentATK+ pendingDamageMultiplier);
         }
 
         // slide back
@@ -92,6 +162,7 @@ public class EnemyState : MonoBehaviour
 
         actionStarted = false;
         currentState = TurnState.WAITING;
+        pendingDamageMultiplier = 1f;
 
         BSM.onActionComplete(); 
     }
@@ -99,7 +170,9 @@ public class EnemyState : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        enemy.currentHP -= amount;
+        float finalDamage = amount;
+        if (isGuarding) { finalDamage *= (1f - guardDamageReduction); }
+        if (isFocusing) { finalDamage *= (1f + guardDamageReduction); }
         Debug.Log(enemy.name + " took " + amount + " damage. HP now: " + enemy.currentHP);
 
         if (enemy.currentHP <= 0)
