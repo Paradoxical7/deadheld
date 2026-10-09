@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3e3159e3b57d246b6a171e3a2b7975, type: 3}
+  m_Name: ShipPalette
+  m_EditorClassIdentifier: Assembly-CSharp::ShipPalette
+  baseBlack: {r: 0.043137256, g: 0.050980393, b: 0.07058824, a: 1}
+  slate: {r: 0.22745098, g: 0.2627451, b: 0.32156864, a: 1}
+  charcoal: {r: 0.13333334, g: 0.14901961, b: 0.18039216, a: 1}
+  highlight: {r: 0.7882353, g: 0.7764706, b: 0.8666667, a: 1}
+  danger: {r: 0.43137255, g: 0.12156863, b: 0.14901961, a: 1}
+  energy: {r: 0.60784316, g: 0.65882355, b: 0.2901961, a: 1}
+  teal: {r: 0.18431373, g: 0.43137255, b: 0.41960785, a: 1}
+  alertAmber: {r: 0.78039217, g: 0.47843137, b: 0.11764706, a: 1}
+  alertRed: {r: 0.7019608, g: 0.14901961, b: 0.16862746, a: 1}
+  terminal: {r: 0.37254903, g: 0.8392157, b: 0.64705884, a: 1}
