@@ -1009,6 +1009,16 @@ MonoBehaviour:
     nrgGain: 0
   currentState: 0
   playerToAttack: {fileID: 0}
+  attackMoves:
+  - moveName: Attack 1
+    energyCost: 1
+    dmgMultiplier: 0
+  - moveName: Attack 2
+    energyCost: 3
+    dmgMultiplier: 5
+  focusExtraEnergy: 1
+  focusDamageIncrease: 0.15
+  guardDamageReduction: 0.5
 --- !u!1001 &932613985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,6 +1452,16 @@ MonoBehaviour:
     nrgGain: 0
   currentState: 0
   playerToAttack: {fileID: 0}
+  attackMoves:
+  - moveName: Attack 1
+    energyCost: 1
+    dmgMultiplier: 0
+  - moveName: Attack 2
+    energyCost: 3
+    dmgMultiplier: 5
+  focusExtraEnergy: 1
+  focusDamageIncrease: 0.15
+  guardDamageReduction: 0.5
 --- !u!1 &968847622
 GameObject:
   m_ObjectHideFlags: 0
@@ -3865,6 +3885,16 @@ MonoBehaviour:
     nrgGain: 0
   currentState: 0
   playerToAttack: {fileID: 0}
+  attackMoves:
+  - moveName: Attack 1
+    energyCost: 1
+    dmgMultiplier: 0
+  - moveName: Attack 2
+    energyCost: 3
+    dmgMultiplier: 5
+  focusExtraEnergy: 1
+  focusDamageIncrease: 0.15
+  guardDamageReduction: 0.5
 --- !u!136 &2084575512
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4083,6 +4113,16 @@ MonoBehaviour:
     nrgGain: 0
   currentState: 0
   playerToAttack: {fileID: 0}
+  attackMoves:
+  - moveName: Attack 1
+    energyCost: 1
+    dmgMultiplier: 0
+  - moveName: Attack 2
+    energyCost: 3
+    dmgMultiplier: 5
+  focusExtraEnergy: 1
+  focusDamageIncrease: 0.15
+  guardDamageReduction: 0.5
 --- !u!136 &2103111584
 CapsuleCollider:
   m_ObjectHideFlags: 0
