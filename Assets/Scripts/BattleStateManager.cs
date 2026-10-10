@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Networking.PlayerConnection;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class BattleStateMachine : MonoBehaviour
 {
@@ -50,7 +48,6 @@ public class BattleStateMachine : MonoBehaviour
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battleState = performAction.WAIT;
@@ -65,7 +62,6 @@ public class BattleStateMachine : MonoBehaviour
         StartPlayerPhase();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (battleState)
@@ -75,50 +71,48 @@ public class BattleStateMachine : MonoBehaviour
                 {
                     battleState = performAction.TAKEACTION;
                 }
-
                 break;
 
             case (performAction.TAKEACTION):
+                if (PerformList.Count == 0)
+                {
+                    battleState = performAction.WAIT;
+                    break;
+                }
+
                 battleState = performAction.PERFORMACTION;
 
-                //if (PerformList.Count == 0) break;
+                // cache the entry: onActionComplete() can remove it from the list
+                // before this case finishes (Guard/Focus complete instantly)
+                HandleTurn current = PerformList[0];
+                GameObject performer = GameObject.Find(current.Attacker);
 
-                GameObject performer = GameObject.Find(PerformList[0].Attacker);
-
-                if (PerformList[0].Type == "Enemy")
+                if (current.Type == "Enemy")
                 {
                     EnemyState ES = performer.GetComponent<EnemyState>();
 
-                    switch (PerformList[0].Action)
+                    // retarget if the chosen player died in the meantime
+                    GameObject target = current.AttackersTarget;
+                    if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
                     {
-                        case "Attack":
-                            ES.SpendEnergy(PerformList[0].MoveEnergyCost);
-                            ES.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
-                            ES.playerToAttack = PerformList[0].AttackersTarget;
-                            ES.currentState = EnemyState.TurnState.ACTION;
-                            break;
-
-                        case "Guard":
-                            ES.DoGuard();
-                            break;
-
-                        case "Focus":
-                            ES.DoFocus();
-                            break;
+                        target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
                     }
-                }
 
-                if (PerformList[0].Type == "Player")
+                    ES.SpendEnergy(current.MoveEnergyCost);
+                    ES.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
+                    ES.playerToAttack = target;
+                    ES.currentState = EnemyState.TurnState.ACTION;
+                }
+                else if (current.Type == "Player")
                 {
-                    // Debug.Log("Player is performing");
                     PlayerState PS = performer.GetComponent<PlayerState>();
 
-                    switch (PerformList[0].Action)
+                    switch (current.Action)
                     {
                         case "Attack":
-                            PS.SpendEnergy(PerformList[0].MoveEnergyCost);
-                            PS.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
-                            PS.enemyToAttack = PerformList[0].AttackersTarget;
+                            PS.SpendEnergy(current.MoveEnergyCost);
+                            PS.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
+                            PS.enemyToAttack = current.AttackersTarget;
                             PS.currentState = PlayerState.TurnState.ACTION;
                             break;
 
@@ -135,7 +129,6 @@ public class BattleStateMachine : MonoBehaviour
 
             case (performAction.PERFORMACTION):
                 //idle
-
                 break;
         }
 
@@ -151,8 +144,6 @@ public class BattleStateMachine : MonoBehaviour
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
-                
-              
                 break;
 
             case (PlayerGUI.WAITING):

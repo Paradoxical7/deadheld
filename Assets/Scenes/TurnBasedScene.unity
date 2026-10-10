@@ -1008,6 +1008,7 @@ MonoBehaviour:
     agility: 0
     nrgGain: 0
   currentState: 0
+  moves: []
   playerToAttack: {fileID: 0}
 --- !u!1001 &932613985
 PrefabInstance:
@@ -1441,6 +1442,7 @@ MonoBehaviour:
     agility: 0
     nrgGain: 0
   currentState: 0
+  moves: []
   playerToAttack: {fileID: 0}
 --- !u!1 &968847622
 GameObject:
@@ -1734,6 +1736,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061884517}
   m_CullTransparentMesh: 1
+--- !u!1001 &1095071611
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2222222222222222222, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: moves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222222222222222222, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: moves.Array.data[0].moveName
+      value: sadfk
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222222222222222222, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: moves.Array.data[0].dmgMultiplier
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295359177494440511, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Medic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.2028944
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.9663663
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990572496354636426, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2591914e207383c4ea71cec795a9e83e, type: 3}
 --- !u!1 &1172919414
 GameObject:
   m_ObjectHideFlags: 0
@@ -3864,6 +3935,7 @@ MonoBehaviour:
     agility: 0
     nrgGain: 0
   currentState: 0
+  moves: []
   playerToAttack: {fileID: 0}
 --- !u!136 &2084575512
 CapsuleCollider:
@@ -4082,6 +4154,7 @@ MonoBehaviour:
     agility: 0
     nrgGain: 0
   currentState: 0
+  moves: []
   playerToAttack: {fileID: 0}
 --- !u!136 &2103111584
 CapsuleCollider:
@@ -4555,3 +4628,4 @@ SceneRoots:
   - {fileID: 1476656373}
   - {fileID: 2084764658}
   - {fileID: 1999867056}
+  - {fileID: 1095071611}

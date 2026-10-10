@@ -56,6 +56,10 @@ MonoBehaviour:
     agility: 0
     nrgGain: 0
   currentState: 0
+  moves:
+  - moveName: Guard_Attack
+    energyCost: 1
+    dmgMultiplier: 1
   playerToAttack: {fileID: 0}
 --- !u!1 &4767703826607668592
 GameObject:
