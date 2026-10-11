@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerState : MonoBehaviour
 {
@@ -19,6 +20,15 @@ public class PlayerState : MonoBehaviour
     private bool actionStarted = false;
     private Vector3 startPosition;
     private float animSpeed = 0.3f;
+    public List<PlayerMove> attackMoves = new List<PlayerMove>();
+    public float focusExtraEnergy = 1f;
+    public float focusDamageIncrease = 0.15f;
+    public float guardDamageReduction = 0.5f;
+    private bool isGuarding = false;
+    private bool isFocusing = false;
+
+    // this gets set before attack animation plays
+    private float pendingDamageMultiplier = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,8 +41,7 @@ public class PlayerState : MonoBehaviour
         // Initialize live stats from base values
         player.currentHP = player.baseHP;
         player.currentATK = player.baseATK;
-        player.currentNRG = player.baseNRG;
-        
+        player.currentNRG = 0;
     }
 
     // Update is called once per frame
@@ -42,6 +51,48 @@ public class PlayerState : MonoBehaviour
         {
             StartCoroutine(TimeForAction());
         }
+    }
+
+    public void OnTurnStart()
+    {
+        GainEnergy(1f);
+        isGuarding = false;
+        isFocusing = false;
+    }
+
+    public void GainEnergy(float amount)
+    {
+        player.currentNRG = Mathf.Min(player.currentNRG + amount, player.baseNRG);
+    }
+
+    public bool HasEnoughEnergy(float cost)
+    {
+        return player.currentNRG >= cost;
+    }
+
+    public void SpendEnergy(float amount)
+    {
+        player.currentNRG = Mathf.Max(0f, player.currentNRG -  amount);
+    }
+
+    public void SetPendingDamageMultiplier(float multiplier)
+    {
+        pendingDamageMultiplier = multiplier;
+    }
+
+    public void DoGuard()
+    {
+        Debug.Log(gameObject.name + " used Guard");
+        isGuarding = true;
+        BSM.onActionComplete();
+    }
+
+    public void DoFocus()
+    {
+        Debug.Log(gameObject.name + " used Focus");
+        isFocusing = true;
+        GainEnergy(focusExtraEnergy);
+        BSM.onActionComplete();
     }
 
     private IEnumerator TimeForAction()
@@ -65,7 +116,7 @@ public class PlayerState : MonoBehaviour
         EnemyState target = enemyToAttack.GetComponent<EnemyState>();
         if (target != null)
         {
-            target.TakeDamage(player.currentATK);
+            target.TakeDamage(player.currentATK * pendingDamageMultiplier);
         }
 
         // slide back
@@ -74,14 +125,26 @@ public class PlayerState : MonoBehaviour
 
         actionStarted = false;
         currentState = TurnState.WAITING;
+        pendingDamageMultiplier = 1f;
 
         BSM.onActionComplete();
     }
 
     public void TakeDamage(float amount)
     {
-        player.currentHP -= amount;
-        Debug.Log(player.name + " took " + amount + " damage. HP now: " + player.currentHP);
+        float finalDamage = amount;
+
+        if (isGuarding)
+        {
+            finalDamage *= (1f - guardDamageReduction);
+        }
+        if (isFocusing)
+        {
+            finalDamage *= (1f + focusDamageIncrease);
+        }
+
+        player.currentHP -= finalDamage;
+        Debug.Log(player.name + " took " + finalDamage + " damage. HP now: " + player.currentHP);
 
         if (player.currentHP <= 0)
         {
