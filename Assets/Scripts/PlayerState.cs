@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.Cinemachine;
 
+
 public class PlayerState : MonoBehaviour
 {
     public TurnBasedPlayer player;
@@ -31,7 +32,6 @@ public class PlayerState : MonoBehaviour
 
     // this gets set before attack animation plays
     private float pendingDamageMultiplier = 1f;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

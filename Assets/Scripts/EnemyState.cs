@@ -73,7 +73,6 @@ public class EnemyState : MonoBehaviour
     // turn decision
     public void TakeTurn()
     {
-
         if (BSM.PlayerInBattle.Count == 0)
         {
             Debug.Log("All players are dead. Game over.");
@@ -163,10 +162,8 @@ public class EnemyState : MonoBehaviour
         actionStarted = false;
         currentState = TurnState.WAITING;
         pendingDamageMultiplier = 1f;
-
         BSM.onActionComplete(); 
     }
-
 
     public void TakeDamage(float amount)
     {

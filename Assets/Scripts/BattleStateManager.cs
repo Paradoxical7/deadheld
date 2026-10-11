@@ -50,10 +50,14 @@ public class BattleStateMachine : MonoBehaviour
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battleState = performAction.WAIT;
+
+        // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
+
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
@@ -79,9 +83,11 @@ public class BattleStateMachine : MonoBehaviour
                 break;
 
             case (performAction.TAKEACTION):
+
                 battleState = performAction.PERFORMACTION;
 
                 //if (PerformList.Count == 0) break;
+
 
                 GameObject performer = GameObject.Find(PerformList[0].Attacker);
 
@@ -144,14 +150,15 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.ACTIVATE):
                 if (PlayersToManage.Count > 0)
                 {
+
                     PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
                     PS.OnTurnStart();
+
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     playerChoice = new HandleTurn();
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
-                
               
                 break;
 
@@ -209,6 +216,7 @@ public class BattleStateMachine : MonoBehaviour
         {
             StartEnemyPhase();
         }
+
     }
 
     public void CollectActions(HandleTurn input)

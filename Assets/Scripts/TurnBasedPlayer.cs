@@ -9,7 +9,6 @@ public class TurnBasedPlayer
     public float baseNRG;
     public float currentNRG;
 
-
     public float baseATK;
     public float currentATK;
 
