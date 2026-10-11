@@ -151,7 +151,7 @@ public class EnemyState : MonoBehaviour
         if (target != null)
         {
             Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
-            target.TakeDamage(enemy.currentATK+ pendingDamageMultiplier);
+            target.TakeDamage(enemy.currentATK * pendingDamageMultiplier);
         }
 
         // slide back
@@ -169,8 +169,10 @@ public class EnemyState : MonoBehaviour
     {
         float finalDamage = amount;
         if (isGuarding) { finalDamage *= (1f - guardDamageReduction); }
-        if (isFocusing) { finalDamage *= (1f + guardDamageReduction); }
-        Debug.Log(enemy.name + " took " + amount + " damage. HP now: " + enemy.currentHP);
+        if (isFocusing) { finalDamage *= (1f + focusDamageIncrease); }
+
+        enemy.currentHP -= finalDamage;
+        Debug.Log(enemy.name + " took " + finalDamage + " damage. HP now: " + enemy.currentHP);
 
         if (enemy.currentHP <= 0)
         {

@@ -666,7 +666,7 @@ MonoBehaviour:
   attackMoves:
   - moveName: Attack 1
     energyCost: 1
-    dmgMultiplier: 0
+    dmgMultiplier: 1
   - moveName: Attack 2
     energyCost: 3
     dmgMultiplier: 5
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   attackMoves:
   - moveName: Attack 1
     energyCost: 1
-    dmgMultiplier: 0
+    dmgMultiplier: 1
   - moveName: Attack 2
     energyCost: 3
     dmgMultiplier: 5
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   attackMoves:
   - moveName: Attack 1
     energyCost: 1
-    dmgMultiplier: 0
+    dmgMultiplier: 1
   - moveName: Attack 2
     energyCost: 3
     dmgMultiplier: 5
@@ -3888,7 +3888,7 @@ MonoBehaviour:
   attackMoves:
   - moveName: Attack 1
     energyCost: 1
-    dmgMultiplier: 0
+    dmgMultiplier: 1
   - moveName: Attack 2
     energyCost: 3
     dmgMultiplier: 5
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   attackMoves:
   - moveName: Attack 1
     energyCost: 1
-    dmgMultiplier: 0
+    dmgMultiplier: 1
   - moveName: Attack 2
     energyCost: 3
     dmgMultiplier: 5
@@ -4298,7 +4298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2817864726604752722, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.8220997
+      value: -0.8221016
       objectReference: {fileID: 0}
     - target: {fileID: 5058221736961053642, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_Pivot.x
@@ -4386,7 +4386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7189246162449092232, guid: d79d4a2c488d158479ef10fcf764765f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.59999657
+      value: -0.5999985
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,10 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Networking.PlayerConnection;
 using UnityEngine.UI;
 using TMPro;
-using System.Linq;
-using Unity.VisualScripting;
 
 public class BattleStateMachine : MonoBehaviour
 {
@@ -86,21 +83,19 @@ public class BattleStateMachine : MonoBehaviour
 
                 battleState = performAction.PERFORMACTION;
 
-                //if (PerformList.Count == 0) break;
+                HandleTurn turn = PerformList[0];
+                GameObject performer = GameObject.Find(turn.Attacker);
 
-
-                GameObject performer = GameObject.Find(PerformList[0].Attacker);
-
-                if (PerformList[0].Type == "Enemy")
+                if (turn.Type == "Enemy")
                 {
                     EnemyState ES = performer.GetComponent<EnemyState>();
 
-                    switch (PerformList[0].Action)
+                    switch (turn.Action)
                     {
                         case "Attack":
-                            ES.SpendEnergy(PerformList[0].MoveEnergyCost);
-                            ES.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
-                            ES.playerToAttack = PerformList[0].AttackersTarget;
+                            ES.SpendEnergy(turn.MoveEnergyCost);
+                            ES.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
+                            ES.playerToAttack = turn.AttackersTarget;
                             ES.currentState = EnemyState.TurnState.ACTION;
                             break;
 
@@ -114,17 +109,17 @@ public class BattleStateMachine : MonoBehaviour
                     }
                 }
 
-                if (PerformList[0].Type == "Player")
+                if (turn.Type == "Player")
                 {
                     // Debug.Log("Player is performing");
                     PlayerState PS = performer.GetComponent<PlayerState>();
 
-                    switch (PerformList[0].Action)
+                    switch (turn.Action)
                     {
                         case "Attack":
-                            PS.SpendEnergy(PerformList[0].MoveEnergyCost);
-                            PS.SetPendingDamageMultiplier(PerformList[0].MoveDamageMultiplier);
-                            PS.enemyToAttack = PerformList[0].AttackersTarget;
+                            PS.SpendEnergy(turn.MoveEnergyCost);
+                            PS.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
+                            PS.enemyToAttack = turn.AttackersTarget;
                             PS.currentState = PlayerState.TurnState.ACTION;
                             break;
 
