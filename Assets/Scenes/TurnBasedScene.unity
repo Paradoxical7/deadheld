@@ -522,6 +522,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7960316134579769311, guid: 71fcd5949b5fc674f858c9bad6305fcb, type: 3}
   m_PrefabInstance: {fileID: 5891582623153477849}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &310607588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 310607590}
+  - component: {fileID: 310607589}
+  m_Layer: 0
+  m_Name: BattleOutcome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &310607589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310607588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d670e91ed7bb140afc7cb35c1672e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BattleOutcome
+--- !u!4 &310607590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310607588}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.50956, y: 0, z: -1.0669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399179672
 GameObject:
   m_ObjectHideFlags: 0
@@ -4595,3 +4639,4 @@ SceneRoots:
   - {fileID: 1476656373}
   - {fileID: 2084764658}
   - {fileID: 1999867056}
+  - {fileID: 310607590}
