@@ -1,11 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class CameraZone : MonoBehaviour
 {
+    // Every camera a zone knows about registers here, so a prefab needs no scene wiring.
+    private static readonly HashSet<Camera> registered = new HashSet<Camera>();
+
     [SerializeField] private Camera zoneCamera;
     [SerializeField] private Camera fallbackCamera;
     [SerializeField] private Camera[] allCameras;
+    [Tooltip("Turn this zone's camera and AudioListener off at startup. Use on CameraRig pieces; leave off for the scene's starting camera.")]
+    [SerializeField] private bool startDisabled;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetRegistry() => registered.Clear();
+
+    private void Awake()
+    {
+        Register(zoneCamera);
+        Register(fallbackCamera);
+        if(allCameras != null)
+            foreach(var c in allCameras) Register(c);
+
+        if(startDisabled && zoneCamera != null) SetActive(zoneCamera, false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,18 +33,26 @@ public class CameraZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(fallbackCamera != null && other.CompareTag("Player")) Show(fallbackCamera);
+        // Only revert if this zone's camera is still the one showing; a neighbouring zone may already have taken over.
+        if(fallbackCamera != null && zoneCamera.enabled && other.CompareTag("Player")) Show(fallbackCamera);
     }
 
-    private void Show(Camera cam)
+    private static void Register(Camera cam)
     {
-        foreach(var c in allCameras)
-        {
-            bool on = c == cam;
-            c.enabled=on;
-            var listener = c.GetComponent<AudioListener>();
-            if(listener != null) listener.enabled=on;
-        }
+        if(cam != null) registered.Add(cam);
+    }
+
+    private static void Show(Camera cam)
+    {
+        registered.RemoveWhere(c => c == null);
+        foreach(var c in registered) SetActive(c, c == cam);
+    }
+
+    private static void SetActive(Camera cam, bool on)
+    {
+        cam.enabled = on;
+        var listener = cam.GetComponent<AudioListener>();
+        if(listener != null) listener.enabled = on;
     }
 
 }
