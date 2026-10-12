@@ -80,6 +80,10 @@ public class EnemyAI : MonoBehaviour
             GameManager.Instance.SetPendingEnemy(identity.role, identity.stage);
         }
 
+        EnemyID enemyId = GetComponent<EnemyID>();
+        if (enemyId != null && GameManager.Instance != null)
+            GameManager.Instance.pendingEnemyId = enemyId.id;
+
         SceneManager.LoadScene("TurnBasedScene");
     }
 }
