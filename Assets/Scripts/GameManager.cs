@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public EnemyIdentity.EnemyStage pendingEnemyStage;
     public bool hasPendingEnemy = false;
 
+    public enum Outcome { None, Won, Lost }
+    public Outcome lastOutcome = Outcome.None;
+
     void Awake()
     {
         // singleton: keep only one, and survive scene loads

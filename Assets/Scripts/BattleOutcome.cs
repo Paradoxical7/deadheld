@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleOutcome : MonoBehaviour
 {
@@ -35,6 +36,22 @@ public class BattleOutcome : MonoBehaviour
         {
             resolved = true;
             Debug.Log("BattleOutcome: PLAYER LOST");
+        }
+                if (bsm.EnemyInBattle.Count == 0)
+        {
+            resolved = true;
+            Debug.Log("BattleOutcome: PLAYER WON");
+            if (GameManager.Instance != null)
+                GameManager.Instance.lastOutcome = GameManager.Outcome.Won;
+            SceneManager.LoadScene("Room_01");
+        }
+        else if (bsm.PlayerInBattle.Count == 0)
+        {
+            resolved = true;
+            Debug.Log("BattleOutcome: PLAYER LOST");
+            if (GameManager.Instance != null)
+                GameManager.Instance.lastOutcome = GameManager.Outcome.Lost;
+            SceneManager.LoadScene("Room_01");
         }
     }
 }
