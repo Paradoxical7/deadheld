@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -71,6 +72,18 @@ public class EnemyAI : MonoBehaviour
     void StartCombat()
     {
         combatStarted = true;
-        Debug.Log("START COMBAT");   // stub: real turn-based transition hooks in here later
+
+        // read this enemy's identity and hand it to the GameManager
+        EnemyIdentity identity = GetComponent<EnemyIdentity>();
+        if (identity != null && GameManager.Instance != null)
+        {
+            GameManager.Instance.SetPendingEnemy(identity.role, identity.stage);
+        }
+
+        EnemyID enemyId = GetComponent<EnemyID>();
+        if (enemyId != null && GameManager.Instance != null)
+            GameManager.Instance.pendingEnemyId = enemyId.id;
+
+        SceneManager.LoadScene("TurnBasedScene");
     }
 }
