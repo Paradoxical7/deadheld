@@ -18,6 +18,7 @@ public class EnemyState : MonoBehaviour
 
     // Moveset, filled in per enemy/prefab in the Inspector
     public List<PlayerMove> moves = new List<PlayerMove>();
+    public float healThreshold = 0.6f; // heal allies below this fraction of max HP
     private float pendingDamageMultiplier = 1f;
 
     // IEnumerator variables
@@ -67,6 +68,49 @@ public class EnemyState : MonoBehaviour
         pendingDamageMultiplier = multiplier;
     }
 
+    // ---- Healing ----
+    GameObject FindMostHurtAlly()
+    {
+        GameObject best = null;
+        float lowest = healThreshold;
+        foreach (GameObject ally in BSM.EnemyInBattle)
+        {
+            if (ally == null) continue;
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es == null || es.enemy.baseHP <= 0) continue;
+            float pct = es.enemy.currentHP / es.enemy.baseHP;
+            if (pct < lowest)
+            {
+                lowest = pct;
+                best = ally;
+            }
+        }
+        return best; // null if nobody is hurt enough
+    }
+
+    public void Heal(float amount)
+    {
+        enemy.currentHP = Mathf.Min(enemy.currentHP + amount, enemy.baseHP);
+        Debug.Log(enemy.name + " healed " + amount + ". HP now: " + enemy.currentHP);
+    }
+
+    public void DoHeal(GameObject target, float amount)
+    {
+        StartCoroutine(HealRoutine(target, amount));
+    }
+
+    private IEnumerator HealRoutine(GameObject target, float amount)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (target != null)
+        {
+            EnemyState es = target.GetComponent<EnemyState>();
+            if (es != null) es.Heal(amount);
+        }
+        yield return new WaitForSeconds(0.3f);
+        BSM.onActionComplete();
+    }
+
     // ---- AI ----
     public void TakeTurn()
     {
@@ -79,28 +123,42 @@ public class EnemyState : MonoBehaviour
         GainEnergy(1f);
 
         List<PlayerMove> affordable = moves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
+        List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
+        List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
+        GameObject healTarget = FindMostHurtAlly();
 
-        // nothing affordable (or no moves set): skip the turn, but still advance the battle
-        if (affordable.Count == 0)
+        HandleTurn turn = new HandleTurn();
+        turn.Attacker = gameObject.name;
+        turn.Type = "Enemy";
+        turn.AttackersGameObject = gameObject;
+
+        if (healTarget != null && heals.Count > 0)
+        {
+            PlayerMove heal = heals[Random.Range(0, heals.Count)];
+            turn.Action = "Heal";
+            turn.AttackersTarget = healTarget;
+            turn.MoveEnergyCost = heal.energyCost;
+            turn.MoveHealAmount = heal.healAmount;
+        }
+        else if (attacks.Count > 0)
+        {
+            PlayerMove atk = attacks[Random.Range(0, attacks.Count)];
+            turn.Action = "Attack";
+            turn.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
+            turn.MoveEnergyCost = atk.energyCost;
+            turn.MoveDamageMultiplier = atk.dmgMultiplier;
+        }
+        else
         {
             Debug.Log(enemy.name + " can't afford a move and skips.");
             BSM.onActionComplete();
             return;
         }
 
-        PlayerMove move = affordable[Random.Range(0, affordable.Count)];
-
-        HandleTurn myAttack = new HandleTurn();
-        myAttack.Attacker = gameObject.name;
-        myAttack.Type = "Enemy";
-        myAttack.Action = "Attack";
-        myAttack.AttackersGameObject = gameObject;
-        myAttack.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
-        myAttack.MoveEnergyCost = move.energyCost;
-        myAttack.MoveDamageMultiplier = move.dmgMultiplier;
-        BSM.CollectActions(myAttack);
+        BSM.CollectActions(turn);
     }
 
+    // ---- Attack animation + damage ----
     private IEnumerator TimeForAction()
     {
         if (actionStarted)

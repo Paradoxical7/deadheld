@@ -90,18 +90,22 @@ public class BattleStateMachine : MonoBehaviour
                 if (current.Type == "Enemy")
                 {
                     EnemyState ES = performer.GetComponent<EnemyState>();
-
-                    // retarget if the chosen player died in the meantime
-                    GameObject target = current.AttackersTarget;
-                    if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
-                    {
-                        target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
-                    }
-
                     ES.SpendEnergy(current.MoveEnergyCost);
-                    ES.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
-                    ES.playerToAttack = target;
-                    ES.currentState = EnemyState.TurnState.ACTION;
+
+                    if (current.Action == "Heal")
+                    {
+                        ES.DoHeal(current.AttackersTarget, current.MoveHealAmount);
+                    }
+                    else
+                    {
+                        GameObject target = current.AttackersTarget;
+                        if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
+                            target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
+
+                        ES.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
+                        ES.playerToAttack = target;
+                        ES.currentState = EnemyState.TurnState.ACTION;
+                    }
                 }
                 else if (current.Type == "Player")
                 {

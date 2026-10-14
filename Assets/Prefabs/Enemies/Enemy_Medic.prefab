@@ -60,6 +60,14 @@ MonoBehaviour:
   - moveName: Medic_Attack
     energyCost: 0
     dmgMultiplier: 0.2
+    kind: 0
+    healAmount: 0
+  - moveName: Heal
+    energyCost: 0
+    dmgMultiplier: 1
+    kind: 1
+    healAmount: 20
+  healThreshold: 0.6
   playerToAttack: {fileID: 0}
 --- !u!1 &9126798691419569717
 GameObject:
