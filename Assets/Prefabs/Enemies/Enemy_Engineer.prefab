@@ -166,10 +166,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8203849778070628831}
-  - component: {fileID: 3333333333333333333}
   m_Layer: 0
   m_Name: Enemy_Engineer
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,31 +189,3 @@ Transform:
   - {fileID: 5670538533050501912}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3333333333333333333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174704887512687192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21c47dd01a420294488dc87b6f167e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyState
-  enemy:
-    name: Engineer
-    baseHP: 60
-    currentHP: 0
-    baseNRG: 3
-    currentNRG: 0
-    baseATK: 12
-    currentATK: 0
-    agility: 0
-    nrgGain: 0
-  currentState: 0
-  moves:
-  - moveName: Engineer_attack
-    energyCost: 1
-    dmgMultiplier: 0.7
-  playerToAttack: {fileID: 0}

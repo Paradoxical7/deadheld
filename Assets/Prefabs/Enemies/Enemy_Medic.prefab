@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8990572496354636426}
-  - component: {fileID: 2222222222222222222}
   m_Layer: 0
   m_Name: Enemy_Medic
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,42 +32,6 @@ Transform:
   - {fileID: 720319671596301435}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2222222222222222222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4295359177494440511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21c47dd01a420294488dc87b6f167e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyState
-  enemy:
-    name: Medic
-    baseHP: 60
-    currentHP: 0
-    baseNRG: 3
-    currentNRG: 0
-    baseATK: 12
-    currentATK: 0
-    agility: 0
-    nrgGain: 0
-  currentState: 0
-  moves:
-  - moveName: Medic_Attack
-    energyCost: 0
-    dmgMultiplier: 0.2
-    kind: 0
-    healAmount: 0
-  - moveName: Heal
-    energyCost: 0
-    dmgMultiplier: 1
-    kind: 1
-    healAmount: 20
-  healThreshold: 0.6
-  playerToAttack: {fileID: 0}
 --- !u!1 &9126798691419569717
 GameObject:
   m_ObjectHideFlags: 0

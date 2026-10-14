@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
-using Unity.Cinemachine;
 
 public class PlayerState : MonoBehaviour
 {
@@ -31,7 +29,6 @@ public class PlayerState : MonoBehaviour
 
     // this gets set before attack animation plays
     private float pendingDamageMultiplier = 1f;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -119,7 +116,7 @@ public class PlayerState : MonoBehaviour
         EnemyState target = enemyToAttack.GetComponent<EnemyState>();
         if (target != null)
         {
-            target.TakeDamage(player.currentATK);
+            target.TakeDamage(player.currentATK * pendingDamageMultiplier);
         }
 
         // slide back
@@ -128,6 +125,7 @@ public class PlayerState : MonoBehaviour
 
         actionStarted = false;
         currentState = TurnState.WAITING;
+        pendingDamageMultiplier = 1f;
 
         BSM.onActionComplete();
     }

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-using System.Linq;
 
 public class BattleStateMachine : MonoBehaviour
 {
@@ -48,9 +47,14 @@ public class BattleStateMachine : MonoBehaviour
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
 
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battleState = performAction.WAIT;
+
+        // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
+
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
@@ -62,6 +66,7 @@ public class BattleStateMachine : MonoBehaviour
         StartPlayerPhase();
     }
 
+    // Update is called once per frame
     void Update()
     {
         switch (battleState)
@@ -71,52 +76,50 @@ public class BattleStateMachine : MonoBehaviour
                 {
                     battleState = performAction.TAKEACTION;
                 }
+
                 break;
 
             case (performAction.TAKEACTION):
-                if (PerformList.Count == 0)
-                {
-                    battleState = performAction.WAIT;
-                    break;
-                }
 
                 battleState = performAction.PERFORMACTION;
 
-                // cache the entry: onActionComplete() can remove it from the list
-                // before this case finishes (Guard/Focus complete instantly)
-                HandleTurn current = PerformList[0];
-                GameObject performer = GameObject.Find(current.Attacker);
+                HandleTurn turn = PerformList[0];
+                GameObject performer = GameObject.Find(turn.Attacker);
 
-                if (current.Type == "Enemy")
+                if (turn.Type == "Enemy")
                 {
                     EnemyState ES = performer.GetComponent<EnemyState>();
-                    ES.SpendEnergy(current.MoveEnergyCost);
 
-                    if (current.Action == "Heal")
-                    {
-                        ES.DoHeal(current.AttackersTarget, current.MoveHealAmount);
-                    }
-                    else
-                    {
-                        GameObject target = current.AttackersTarget;
-                        if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
-                            target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
-
-                        ES.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
-                        ES.playerToAttack = target;
-                        ES.currentState = EnemyState.TurnState.ACTION;
-                    }
-                }
-                else if (current.Type == "Player")
-                {
-                    PlayerState PS = performer.GetComponent<PlayerState>();
-
-                    switch (current.Action)
+                    switch (turn.Action)
                     {
                         case "Attack":
-                            PS.SpendEnergy(current.MoveEnergyCost);
-                            PS.SetPendingDamageMultiplier(current.MoveDamageMultiplier);
-                            PS.enemyToAttack = current.AttackersTarget;
+                            ES.SpendEnergy(turn.MoveEnergyCost);
+                            ES.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
+                            ES.playerToAttack = turn.AttackersTarget;
+                            ES.currentState = EnemyState.TurnState.ACTION;
+                            break;
+
+                        case "Guard":
+                            ES.DoGuard();
+                            break;
+
+                        case "Focus":
+                            ES.DoFocus();
+                            break;
+                    }
+                }
+
+                if (turn.Type == "Player")
+                {
+                    // Debug.Log("Player is performing");
+                    PlayerState PS = performer.GetComponent<PlayerState>();
+
+                    switch (turn.Action)
+                    {
+                        case "Attack":
+                            PS.SpendEnergy(turn.MoveEnergyCost);
+                            PS.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
+                            PS.enemyToAttack = turn.AttackersTarget;
                             PS.currentState = PlayerState.TurnState.ACTION;
                             break;
 
@@ -133,6 +136,7 @@ public class BattleStateMachine : MonoBehaviour
 
             case (performAction.PERFORMACTION):
                 //idle
+
                 break;
         }
 
@@ -141,13 +145,16 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.ACTIVATE):
                 if (PlayersToManage.Count > 0)
                 {
+
                     PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
                     PS.OnTurnStart();
+
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     playerChoice = new HandleTurn();
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
+              
                 break;
 
             case (PlayerGUI.WAITING):
@@ -204,6 +211,7 @@ public class BattleStateMachine : MonoBehaviour
         {
             StartEnemyPhase();
         }
+
     }
 
     public void CollectActions(HandleTurn input)
