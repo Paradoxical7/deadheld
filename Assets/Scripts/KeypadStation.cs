@@ -10,6 +10,10 @@ public class KeypadStation : MonoBehaviour
     [SerializeField] private TMP_Text display;
     [SerializeField] private TMP_Text message;
     [SerializeField] private UnityEvent onSolved;
+    [SerializeField] private TMP_Text hintText;
+    [SerializeField] private float hintDelay = 30f;
+    [SerializeField] private string hintBeforeCode = "SOMETHING IN THIS ROOM IS STILL ALIVE";
+    [SerializeField] private string hintAfterCode = "ENTER THE CODE FROM THE NOTE";
 
     private const int CodeLength = 4;
 
@@ -41,6 +45,12 @@ public class KeypadStation : MonoBehaviour
         var kb = Keyboard.current;
         if (kb == null) return;
 
+        if (!solved && GameManager.Instance != null && GameManager.Instance.doorUnlocked)
+        {
+            solved = true;
+            if (open) Close();
+        }
+
         if (prompt != null) prompt.SetActive(playerInside && !open && !solved);
 
         if (!open)
@@ -50,6 +60,7 @@ public class KeypadStation : MonoBehaviour
         }
 
         if (solved) return;
+        UpdateHint();
 
         if (kb.escapeKey.wasPressedThisFrame) Close();
         else if (kb.backspaceKey.wasPressedThisFrame) Backspace();
@@ -116,6 +127,18 @@ public class KeypadStation : MonoBehaviour
             entered = "";
             Refresh();
         }
+    }
+    
+    private void UpdateHint()
+    {
+        if (hintText == null) return;
+
+        bool show = Time.timeSinceLevelLoad >= hintDelay;
+        hintText.gameObject.SetActive(show);
+        if (!show) return;
+
+        bool codeFound = GameManager.Instance != null && GameManager.Instance.codeFound;
+        hintText.text = codeFound ? hintAfterCode : hintBeforeCode;
     }
 
     private void Refresh()

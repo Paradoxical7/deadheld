@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PuzzleDoor : MonoBehaviour
 {
@@ -16,6 +17,18 @@ public class PuzzleDoor : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.doorUnlocked)
             OpenInstant();
     }
+    
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    private void Update()
+    {
+        var kb = Keyboard.current;
+        if (kb != null && kb.f9Key.wasPressedThisFrame && !opened)
+        {
+            if (GameManager.Instance != null) GameManager.Instance.doorUnlocked = true;
+            Open();
+        }
+    }
+#endif
 
     public void Open()
     {
