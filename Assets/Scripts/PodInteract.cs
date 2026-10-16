@@ -7,9 +7,12 @@ public class PodInteract : MonoBehaviour
     [SerializeField] private Pod pod;
     [SerializeField] private GameObject prompt;
     [SerializeField] private Camera inspectCamera;
+    [SerializeField] private GameObject readPrompt;
+    [SerializeField] private GameObject notePanel;
 
     private bool playerInside;
     private bool inspecting;
+    private bool noteOpen;
     private TankController player;
     private readonly List<Camera> hiddenCameras = new List<Camera>();
 
@@ -36,7 +39,10 @@ public class PodInteract : MonoBehaviour
 
         if (inspecting)
         {
-            if (kb.eKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame) EndInspect();
+            if (readPrompt != null) readPrompt.SetActive(!noteOpen);
+
+            if (kb.eKey.wasPressedThisFrame && !noteOpen) OpenNote();
+            else if (kb.eKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame) EndInspect();
         }
         else if (canInspect && kb.eKey.wasPressedThisFrame)
         {
@@ -61,12 +67,23 @@ public class PodInteract : MonoBehaviour
 
     private void EndInspect()
     {
+        noteOpen = false;
+        if (notePanel != null) notePanel.SetActive(false);
+        if (readPrompt != null) readPrompt.SetActive(false);
         inspectCamera.enabled = false;
         foreach (var cam in hiddenCameras) cam.enabled = true;
         hiddenCameras.Clear();
 
         LockPlayer(false);
         inspecting = false;
+    }
+
+    private void OpenNote()
+    {
+        noteOpen = true;
+        if (readPrompt != null) readPrompt.SetActive(false);
+        if (notePanel != null) notePanel.SetActive(true);
+        Debug.Log("Code found: 4172");
     }
 
     private void LockPlayer(bool locked)
