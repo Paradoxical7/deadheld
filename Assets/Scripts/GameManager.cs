@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
 
     public enum Outcome { None, Won, Lost }
     public Outcome lastOutcome = Outcome.None;
+    
+    [Header("Room 01 puzzle")]
+    public bool codeFound = false;
+    public bool doorUnlocked = false;
+    public const string PuzzleCode = "4172";
 
     void Awake()
     {
@@ -45,5 +50,19 @@ public class GameManager : MonoBehaviour
     public bool IsEnemyDefeated(string id)
     {
         return !string.IsNullOrEmpty(id) && defeatedEnemies.Contains(id);
+    }
+
+    
+    public void MarkCodeFound()
+    {
+        codeFound = true;
+        Debug.Log("GameManager: puzzle code found");
+    }
+
+    public bool TryUnlockDoor(string entered)
+    {
+        if (entered != PuzzleCode) return false;
+        doorUnlocked = true;
+        return true;
     }
 }

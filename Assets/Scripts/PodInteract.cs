@@ -83,9 +83,8 @@ public class PodInteract : MonoBehaviour
         noteOpen = true;
         if (readPrompt != null) readPrompt.SetActive(false);
         if (notePanel != null) notePanel.SetActive(true);
-        Debug.Log("Code found: 4172");
+        if (GameManager.Instance != null) GameManager.Instance.MarkCodeFound();
     }
-
     private void LockPlayer(bool locked)
     {
         if (player == null) return;
