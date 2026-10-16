@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1497140598862878048}
   - component: {fileID: 9148727751546601743}
   - component: {fileID: 2494832744269827727}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Door_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 6103402540735689144}
   - component: {fileID: 8344760140134966558}
   - component: {fileID: 6470954539350393326}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Door_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,6 +329,7 @@ MonoBehaviour:
   rightDoor: {fileID: 3776764344029196317}
   slideDistance: 1
   slideSpeed: 2
+  closingDelay: 1.5
 --- !u!54 &591597053498955240
 Rigidbody:
   m_ObjectHideFlags: 0
