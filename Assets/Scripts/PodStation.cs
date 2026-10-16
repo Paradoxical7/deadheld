@@ -8,6 +8,11 @@ public class Pod : MonoBehaviour
     [SerializeField] private PodState state = PodState.Empty;
 
     [Header("References")]
+    [Header("Monitor")]
+    [SerializeField] private Renderer monitor;
+    [SerializeField] private Color offColor = new Color(0.043f, 0.051f, 0.071f); // #0B0D12
+    [SerializeField] private Color flatlineColor = new Color(0.157f, 0.325f, 0.271f);     // #285345
+    [SerializeField] private Color pulseColor = new Color(0.373f, 0.839f, 0.647f); // #5FD6A5
     [SerializeField] private Light podLight;
     [SerializeField] private GameObject creature;
 
@@ -33,6 +38,11 @@ public class Pod : MonoBehaviour
         // Smooth 0..1 wave so the light throbs like a heartbeat
         float t = (Mathf.Sin(Time.time*pulseSpeed) + 1f) * 0.5f;
         podLight.intensity = Mathf.Lerp(minIntesity, maxIntesity, t);
+
+        if(monitor != null)
+        {
+            monitor.material.color=Color.Lerp(flatlineColor, pulseColor, t);
+        }
     }
 
     public void SetState(PodState newState)
@@ -46,6 +56,11 @@ public class Pod : MonoBehaviour
 
         podLight.gameObject.SetActive(state == PodState.Pulse);
         creature.SetActive(state != PodState.Empty);
+
+        if(monitor != null)
+        {
+            monitor.material.color = state == PodState.Empty ? offColor : flatlineColor;
+        }
     }
 
     // Lets you flip the state in the Inspector while in Play mode
