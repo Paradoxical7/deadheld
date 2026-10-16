@@ -1050,9 +1050,13 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hintText: {fileID: 1748425535}
-  hintDelay: 5
+  hintDelay: 30
   hintBeforeCode: SOMETHING IN THIS ROOM IS STILL ALIVE
   hintAfterCode: ENTER THE CODE FROM THE NOTE
+  door: {fileID: 1587316706}
+  promptLocked: E - KEYPAD
+  promptClosed: E - OPEN
+  promptOpen: E - CLOSE
 --- !u!1 &1045901965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1431,8 @@ MonoBehaviour:
   obstacle: {fileID: 1587316707}
   slideOffset: {x: 0, y: 0, z: -2.05}
   slideTime: 1
+  closeDelay: 4
+  senseRadius: 3
 --- !u!208 &1587316707
 NavMeshObstacle:
   m_ObjectHideFlags: 0
