@@ -14,6 +14,11 @@ public class KeypadStation : MonoBehaviour
     [SerializeField] private float hintDelay = 30f;
     [SerializeField] private string hintBeforeCode = "SOMETHING IN THIS ROOM IS STILL ALIVE";
     [SerializeField] private string hintAfterCode = "ENTER THE CODE FROM THE NOTE";
+    [SerializeField] private PuzzleDoor door;
+    [SerializeField] private string promptLocked = "E - KEYPAD";
+    [SerializeField] private string promptClosed = "E - OPEN";
+    [SerializeField] private string promptOpen = "E - CLOSE";
+    private TMP_Text promptLabel;
 
     private const int CodeLength = 4;
 
@@ -51,11 +56,18 @@ public class KeypadStation : MonoBehaviour
             if (open) Close();
         }
 
-        if (prompt != null) prompt.SetActive(playerInside && !open && !solved);
-
+                if (prompt != null)
+        {
+            prompt.SetActive(playerInside && !open);
+            UpdatePromptText();
+        }
         if (!open)
         {
-            if (playerInside && !solved && kb.eKey.wasPressedThisFrame) Open();
+            if (playerInside && kb.eKey.wasPressedThisFrame)
+            {
+                if (solved) ToggleDoor();
+                else Open();
+            }
             return;
         }
 
@@ -65,6 +77,28 @@ public class KeypadStation : MonoBehaviour
         if (kb.escapeKey.wasPressedThisFrame) Close();
         else if (kb.backspaceKey.wasPressedThisFrame) Backspace();
         else if (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) Submit();
+    }
+    
+    private void ToggleDoor()
+    {
+        if (door == null)
+        {
+            onSolved.Invoke();
+            return;
+        }
+
+        if (door.IsOpen) door.Close();
+        else door.Open();
+    }
+
+    private void UpdatePromptText()
+    {
+        if (promptLabel == null) promptLabel = prompt.GetComponent<TMP_Text>();
+        if (promptLabel == null) return;
+
+        if (!solved) promptLabel.text = promptLocked;
+        else if (door != null && door.IsOpen) promptLabel.text = promptOpen;
+        else promptLabel.text = promptClosed;
     }
 
     private void Open()

@@ -9,52 +9,85 @@ public class PuzzleDoor : MonoBehaviour
     [SerializeField] private NavMeshObstacle obstacle;
     [SerializeField] private Vector3 slideOffset = new Vector3(0f, 0f, -2.05f);
     [SerializeField] private float slideTime = 1f;
+    [SerializeField] private float closeDelay = 4f;
+    [SerializeField] private float senseRadius = 3f;
 
-    private bool opened;
+    private Vector3 closedPos;
+    private Vector3 openPos;
+    private bool unlocked;
+    private bool isOpen;
+    private float emptyTimer;
+    private Transform player;
+    private Coroutine moving;
 
     private void Start()
     {
+        closedPos = transform.position;
+        openPos = closedPos + slideOffset;
+
+        var p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null) player = p.transform;
+
         if (GameManager.Instance != null && GameManager.Instance.doorUnlocked)
-            OpenInstant();
+            unlocked = true;
     }
-    
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+
     private void Update()
     {
+    #if UNITY_EDITOR || DEVELOPMENT_BUILD
         var kb = Keyboard.current;
-        if (kb != null && kb.f9Key.wasPressedThisFrame && !opened)
+        if (kb != null && kb.f9Key.wasPressedThisFrame && !unlocked)
         {
             if (GameManager.Instance != null) GameManager.Instance.doorUnlocked = true;
             Open();
         }
+    #endif
+        if (!isOpen || player == null) return;
+
+        bool inDoorway = Vector3.Distance(player.position, closedPos) <= senseRadius;
+        if (inDoorway)
+        {
+            emptyTimer = 0f;
+            return;
+        }
+
+        emptyTimer += Time.deltaTime;
+        if (emptyTimer >= closeDelay) SetOpen(false);
     }
-#endif
 
     public void Open()
     {
-        if (opened) return;
-        Unblock();
-        StartCoroutine(Slide());
+        unlocked = true;
+        emptyTimer = 0f;
+        if (!isOpen) SetOpen(true);
     }
+    
+    public bool IsOpen => isOpen;
 
-    private void OpenInstant()
+    public void Close()
     {
-        if (opened) return;
-        Unblock();
-        transform.position += slideOffset;
+        if (isOpen) SetOpen(false);
     }
 
-    private void Unblock()
+    private void SetOpen(bool open)
     {
-        opened = true;
-        if (blocker != null) blocker.enabled = false;
-        if (obstacle != null) obstacle.enabled = false;
+        isOpen = open;
+        emptyTimer = 0f;
+        if (open) SetBlocked(false);
+
+        if (moving != null) StopCoroutine(moving);
+        moving = StartCoroutine(Slide(open ? openPos : closedPos, open));
     }
 
-    private IEnumerator Slide()
+    private void SetBlocked(bool blocked)
+    {
+        if (blocker != null) blocker.enabled = blocked;
+        if (obstacle != null) obstacle.enabled = blocked;
+    }
+
+    private IEnumerator Slide(Vector3 end, bool open)
     {
         Vector3 start = transform.position;
-        Vector3 end = start + slideOffset;
 
         for (float t = 0f; t < slideTime; t += Time.deltaTime)
         {
@@ -62,5 +95,7 @@ public class PuzzleDoor : MonoBehaviour
             yield return null;
         }
         transform.position = end;
+
+        if (!open) SetBlocked(true);
     }
 }
