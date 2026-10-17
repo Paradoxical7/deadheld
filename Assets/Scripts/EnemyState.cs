@@ -9,21 +9,14 @@ public class EnemyState : MonoBehaviour
     private BattleStateMachine BSM;
     public TurnBasedPlayer enemy;
 
-    public enum TurnState
-    {
-        WAITING,
-        ACTION,
-        DEAD
-    }
+    public enum TurnState { WAITING, ACTION, DEAD }
     public TurnState currentState;
 
-    // IEnumerator variables
     private Vector3 startPosition;
     private bool actionStarted = false;
     public GameObject playerToAttack;
     private float animSpeed = 0.3f;
 
-    // moveset, set per enemy/prefab in the Inspector
     [FormerlySerializedAs("moves")]
     public List<PlayerMove> attackMoves = new List<PlayerMove>();
     public float healThreshold = 0.6f; // heal allies below this fraction of max HP
@@ -32,9 +25,7 @@ public class EnemyState : MonoBehaviour
     public float focusDamageIncrease = 0.15f;
     public float guardDamageReduction = 0.5f;
 
-    private bool isGuarding = false;
-    private bool isFocusing = false;
-    private float pendingDamageMultiplier = 1f;
+    public StatusEffects statuses = new StatusEffects();
     private PlayerMove currentMove;
 
     void Start()
@@ -44,7 +35,6 @@ public class EnemyState : MonoBehaviour
         startPosition = transform.position;
 
         enemy.currentHP = enemy.baseHP;
-        enemy.currentATK = enemy.baseATK;
         enemy.currentNRG = 0f;
     }
 
@@ -56,28 +46,20 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    // ---- Energy ----
+    // energy
     public void GainEnergy(float amount)
     {
         enemy.currentNRG = Mathf.Min(enemy.currentNRG + amount, enemy.baseNRG);
     }
 
-    public bool HasEnoughEnergy(float cost)
-    {
-        return enemy.currentNRG >= cost;
-    }
+    public bool HasEnoughEnergy(float cost) { return enemy.currentNRG >= cost; }
 
     public void SpendEnergy(float amount)
     {
         enemy.currentNRG = Mathf.Max(0f, enemy.currentNRG - amount);
     }
 
-    public void SetPendingDamageMultiplier(float multiplier)
-    {
-        pendingDamageMultiplier = multiplier;
-    }
-
-    // ---- Healing ----
+    // healing
     GameObject FindMostHurtAlly()
     {
         GameObject best = null;
@@ -120,7 +102,7 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
-    // ---- AI ----
+    // enemy AI
     public void TakeTurn()
     {
         if (BSM.PlayerInBattle.Count == 0)
@@ -130,8 +112,8 @@ public class EnemyState : MonoBehaviour
         }
 
         GainEnergy(1f);
-        isGuarding = false;
-        isFocusing = false;
+        statuses.Remove(StatusId.Guard);
+        statuses.Remove(StatusId.Focus);
 
         List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
@@ -145,25 +127,18 @@ public class EnemyState : MonoBehaviour
 
         if (healTarget != null && heals.Count > 0)
         {
-            PlayerMove heal = heals[Random.Range(0, heals.Count)];
-            currentMove = heal;
             myTurn.Action = "Heal";
+            myTurn.Move = heals[Random.Range(0, heals.Count)];
             myTurn.AttackersTarget = healTarget;
-            myTurn.MoveEnergyCost = heal.energyCost;
-            myTurn.MoveHealAmount = heal.healAmount;
         }
         else if (attacks.Count > 0)
         {
-            PlayerMove atk = attacks[Random.Range(0, attacks.Count)];
-            currentMove = atk;
             myTurn.Action = "Attack";
+            myTurn.Move = attacks[Random.Range(0, attacks.Count)];
             myTurn.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
-            myTurn.MoveEnergyCost = atk.energyCost;
-            myTurn.MoveDamageMultiplier = atk.dmgMultiplier;
         }
         else
         {
-            // can't afford any move: Guard or Focus (kept from main)
             myTurn.Action = (Random.value < 0.5f) ? "Focus" : "Guard";
             myTurn.AttackersTarget = null;
         }
@@ -171,61 +146,72 @@ public class EnemyState : MonoBehaviour
         BSM.CollectActions(myTurn);
     }
 
-    // ---- Guard / Focus (from main) ----
+    // ---- Actions (called by BSM) ----
+    public void PerformAttack(PlayerMove move, GameObject target)
+    {
+        SpendEnergy(move.energyCost);
+        currentMove = move;
+        playerToAttack = target;
+        currentState = TurnState.ACTION;
+    }
+
     public void DoGuard()
     {
         Debug.Log(gameObject.name + " used Guard");
-        isGuarding = true;
+        statuses.Apply(StatusId.Guard, "Guard", false, 1,
+            s => "Take " + Mathf.RoundToInt(guardDamageReduction * 100f) + "% less damage until its next turn.");
         BSM.onActionComplete();
     }
 
     public void DoFocus()
     {
         Debug.Log(gameObject.name + " used Focus");
-        isFocusing = true;
+        statuses.Apply(StatusId.Focus, "Focus", true, 1,
+            s => "Take " + Mathf.RoundToInt(focusDamageIncrease * 100f) + "% more damage until its next turn.");
         GainEnergy(focusExtraEnergy);
         BSM.onActionComplete();
     }
 
-    // ---- Attack animation + damage ----
     private IEnumerator TimeForAction()
     {
-        if (actionStarted)
-        {
-            yield break;
-        }
-
+        if (actionStarted) yield break;
         actionStarted = true;
 
+        AttackRoll roll = Combat.PrepareAttack(currentMove.damage, enemy.critChance, statuses);
+
         Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x + 1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
-        while (MoveTowardsEnemy(playerPosition)) { yield return null; }
+        while (MoveTo(playerPosition)) { yield return null; }
 
         yield return new WaitForSeconds(0.5f);
 
         PlayerState target = playerToAttack.GetComponent<PlayerState>();
         if (target != null)
         {
-            Debug.Log(gameObject.name + " used " + (currentMove != null ? currentMove.moveName : "an attack") + " on " + playerToAttack.name);
-            target.TakeDamage(enemy.currentATK * pendingDamageMultiplier);
+            Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
+            target.TakeDamage(roll.damage, roll.isCrit);
         }
 
-        Vector3 firstPosition = startPosition;
-        while (MoveTowardsStart(firstPosition)) { yield return null; }
+        while (MoveTo(startPosition)) { yield return null; }
 
         actionStarted = false;
         currentState = TurnState.WAITING;
-        pendingDamageMultiplier = 1f;
         BSM.onActionComplete();
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, bool wasCrit = false)
     {
+        if (Combat.RollDodge(enemy.dodgeChance))
+        {
+            Debug.Log(enemy.name + " dodged the attack!");
+            return;
+        }
+
         float finalDamage = amount;
-        if (isGuarding) { finalDamage *= (1f - guardDamageReduction); }
-        if (isFocusing) { finalDamage *= (1f + focusDamageIncrease); }
+        if (statuses.Has(StatusId.Guard)) { finalDamage *= (1f - guardDamageReduction); }
+        if (statuses.Has(StatusId.Focus)) { finalDamage *= (1f + focusDamageIncrease); }
 
         enemy.currentHP -= finalDamage;
-        Debug.Log(enemy.name + " took " + finalDamage + " damage. HP now: " + enemy.currentHP);
+        Debug.Log(enemy.name + (wasCrit ? " took a CRITICAL hit: " : " took ") + finalDamage + " damage. HP now: " + enemy.currentHP);
 
         if (enemy.currentHP <= 0)
         {
@@ -237,12 +223,7 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    private bool MoveTowardsEnemy(Vector3 target)
-    {
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
-    }
-
-    private bool MoveTowardsStart(Vector3 target)
+    private bool MoveTo(Vector3 target)
     {
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
     }

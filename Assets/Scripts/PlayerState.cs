@@ -7,12 +7,7 @@ public class PlayerState : MonoBehaviour
     public TurnBasedPlayer player;
     private BattleStateMachine BSM;
 
-    public enum TurnState
-    {
-        WAITING,
-        ACTION,
-        DEAD
-    }
+    public enum TurnState { WAITING, ACTION, DEAD }
     public TurnState currentState;
 
     public GameObject selector;
@@ -20,17 +15,20 @@ public class PlayerState : MonoBehaviour
     private bool actionStarted = false;
     private Vector3 startPosition;
     private float animSpeed = 0.3f;
-    public List<PlayerMove> attackMoves = new List<PlayerMove>();
+
+    // Moves come from the equipped weapon
+    public WeaponData weapon;
+    private static readonly List<PlayerMove> noMoves = new List<PlayerMove>();
+    public List<PlayerMove> Moves { get { return weapon != null ? weapon.moves : noMoves; } }
+
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
     public float guardDamageReduction = 0.5f;
-    private bool isGuarding = false;
-    private bool isFocusing = false;
 
-    // this gets set before attack animation plays
-    private float pendingDamageMultiplier = 1f;
+    public StatusEffects statuses = new StatusEffects();
+    private readonly Dictionary<PlayerMove, int> cooldowns = new Dictionary<PlayerMove, int>();
+    private PlayerMove pendingMove;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startPosition = transform.position;
@@ -38,13 +36,10 @@ public class PlayerState : MonoBehaviour
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         currentState = TurnState.WAITING;
 
-        // Initialize live stats from base values
         player.currentHP = player.baseHP;
-        player.currentATK = player.baseATK;
         player.currentNRG = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentState == TurnState.ACTION)
@@ -56,95 +51,155 @@ public class PlayerState : MonoBehaviour
     public void OnTurnStart()
     {
         GainEnergy(1f);
-        isGuarding = false;
-        isFocusing = false;
+        statuses.Remove(StatusId.Guard);
+        statuses.Remove(StatusId.Focus);
+
+        foreach (PlayerMove move in new List<PlayerMove>(cooldowns.Keys))
+        {
+            cooldowns[move]--;
+            if (cooldowns[move] <= 0) cooldowns.Remove(move);
+        }
     }
 
+    // energy & cooldowns
     public void GainEnergy(float amount)
     {
         player.currentNRG = Mathf.Min(player.currentNRG + amount, player.baseNRG);
     }
 
-    public bool HasEnoughEnergy(float cost)
-    {
-        return player.currentNRG >= cost;
-    }
+    public bool HasEnoughEnergy(float cost) { return player.currentNRG >= cost; }
 
     public void SpendEnergy(float amount)
     {
-        player.currentNRG = Mathf.Max(0f, player.currentNRG -  amount);
+        player.currentNRG = Mathf.Max(0f, player.currentNRG - amount);
     }
 
-    public void SetPendingDamageMultiplier(float multiplier)
+    public int CooldownRemaining(PlayerMove move)
     {
-        pendingDamageMultiplier = multiplier;
+        int c;
+        return cooldowns.TryGetValue(move, out c) ? c : 0;
+    }
+
+    public bool CanUse(PlayerMove move)
+    {
+        return HasEnoughEnergy(move.energyCost) && CooldownRemaining(move) == 0;
+    }
+
+    private void BeginMove(PlayerMove move)
+    {
+        SpendEnergy(move.energyCost);
+        if (move.cooldown > 0) cooldowns[move] = move.cooldown + 1;
+    }
+
+    // actions
+    public void PerformAttack(PlayerMove move, GameObject target)
+    {
+        BeginMove(move);
+        pendingMove = move;
+        enemyToAttack = target;
+        currentState = TurnState.ACTION;
+    }
+
+    public void PerformBuff(PlayerMove move)
+    {
+        BeginMove(move);
+        Debug.Log(gameObject.name + " used " + move.moveName);
+
+        switch (move.effect)
+        {
+            case MoveEffect.Aim:
+                statuses.Apply(StatusId.Aim, "Aim", false, 1,
+                    s => "Your next attacking move is a guaranteed critical hit.");
+                break;
+
+            case MoveEffect.Chamber:
+                statuses.Apply(StatusId.Chamber, "Chambered", false, Combat.MaxChamberShells,
+                    s => s + "/" + Combat.MaxChamberShells + " shells loaded. Your next attacking move deals +"
+                         + Mathf.RoundToInt(s * Combat.ChamberBonusPerShell * 100f) + "% damage.");
+                break;
+        }
+
+        BSM.onActionComplete();
     }
 
     public void DoGuard()
     {
         Debug.Log(gameObject.name + " used Guard");
-        isGuarding = true;
+        statuses.Apply(StatusId.Guard, "Guard", false, 1,
+            s => "Take " + Mathf.RoundToInt(guardDamageReduction * 100f) + "% less damage until your next turn.");
         BSM.onActionComplete();
     }
 
     public void DoFocus()
     {
         Debug.Log(gameObject.name + " used Focus");
-        isFocusing = true;
+        statuses.Apply(StatusId.Focus, "Focus", true, 1,
+            s => "Take " + Mathf.RoundToInt(focusDamageIncrease * 100f) + "% more damage until your next turn.");
         GainEnergy(focusExtraEnergy);
         BSM.onActionComplete();
     }
 
     private IEnumerator TimeForAction()
     {
-        if (actionStarted)
-        {
-            yield break;
-        }
-
+        if (actionStarted) yield break;
         actionStarted = true;
 
-        //simple slide to player to animate attacking
-        Vector3 enemyPosition = new Vector3(enemyToAttack.transform.position.x - 1.5f, enemyToAttack.transform.position.y, enemyToAttack.transform.position.z);
-        while (MoveTowardsEnemy(enemyPosition)) { yield return null;}
+        AttackRoll roll = Combat.PrepareAttack(pendingMove.damage, player.critChance, statuses);
 
-
-        // wait 
-        yield return new WaitForSeconds(0.5f);
-
-        // do dmg
-        EnemyState target = enemyToAttack.GetComponent<EnemyState>();
-        if (target != null)
+        if (pendingMove.target == MoveTarget.AllEnemies)
         {
-            target.TakeDamage(player.currentATK * pendingDamageMultiplier);
-        }
+            yield return new WaitForSeconds(0.5f);
 
-        // slide back
-        Vector3 firstPosition = startPosition;
-        while (MoveTowardsStart(firstPosition)) { yield return null; }
+            // copy the list, enemies remove themselves when they die
+            foreach (GameObject enemyObj in new List<GameObject>(BSM.EnemyInBattle))
+            {
+                DealDamage(enemyObj, roll);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            Vector3 enemyPosition = new Vector3(enemyToAttack.transform.position.x - 1.5f, enemyToAttack.transform.position.y, enemyToAttack.transform.position.z);
+            while (MoveTo(enemyPosition)) { yield return null; }
+
+            yield return new WaitForSeconds(0.5f);
+
+            DealDamage(enemyToAttack, roll);
+
+            while (MoveTo(startPosition)) { yield return null; }
+        }
 
         actionStarted = false;
         currentState = TurnState.WAITING;
-        pendingDamageMultiplier = 1f;
+        pendingMove = null;
 
         BSM.onActionComplete();
     }
 
-    public void TakeDamage(float amount)
+    private void DealDamage(GameObject enemyObj, AttackRoll roll)
     {
-        float finalDamage = amount;
+        EnemyState target = enemyObj.GetComponent<EnemyState>();
+        if (target == null) return;
 
-        if (isGuarding)
+        Debug.Log(gameObject.name + " used " + pendingMove.moveName + " on " + enemyObj.name);
+        target.TakeDamage(roll.damage, roll.isCrit);
+    }
+
+    public void TakeDamage(float amount, bool wasCrit = false)
+    {
+        if (Combat.RollDodge(player.dodgeChance))
         {
-            finalDamage *= (1f - guardDamageReduction);
+            Debug.Log(player.name + " dodged the attack!");
+            return;
         }
-        if (isFocusing)
-        {
-            finalDamage *= (1f + focusDamageIncrease);
-        }
+
+        float finalDamage = amount;
+        if (statuses.Has(StatusId.Guard)) { finalDamage *= (1f - guardDamageReduction); }
+        if (statuses.Has(StatusId.Focus)) { finalDamage *= (1f + focusDamageIncrease); }
 
         player.currentHP -= finalDamage;
-        Debug.Log(player.name + " took " + finalDamage + " damage. HP now: " + player.currentHP);
+        Debug.Log(player.name + (wasCrit ? " took a CRITICAL hit: " : " took ") + finalDamage + " damage. HP now: " + player.currentHP);
 
         if (player.currentHP <= 0)
         {
@@ -157,12 +212,7 @@ public class PlayerState : MonoBehaviour
         }
     }
 
-    private bool MoveTowardsEnemy(Vector3 target)
-    {
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
-    }
-
-    private bool MoveTowardsStart(Vector3 target)
+    private bool MoveTo(Vector3 target)
     {
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
     }

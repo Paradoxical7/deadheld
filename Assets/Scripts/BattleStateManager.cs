@@ -1,25 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using System.Linq;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleStateMachine : MonoBehaviour
 {
     // Loop: Wait -> Take Action -> Perform Action -> Loop back to Wait
-    public enum performAction
-    {
-        WAIT,
-        TAKEACTION,
-        PERFORMACTION
-    }
-
+    public enum performAction { WAIT, TAKEACTION, PERFORMACTION }
     public performAction battleState;
 
-    public enum BattlePhase
-    {
-        PLAYER_PHASE,
-        ENEMY_PHASE
-    }
+    public enum BattlePhase { PLAYER_PHASE, ENEMY_PHASE }
     public BattlePhase currentPhase;
     private int currentEnemyIndex = 0;
 
@@ -27,18 +18,11 @@ public class BattleStateMachine : MonoBehaviour
     public List<GameObject> PlayerInBattle = new List<GameObject>();
     public List<GameObject> EnemyInBattle = new List<GameObject>();
 
-    public enum PlayerGUI
-    {
-        ACTIVATE,
-        WAITING,
-        INPUT1, // basic attack
-        INPUT2, // select enemy
-        DONE
-    }
-
+    public enum PlayerGUI { ACTIVATE, WAITING, INPUT1, INPUT2, DONE }
     public PlayerGUI playerInput;
     public List<GameObject> PlayersToManage = new List<GameObject>();
     private HandleTurn playerChoice;
+
     public GameObject enemyButton;
     public Transform Spacer;
     public GameObject attackPanel;
@@ -46,17 +30,21 @@ public class BattleStateMachine : MonoBehaviour
     public GameObject moveSelectPanel;
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
+    public BuffBar buffBar;
 
+    public bool randomizeEnemyCount = true;
+    public int minEnemies = 1;
+    public int maxEnemies = 4;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         battleState = performAction.WAIT;
 
-        // EnemyInBattle = EnemyInBattle.OrderBy(e => e.transform.position.x).ToList(); I wanted to make the buttons appear in a set order but ill implement later
-
         EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        EnemyInBattle = EnemyInBattle.OrderBy(e => TrailingNumber(e.name)).ThenBy(e => e.name).ToList();
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+
+        if (randomizeEnemyCount) RandomizeEnemyCount(); 
 
         attackPanel.SetActive(false);
         enemySelectPanel.SetActive(false);
@@ -66,7 +54,12 @@ public class BattleStateMachine : MonoBehaviour
         StartPlayerPhase();
     }
 
-    // Update is called once per frame
+    static int TrailingNumber(string s)
+    {
+        System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(s, @"\d+$");
+        return m.Success ? int.Parse(m.Value) : int.MaxValue;
+    }
+
     void Update()
     {
         switch (battleState)
@@ -76,14 +69,12 @@ public class BattleStateMachine : MonoBehaviour
                 {
                     battleState = performAction.TAKEACTION;
                 }
-
                 break;
 
             case (performAction.TAKEACTION):
-
                 battleState = performAction.PERFORMACTION;
 
-                HandleTurn turn = PerformList[0];
+                HandleTurn turn = PerformList[0]; // cache: instant actions can change the list
                 GameObject performer = GameObject.Find(turn.Attacker);
 
                 if (turn.Type == "Enemy")
@@ -93,21 +84,18 @@ public class BattleStateMachine : MonoBehaviour
                     switch (turn.Action)
                     {
                         case "Attack":
-                        {
-                            GameObject target = turn.AttackersTarget;
-                            if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
-                                target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
+                            {
+                                GameObject target = turn.AttackersTarget;
+                                if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
+                                    target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
 
-                            ES.SpendEnergy(turn.MoveEnergyCost);
-                            ES.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
-                            ES.playerToAttack = target;
-                            ES.currentState = EnemyState.TurnState.ACTION;
-                            break;
-                        }
+                                ES.PerformAttack(turn.Move, target);
+                                break;
+                            }
 
                         case "Heal":
-                            ES.SpendEnergy(turn.MoveEnergyCost);
-                            ES.DoHeal(turn.AttackersTarget, turn.MoveHealAmount);
+                            ES.SpendEnergy(turn.Move.energyCost);
+                            ES.DoHeal(turn.AttackersTarget, turn.Move.healAmount);
                             break;
 
                         case "Guard":
@@ -119,19 +107,18 @@ public class BattleStateMachine : MonoBehaviour
                             break;
                     }
                 }
-
-                if (turn.Type == "Player")
+                else if (turn.Type == "Player")
                 {
-                    // Debug.Log("Player is performing");
                     PlayerState PS = performer.GetComponent<PlayerState>();
 
                     switch (turn.Action)
                     {
                         case "Attack":
-                            PS.SpendEnergy(turn.MoveEnergyCost);
-                            PS.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
-                            PS.enemyToAttack = turn.AttackersTarget;
-                            PS.currentState = PlayerState.TurnState.ACTION;
+                            PS.PerformAttack(turn.Move, turn.AttackersTarget);
+                            break;
+
+                        case "Buff":
+                            PS.PerformBuff(turn.Move);
                             break;
 
                         case "Guard":
@@ -146,8 +133,6 @@ public class BattleStateMachine : MonoBehaviour
                 break;
 
             case (performAction.PERFORMACTION):
-                //idle
-
                 break;
         }
 
@@ -156,20 +141,18 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.ACTIVATE):
                 if (PlayersToManage.Count > 0)
                 {
-
                     PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
                     PS.OnTurnStart();
+                    if (buffBar != null) buffBar.Bind(PS.statuses);
 
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     playerChoice = new HandleTurn();
                     attackPanel.SetActive(true);
                     playerInput = PlayerGUI.WAITING;
                 }
-              
                 break;
 
             case (PlayerGUI.WAITING):
-                //idle
                 break;
 
             case (PlayerGUI.DONE):
@@ -222,7 +205,6 @@ public class BattleStateMachine : MonoBehaviour
         {
             StartEnemyPhase();
         }
-
     }
 
     public void CollectActions(HandleTurn input)
@@ -253,40 +235,50 @@ public class BattleStateMachine : MonoBehaviour
 
         for (int i = 0; i < attackMoveButtons.Count; i++)
         {
-            if (i >= PS.attackMoves.Count)
+            if (i >= PS.Moves.Count)
             {
                 attackMoveButtons[i].gameObject.SetActive(false); // hide unused slots
                 continue;
             }
 
-            PlayerMove move = PS.attackMoves[i];
+            PlayerMove move = PS.Moves[i];
+            int cd = PS.CooldownRemaining(move);
+
             attackMoveButtons[i].gameObject.SetActive(true);
-            attackMoveButtons[i].interactable = PS.HasEnoughEnergy(move.energyCost);
-            attackMoveLabels[i].text = move.moveName + "\n(" + move.energyCost + " NRG)";
+            attackMoveButtons[i].interactable = PS.CanUse(move);
+            attackMoveLabels[i].text = move.moveName + " (" + move.energyCost + " nrg)"
+                                       + (cd > 0 ? "\nCooldown: " + cd : "");
         }
     }
 
-    public void InputAttack(int moveIndex) // attack button
+    public void InputAttack(int moveIndex) // move buttons
     {
         PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
-        PlayerMove move = PS.attackMoves[moveIndex];
+        PlayerMove move = PS.Moves[moveIndex];
 
-        if (!PS.HasEnoughEnergy(move.energyCost))
+        if (!PS.CanUse(move))
         {
-            Debug.Log("Not enough energy for " + move.moveName);
+            Debug.Log("Can't use " + move.moveName + " right now (energy or cooldown)");
             return;
         }
 
         playerChoice.Attacker = PlayersToManage[0].name;
         playerChoice.AttackersGameObject = PlayersToManage[0];
         playerChoice.Type = "Player";
-        playerChoice.Action = "Attack";
-        playerChoice.MoveEnergyCost = move.energyCost;
-        playerChoice.MoveDamageMultiplier = move.dmgMultiplier;
+        playerChoice.Move = move;
+        playerChoice.Action = (move.kind == MoveKind.Buff) ? "Buff" : "Attack";
 
         attackPanel.SetActive(false);
         moveSelectPanel.SetActive(false);
-        enemySelectPanel.SetActive(true);
+
+        if (move.kind == MoveKind.Attack && move.target == MoveTarget.SingleEnemy)
+        {
+            enemySelectPanel.SetActive(true); // pick a target
+        }
+        else
+        {
+            playerInput = PlayerGUI.DONE; // self buffs and AOE need no target
+        }
     }
 
     public void InputGuard()
@@ -326,5 +318,21 @@ public class BattleStateMachine : MonoBehaviour
         PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(false);
         PlayersToManage.RemoveAt(0);
         playerInput = PlayerGUI.ACTIVATE;
+    }
+
+    void RandomizeEnemyCount()
+    {
+        // for ints, Random.Range's max is exclusive, so +1
+        int count = UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
+        count = Mathf.Clamp(count, 1, EnemyInBattle.Count);
+
+        while (EnemyInBattle.Count > count)
+        {
+            GameObject extra = EnemyInBattle[EnemyInBattle.Count - 1];
+            EnemyInBattle.RemoveAt(EnemyInBattle.Count - 1);
+            extra.SetActive(false);
+        }
+
+        Debug.Log("Fighting " + EnemyInBattle.Count + " enemies");
     }
 }
