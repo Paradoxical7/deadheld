@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 28405689}
   - component: {fileID: 28405691}
   - component: {fileID: 28405690}
+  - component: {fileID: 28405692}
   m_Layer: 5
   m_Name: Note
   m_TagString: Untagged
@@ -256,6 +257,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28405688}
   m_CullTransparentMesh: 1
+--- !u!114 &28405692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28405688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06abf05303d951d48a9a6385267af592, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodeNoteText
+  label: {fileID: 0}
+  prefix: 'EMERGENCY RELEASE '
 --- !u!1 &208373722
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +581,7 @@ MonoBehaviour:
   lastOutcome: 0
   codeFound: 0
   doorUnlocked: 0
+  puzzleCode: 
 --- !u!4 &506273265
 Transform:
   m_ObjectHideFlags: 0
@@ -1054,6 +1070,7 @@ MonoBehaviour:
   hintBeforeCode: SOMETHING IN THIS ROOM IS STILL ALIVE
   hintAfterCode: ENTER THE CODE FROM THE NOTE
   door: {fileID: 1587316706}
+  slidingDoor: {fileID: 1397936799}
   promptLocked: E - KEYPAD
   promptClosed: E - OPEN
   promptOpen: E - CLOSE
@@ -1333,6 +1350,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347985745}
   m_CullTransparentMesh: 1
+--- !u!1001 &1397936798
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7438898
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.18051997
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.767986
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 609971152320944747, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863927982132313068, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: m_Name
+      value: SlidingDoor_Double
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570777994517340785, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+      propertyPath: requiresUnlock
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+--- !u!114 &1397936799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7570777994517340785, guid: 97a0b8cd2697b4fc3a014a4a940dc1f2, type: 3}
+  m_PrefabInstance: {fileID: 1397936798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10f07f6b5d354462848f015b3cb03c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlidingDoor
 --- !u!1001 &1566499057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2108,8 +2197,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996146442}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13721253, y: 0.7931879, z: -0.1941009, w: 0.5606698}
-  m_LocalPosition: {x: -5.15748, y: 5.4351025, z: 4.3071637}
+  m_LocalRotation: {x: 0.20286372, y: 0.34933522, z: -0.077752635, w: 0.91146356}
+  m_LocalPosition: {x: -2.8603506, y: 7.329584, z: -4.804456}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2321,3 +2410,4 @@ SceneRoots:
   - {fileID: 506273265}
   - {fileID: 940031024}
   - {fileID: 1587316711}
+  - {fileID: 1397936798}
