@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyState : MonoBehaviour
 {
@@ -15,14 +17,17 @@ public class EnemyState : MonoBehaviour
     }
     public TurnState currentState;
 
-    // IeNumerator variables
+    // IEnumerator variables
     private Vector3 startPosition;
     private bool actionStarted = false;
     public GameObject playerToAttack;
     private float animSpeed = 0.3f;
 
-    // using the player testing moveset for now, can change later once movesets are planned/made
+    // moveset, set per enemy/prefab in the Inspector
+    [FormerlySerializedAs("moves")]
     public List<PlayerMove> attackMoves = new List<PlayerMove>();
+    public float healThreshold = 0.6f; // heal allies below this fraction of max HP
+
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
     public float guardDamageReduction = 0.5f;
@@ -32,20 +37,17 @@ public class EnemyState : MonoBehaviour
     private float pendingDamageMultiplier = 1f;
     private PlayerMove currentMove;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentState = TurnState.WAITING;
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
 
-        // Initialize live stats from base values
         enemy.currentHP = enemy.baseHP;
         enemy.currentATK = enemy.baseATK;
         enemy.currentNRG = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentState == TurnState.ACTION)
@@ -54,10 +56,15 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    // energy
+    // ---- Energy ----
     public void GainEnergy(float amount)
     {
         enemy.currentNRG = Mathf.Min(enemy.currentNRG + amount, enemy.baseNRG);
+    }
+
+    public bool HasEnoughEnergy(float cost)
+    {
+        return enemy.currentNRG >= cost;
     }
 
     public void SpendEnergy(float amount)
@@ -70,7 +77,50 @@ public class EnemyState : MonoBehaviour
         pendingDamageMultiplier = multiplier;
     }
 
-    // turn decision
+    // ---- Healing ----
+    GameObject FindMostHurtAlly()
+    {
+        GameObject best = null;
+        float lowest = healThreshold;
+        foreach (GameObject ally in BSM.EnemyInBattle)
+        {
+            if (ally == null) continue;
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es == null || es.enemy.baseHP <= 0) continue;
+            float pct = es.enemy.currentHP / es.enemy.baseHP;
+            if (pct < lowest)
+            {
+                lowest = pct;
+                best = ally;
+            }
+        }
+        return best;
+    }
+
+    public void Heal(float amount)
+    {
+        enemy.currentHP = Mathf.Min(enemy.currentHP + amount, enemy.baseHP);
+        Debug.Log(enemy.name + " healed " + amount + ". HP now: " + enemy.currentHP);
+    }
+
+    public void DoHeal(GameObject target, float amount)
+    {
+        StartCoroutine(HealRoutine(target, amount));
+    }
+
+    private IEnumerator HealRoutine(GameObject target, float amount)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (target != null)
+        {
+            EnemyState es = target.GetComponent<EnemyState>();
+            if (es != null) es.Heal(amount);
+        }
+        yield return new WaitForSeconds(0.3f);
+        BSM.onActionComplete();
+    }
+
+    // ---- AI ----
     public void TakeTurn()
     {
         if (BSM.PlayerInBattle.Count == 0)
@@ -83,31 +133,37 @@ public class EnemyState : MonoBehaviour
         isGuarding = false;
         isFocusing = false;
 
+        List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
+        List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
+        List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
+        GameObject healTarget = FindMostHurtAlly();
+
         HandleTurn myTurn = new HandleTurn();
-        myTurn.Attacker = this.gameObject.name;
+        myTurn.Attacker = gameObject.name;
         myTurn.Type = "Enemy";
-        myTurn.AttackersGameObject = this.gameObject;
+        myTurn.AttackersGameObject = gameObject;
 
-        List<PlayerMove> affordable = new List<PlayerMove>();
-        foreach (PlayerMove move in attackMoves)
+        if (healTarget != null && heals.Count > 0)
         {
-            if (enemy.currentNRG >= move.energyCost)
-                affordable.Add(move);
+            PlayerMove heal = heals[Random.Range(0, heals.Count)];
+            currentMove = heal;
+            myTurn.Action = "Heal";
+            myTurn.AttackersTarget = healTarget;
+            myTurn.MoveEnergyCost = heal.energyCost;
+            myTurn.MoveHealAmount = heal.healAmount;
         }
-
-        if (affordable.Count > 0)
+        else if (attacks.Count > 0)
         {
-            PlayerMove chosen = affordable[Random.Range(0, affordable.Count)];
-            currentMove = chosen;
+            PlayerMove atk = attacks[Random.Range(0, attacks.Count)];
+            currentMove = atk;
             myTurn.Action = "Attack";
-            myTurn.MoveEnergyCost = chosen.energyCost;
-            myTurn.MoveDamageMultiplier = chosen.dmgMultiplier;
             myTurn.AttackersTarget = BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
+            myTurn.MoveEnergyCost = atk.energyCost;
+            myTurn.MoveDamageMultiplier = atk.dmgMultiplier;
         }
         else
         {
-            // this is if the enemy cant afford any moves.
-            // Im having them focus/guard to experiment and see if its good for the game or not
+            // can't afford any move: Guard or Focus (kept from main)
             myTurn.Action = (Random.value < 0.5f) ? "Focus" : "Guard";
             myTurn.AttackersTarget = null;
         }
@@ -115,6 +171,7 @@ public class EnemyState : MonoBehaviour
         BSM.CollectActions(myTurn);
     }
 
+    // ---- Guard / Focus (from main) ----
     public void DoGuard()
     {
         Debug.Log(gameObject.name + " used Guard");
@@ -130,6 +187,7 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
+    // ---- Attack animation + damage ----
     private IEnumerator TimeForAction()
     {
         if (actionStarted)
@@ -139,30 +197,25 @@ public class EnemyState : MonoBehaviour
 
         actionStarted = true;
 
-        //simple slide to player to animate attacking
         Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x + 1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
-        while (MoveTowardsEnemy(playerPosition)){yield return null;}
+        while (MoveTowardsEnemy(playerPosition)) { yield return null; }
 
-        
-        // wait 
         yield return new WaitForSeconds(0.5f);
 
         PlayerState target = playerToAttack.GetComponent<PlayerState>();
         if (target != null)
         {
-            Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
+            Debug.Log(gameObject.name + " used " + (currentMove != null ? currentMove.moveName : "an attack") + " on " + playerToAttack.name);
             target.TakeDamage(enemy.currentATK * pendingDamageMultiplier);
         }
 
-        // slide back
         Vector3 firstPosition = startPosition;
         while (MoveTowardsStart(firstPosition)) { yield return null; }
-
 
         actionStarted = false;
         currentState = TurnState.WAITING;
         pendingDamageMultiplier = 1f;
-        BSM.onActionComplete(); 
+        BSM.onActionComplete();
     }
 
     public void TakeDamage(float amount)

@@ -12,4 +12,5 @@ public class HandleTurn
 
     public float MoveEnergyCost;
     public float MoveDamageMultiplier = 1f;
+    public float MoveHealAmount;
 }
