@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
         puzzleCode = Random.Range(0, 10000).ToString("D4");
     }
 
