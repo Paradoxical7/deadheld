@@ -28,6 +28,8 @@ public class EnemyState : MonoBehaviour
     public StatusEffects statuses = new StatusEffects();
     private PlayerMove currentMove;
 
+    public bool justSummoned; // set by BSM, makes a new arrival skip its first turn
+
     void Start()
     {
         currentState = TurnState.WAITING;
@@ -111,21 +113,47 @@ public class EnemyState : MonoBehaviour
             return;
         }
 
+        if (justSummoned)
+        {
+            justSummoned = false;
+            Debug.Log(gameObject.name + " just arrived and sits this turn out");
+            BSM.onActionComplete();
+            return;
+        }
+
         GainEnergy(1f);
         statuses.Remove(StatusId.Guard);
         statuses.Remove(StatusId.Focus);
 
         List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
+        List<PlayerMove> summons = affordable.Where(m => m.kind == MoveKind.Summon && m.summonPrefab != null).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
         GameObject healTarget = FindMostHurtAlly();
+
+        // saving up: if there's a summon we can't afford yet (and room for it),
+        // don't burn energy on paid attacks
+        PlayerMove savingFor = attackMoves.FirstOrDefault(m =>
+            m.kind == MoveKind.Summon && m.summonPrefab != null
+            && !HasEnoughEnergy(m.energyCost)
+            && m.energyCost <= enemy.baseNRG
+            && BSM.HasFreeEnemySlot());
+
+        if (savingFor != null)
+            attacks = attacks.Where(m => m.energyCost <= 0f).ToList();
 
         HandleTurn myTurn = new HandleTurn();
         myTurn.Attacker = gameObject.name;
         myTurn.Type = "Enemy";
         myTurn.AttackersGameObject = gameObject;
 
-        if (healTarget != null && heals.Count > 0)
+        if (summons.Count > 0 && BSM.HasFreeEnemySlot())
+        {
+            myTurn.Action = "Summon";
+            myTurn.Move = summons[Random.Range(0, summons.Count)];
+            myTurn.AttackersTarget = null;
+        }
+        else if (healTarget != null && heals.Count > 0)
         {
             myTurn.Action = "Heal";
             myTurn.Move = heals[Random.Range(0, heals.Count)];
@@ -143,16 +171,37 @@ public class EnemyState : MonoBehaviour
             myTurn.AttackersTarget = null;
         }
 
+        Debug.Log(gameObject.name + " | energy=" + enemy.currentNRG + "/" + enemy.baseNRG
+            + " | chose " + myTurn.Action + (myTurn.Move != null ? "/" + myTurn.Move.moveName : ""));
+
         BSM.CollectActions(myTurn);
     }
 
-    // ---- Actions (called by BSM) ----
+    // actions
     public void PerformAttack(PlayerMove move, GameObject target)
     {
         SpendEnergy(move.energyCost);
         currentMove = move;
         playerToAttack = target;
         currentState = TurnState.ACTION;
+    }
+
+    public void PerformSummon(PlayerMove move)
+    {
+        SpendEnergy(move.energyCost);
+        StartCoroutine(SummonRoutine(move));
+    }
+
+    private IEnumerator SummonRoutine(PlayerMove move)
+    {
+        Debug.Log(gameObject.name + " used " + move.moveName);
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject spawned = BSM.SummonEnemy(move.summonPrefab);
+        Debug.Log("Summon result: " + (spawned != null ? spawned.name : "NOTHING SPAWNED"));
+
+        yield return new WaitForSeconds(0.5f);
+        BSM.onActionComplete();
     }
 
     public void DoGuard()
@@ -218,7 +267,7 @@ public class EnemyState : MonoBehaviour
             enemy.currentHP = 0;
             currentState = TurnState.DEAD;
             Debug.Log(enemy.name + " has died.");
-            BSM.EnemyInBattle.Remove(this.gameObject);
+            BSM.OnEnemyDied(gameObject);
             gameObject.SetActive(false);
         }
     }

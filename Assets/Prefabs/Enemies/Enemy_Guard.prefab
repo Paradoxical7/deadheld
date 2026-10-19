@@ -49,24 +49,46 @@ MonoBehaviour:
     name: Guard
     baseHP: 70
     currentHP: 70
-    baseNRG: 1
-    currentNRG: 1
-    baseATK: 20
-    currentATK: 20
-    agility: 0
+    baseNRG: 3
+    currentNRG: 0
+    dodgeChance: 10
+    critChance: 15
     nrgGain: 0
   currentState: 0
   playerToAttack: {fileID: 0}
   attackMoves:
+  - moveName: Shield Bash
+    energyCost: 1
+    damage: 5
+    cooldown: 0
+    kind: 0
+    target: 0
+    effect: 0
+    healAmount: 0
+    summonPrefab: {fileID: 0}
   - moveName: Guard_Attack
     energyCost: 1
-    dmgMultiplier: 1
+    damage: 0
+    cooldown: 0
     kind: 0
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
+  - moveName: Guard_Attack
+    energyCost: 1
+    damage: 0
+    cooldown: 0
+    kind: 0
+    target: 0
+    effect: 0
+    healAmount: 0
+    summonPrefab: {fileID: 0}
   healThreshold: 0.6
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
+  justSummoned: 0
 --- !u!1 &4767703826607668592
 GameObject:
   m_ObjectHideFlags: 0
