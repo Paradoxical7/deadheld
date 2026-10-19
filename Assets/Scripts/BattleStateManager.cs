@@ -93,10 +93,21 @@ public class BattleStateMachine : MonoBehaviour
                     switch (turn.Action)
                     {
                         case "Attack":
+                        {
+                            GameObject target = turn.AttackersTarget;
+                            if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
+                                target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
+
                             ES.SpendEnergy(turn.MoveEnergyCost);
                             ES.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
-                            ES.playerToAttack = turn.AttackersTarget;
+                            ES.playerToAttack = target;
                             ES.currentState = EnemyState.TurnState.ACTION;
+                            break;
+                        }
+
+                        case "Heal":
+                            ES.SpendEnergy(turn.MoveEnergyCost);
+                            ES.DoHeal(turn.AttackersTarget, turn.MoveHealAmount);
                             break;
 
                         case "Guard":
