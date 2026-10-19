@@ -57,7 +57,7 @@ public class KeypadStation : MonoBehaviour
             if (open) Close();
         }
 
-                if (prompt != null)
+        if (prompt != null)
         {
             prompt.SetActive(playerInside && !open);
             UpdatePromptText();
@@ -79,7 +79,7 @@ public class KeypadStation : MonoBehaviour
         else if (kb.backspaceKey.wasPressedThisFrame) Backspace();
         else if (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) Submit();
     }
-    
+
     private void ToggleDoor()
     {
         if (door != null)
@@ -164,6 +164,7 @@ public class KeypadStation : MonoBehaviour
             solved = true;
             message.text = "ACCESS GRANTED";
             onSolved.Invoke();
+            ToggleDoor();
             Invoke(nameof(Close), 1f);
         }
         else
@@ -173,7 +174,7 @@ public class KeypadStation : MonoBehaviour
             Refresh();
         }
     }
-    
+
     private void UpdateHint()
     {
         if (hintText == null) return;
