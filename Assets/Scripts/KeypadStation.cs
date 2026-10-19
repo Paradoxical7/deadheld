@@ -15,6 +15,7 @@ public class KeypadStation : MonoBehaviour
     [SerializeField] private string hintBeforeCode = "SOMETHING IN THIS ROOM IS STILL ALIVE";
     [SerializeField] private string hintAfterCode = "ENTER THE CODE FROM THE NOTE";
     [SerializeField] private PuzzleDoor door;
+    [SerializeField] private SlidingDoors slidingDoor;
     [SerializeField] private string promptLocked = "E - KEYPAD";
     [SerializeField] private string promptClosed = "E - OPEN";
     [SerializeField] private string promptOpen = "E - CLOSE";
@@ -81,14 +82,21 @@ public class KeypadStation : MonoBehaviour
     
     private void ToggleDoor()
     {
-        if (door == null)
+        if (door != null)
         {
-            onSolved.Invoke();
+            if (door.IsOpen) door.Close();
+            else door.Open();
             return;
         }
 
-        if (door.IsOpen) door.Close();
-        else door.Open();
+        if (slidingDoor != null)
+        {
+            if (slidingDoor.IsOpen) slidingDoor.Close();
+            else slidingDoor.Open();
+            return;
+        }
+
+        onSolved.Invoke();
     }
 
     private void UpdatePromptText()
@@ -96,8 +104,11 @@ public class KeypadStation : MonoBehaviour
         if (promptLabel == null) promptLabel = prompt.GetComponent<TMP_Text>();
         if (promptLabel == null) return;
 
+        bool doorIsOpen = (door != null && door.IsOpen) ||
+                          (slidingDoor != null && slidingDoor.IsOpen);
+
         if (!solved) promptLabel.text = promptLocked;
-        else if (door != null && door.IsOpen) promptLabel.text = promptOpen;
+        else if (doorIsOpen) promptLabel.text = promptOpen;
         else promptLabel.text = promptClosed;
     }
 

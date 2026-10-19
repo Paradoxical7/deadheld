@@ -16,12 +16,11 @@ public class GameManager : MonoBehaviour
 
     public enum Outcome { None, Won, Lost }
     public Outcome lastOutcome = Outcome.None;
-    
+
     [Header("Room 01 puzzle")]
     public bool codeFound = false;
     public bool doorUnlocked = false;
-    private HashSet<string> unlockedDoors = new HashSet<string>();  // per-door unlock, keyed by door id
-    public const string PuzzleCode = "4172";
+    public string puzzleCode;                     // generated once per run
 
     [Header("Battle return")]
     public string returnScene;            // scene to come back to after a battle
@@ -39,6 +38,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        puzzleCode = Random.Range(0, 10000).ToString("D4");
     }
 
     void OnDestroy()
@@ -92,7 +92,6 @@ public class GameManager : MonoBehaviour
         return !string.IsNullOrEmpty(id) && defeatedEnemies.Contains(id);
     }
 
-    
     public void MarkCodeFound()
     {
         codeFound = true;
@@ -101,27 +100,8 @@ public class GameManager : MonoBehaviour
 
     public bool TryUnlockDoor(string entered)
     {
-        if (entered != PuzzleCode) return false;
+        if (entered != puzzleCode) return false;
         doorUnlocked = true;
-        return true;
-    }
-    // --- Per-door unlock (use these so one door doesn't unlock all) ---
-    public void UnlockDoor(string doorId)
-    {
-        if (!string.IsNullOrEmpty(doorId))
-            unlockedDoors.Add(doorId);
-    }
-
-    public bool IsDoorUnlocked(string doorId)
-    {
-        return !string.IsNullOrEmpty(doorId) && unlockedDoors.Contains(doorId);
-    }
-
-    // code-checked unlock for a specific door
-    public bool TryUnlockDoor(string doorId, string entered)
-    {
-        if (entered != PuzzleCode) return false;
-        UnlockDoor(doorId);
         return true;
     }
 }

@@ -39,10 +39,7 @@ public class PodInteract : MonoBehaviour
 
         if (inspecting)
         {
-            if (readPrompt != null) readPrompt.SetActive(!noteOpen);
-
-            if (kb.eKey.wasPressedThisFrame && !noteOpen) OpenNote();
-            else if (kb.eKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame) EndInspect();
+            if (kb.eKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame) EndInspect();
         }
         else if (canInspect && kb.eKey.wasPressedThisFrame)
         {
@@ -63,6 +60,7 @@ public class PodInteract : MonoBehaviour
             cam.enabled = false;
         }
         inspectCamera.enabled = true;
+        OpenNote();
     }
 
     private void EndInspect()

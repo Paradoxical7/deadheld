@@ -34,14 +34,16 @@ public class PuzzleDoor : MonoBehaviour
 
     private void Update()
     {
-    #if UNITY_EDITOR || DEVELOPMENT_BUILD
-        var kb = Keyboard.current;
-        if (kb != null && kb.f9Key.wasPressedThisFrame && !unlocked)
+        if (Debug.isDebugBuild)
         {
-            if (GameManager.Instance != null) GameManager.Instance.doorUnlocked = true;
-            Open();
+            var kb = Keyboard.current;
+            if (kb != null && kb.f9Key.wasPressedThisFrame && !unlocked)
+            {
+                if (GameManager.Instance != null) GameManager.Instance.doorUnlocked = true;
+                Open();
+            }
         }
-    #endif
+
         if (!isOpen || player == null) return;
 
         bool inDoorway = Vector3.Distance(player.position, closedPos) <= senseRadius;
