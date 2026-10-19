@@ -63,7 +63,14 @@ MonoBehaviour:
     dmgMultiplier: 1
     kind: 0
     healAmount: 0
+  - moveName: Guard_Attack
+    energyCost: 0
+    dmgMultiplier: 0
+    kind: 2
+    healAmount: 0
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5

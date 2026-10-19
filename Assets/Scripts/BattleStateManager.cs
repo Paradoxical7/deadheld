@@ -110,6 +110,11 @@ public class BattleStateMachine : MonoBehaviour
                             ES.DoHeal(turn.AttackersTarget, turn.MoveHealAmount);
                             break;
 
+                        case "Protect":
+                            ES.SpendEnergy(turn.MoveEnergyCost);
+                            ES.DoProtect(turn.AttackersTarget);
+                            break;
+
                         case "Guard":
                             ES.DoGuard();
                             break;
@@ -130,7 +135,21 @@ public class BattleStateMachine : MonoBehaviour
                         case "Attack":
                             PS.SpendEnergy(turn.MoveEnergyCost);
                             PS.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
-                            PS.enemyToAttack = turn.AttackersTarget;
+                            GameObject enemyTarget = turn.AttackersTarget;
+
+                                // redirect to a living protector
+                                if (enemyTarget != null)
+                                {
+                                    EnemyState targetState = enemyTarget.GetComponent<EnemyState>();
+                                    if (targetState != null && targetState.protector != null && targetState.protector.activeInHierarchy)
+                                        enemyTarget = targetState.protector;
+                                }
+
+                                // retarget if the chosen enemy already died
+                                if ((enemyTarget == null || !enemyTarget.activeInHierarchy) && EnemyInBattle.Count > 0)
+                                    enemyTarget = EnemyInBattle[Random.Range(0, EnemyInBattle.Count)];
+
+                            PS.enemyToAttack = enemyTarget;
                             PS.currentState = PlayerState.TurnState.ACTION;
                             break;
 

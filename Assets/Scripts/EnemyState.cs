@@ -27,6 +27,9 @@ public class EnemyState : MonoBehaviour
     [FormerlySerializedAs("moves")]
     public List<PlayerMove> attackMoves = new List<PlayerMove>();
     public float healThreshold = 0.6f; // heal allies below this fraction of max HP
+    public float protectThreshold = 0.4f;      // how often the Guard protects when it can
+    [HideInInspector] public GameObject protector; // set on the enemy being covered
+    private GameObject protectedAlly;       // set on the Guard
 
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
@@ -120,6 +123,48 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
+    // ---- Protect ----
+    GameObject FindAllyToProtect()
+    {
+        GameObject best = null;
+        float lowest = protectThreshold;
+        foreach (GameObject ally in BSM.EnemyInBattle)
+        {
+            if (ally == null || ally == gameObject) continue;
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es == null || es.enemy.baseHP <= 0) continue;
+            float pct = es.enemy.currentHP / es.enemy.baseHP;
+            if (pct < lowest) { lowest = pct; best = ally; }
+        }
+        return best; // weakest ally under the threshold, or null
+    }
+
+    public void ClearProtection()
+    {
+        if (protectedAlly != null)
+        {
+            EnemyState es = protectedAlly.GetComponent<EnemyState>();
+            if (es != null && es.protector == gameObject) es.protector = null;
+        }
+        protectedAlly = null;
+    }
+
+    public void DoProtect(GameObject ally)
+    {
+        ClearProtection();
+        if (ally != null)
+        {
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es != null)
+            {
+                es.protector = gameObject;
+                protectedAlly = ally;
+                Debug.Log(gameObject.name + " is protecting " + ally.name);
+            }
+        }
+        BSM.onActionComplete();
+    }
+
     // ---- AI ----
     public void TakeTurn()
     {
@@ -133,10 +178,14 @@ public class EnemyState : MonoBehaviour
         isGuarding = false;
         isFocusing = false;
 
+        ClearProtection();
+
         List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
         GameObject healTarget = FindMostHurtAlly();
+        List<PlayerMove> protects = affordable.Where(m => m.kind == MoveKind.Protect).ToList();
+        GameObject protectTarget = FindAllyToProtect();
 
         HandleTurn myTurn = new HandleTurn();
         myTurn.Attacker = gameObject.name;
@@ -151,6 +200,14 @@ public class EnemyState : MonoBehaviour
             myTurn.AttackersTarget = healTarget;
             myTurn.MoveEnergyCost = heal.energyCost;
             myTurn.MoveHealAmount = heal.healAmount;
+        }
+        else if (protects.Count > 0 && protectTarget != null)
+        {
+            PlayerMove prot = protects[Random.Range(0, protects.Count)];
+            currentMove = prot;
+            myTurn.Action = "Protect";
+            myTurn.AttackersTarget = protectTarget;
+            myTurn.MoveEnergyCost = prot.energyCost;
         }
         else if (attacks.Count > 0)
         {
@@ -233,6 +290,7 @@ public class EnemyState : MonoBehaviour
             currentState = TurnState.DEAD;
             Debug.Log(enemy.name + " has died.");
             BSM.EnemyInBattle.Remove(this.gameObject);
+            ClearProtection();
             gameObject.SetActive(false);
         }
     }

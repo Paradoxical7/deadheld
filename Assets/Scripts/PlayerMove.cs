@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum MoveKind { Attack, Heal }
+public enum MoveKind { Attack, Heal, Protect }
 
 [System.Serializable]
 public class PlayerMove
