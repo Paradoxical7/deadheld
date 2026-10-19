@@ -36,6 +36,14 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
+        // proximity trigger: touching the enemy starts combat even if it can't "see" you
+        float distToPlayer = Vector3.Distance(transform.position, sight.player.position);
+        if (distToPlayer <= catchDistance && !combatStarted)
+        {
+            StartCombat();
+            return;
+        }
+
         if (sight.canSeePlayer)
             state = State.Chase;
         else
