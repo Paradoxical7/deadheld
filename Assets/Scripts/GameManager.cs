@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
     private HashSet<string> unlockedDoors = new HashSet<string>();  // per-door unlock, keyed by door id
     public const string PuzzleCode = "4172";
 
+    [Header("Battle return")]
+    public string returnScene;            // scene to come back to after a battle
+    public Vector3 returnPosition;        // where the player stood when combat started
+    public bool hasReturnPoint = false;
+
     void Awake()
     {
         // singleton: keep only one, and survive scene loads
@@ -32,6 +38,39 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // after returning from a battle, drop the player back where they were
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!hasReturnPoint) return;
+        if (!string.IsNullOrEmpty(returnScene) && scene.name != returnScene) return;
+
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null)
+        {
+            CharacterController cc = p.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;        // CC fights direct position sets
+            p.transform.position = returnPosition;
+            Rigidbody rb = p.GetComponent<Rigidbody>();
+            if (rb != null) { rb.linearVelocity = Vector3.zero; rb.angularVelocity = Vector3.zero; }
+            if (cc != null) cc.enabled = true;
+        }
+        hasReturnPoint = false;
+    }
+
+    public void SetReturnPoint(string sceneName, Vector3 pos)
+    {
+        returnScene = sceneName;
+        returnPosition = pos;
+        hasReturnPoint = true;
     }
 
     public void SetPendingEnemy(EnemyIdentity.EnemyRole role, EnemyIdentity.EnemyStage stage)

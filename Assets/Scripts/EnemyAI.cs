@@ -11,6 +11,8 @@ public class EnemyAI : MonoBehaviour
     private EnemySight sight;             // reference to the sight script on this enemy
     private int currentPoint = 0;
     private bool combatStarted = false;  // so we only fire the stub once
+    public float spawnGraceTime = 2f;    // after (re)spawn, combat won't trigger for this long (lets you run after a loss)
+    private float graceTimer = 0f;
 
     private enum State { Patrol, Chase }   // the two behaviors
     private State state = State.Patrol;    // start out patrolling
@@ -25,6 +27,8 @@ public class EnemyAI : MonoBehaviour
 
         if (sight == null)
             Debug.LogWarning("EnemyAI: no EnemySight component found, enemy will only patrol.");
+
+        graceTimer = spawnGraceTime;
     }
 
         void Update()
@@ -36,9 +40,12 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
+        // count down the post-spawn grace window
+        if (graceTimer > 0f) graceTimer -= Time.deltaTime;
+
         // proximity trigger: touching the enemy starts combat even if it can't "see" you
         float distToPlayer = Vector3.Distance(transform.position, sight.player.position);
-        if (distToPlayer <= catchDistance && !combatStarted)
+        if (distToPlayer <= catchDistance && !combatStarted && graceTimer <= 0f)
         {
             StartCombat();
             return;
@@ -71,7 +78,7 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(sight.player.position);  // walk straight at the player
 
         float dist = Vector3.Distance(transform.position, sight.player.position);
-        if (dist <= catchDistance && !combatStarted)
+        if (dist <= catchDistance && !combatStarted && graceTimer <= 0f)
         {
             StartCombat();
         }
@@ -91,6 +98,10 @@ public class EnemyAI : MonoBehaviour
         EnemyID enemyId = GetComponent<EnemyID>();
         if (enemyId != null && GameManager.Instance != null)
             GameManager.Instance.pendingEnemyId = enemyId.id;
+
+        // remember where to come back to, and where the player was standing
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetReturnPoint(SceneManager.GetActiveScene().name, sight.player.position);
 
         SceneManager.LoadScene("TurnBasedScene");
     }
