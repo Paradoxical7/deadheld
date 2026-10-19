@@ -30,6 +30,7 @@ public class EnemyState : MonoBehaviour
     public float protectThreshold = 0.4f;      // how often the Guard protects when it can
     [HideInInspector] public GameObject protector; // set on the enemy being covered
     private GameObject protectedAlly;       // set on the Guard
+    private int stageLevel = 0; // 0 = Stage1, 1 = Stage2, 2 = Stage3
 
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
@@ -45,6 +46,17 @@ public class EnemyState : MonoBehaviour
         currentState = TurnState.WAITING;
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
+
+        // EnemyIdentity is on the child (EnemyObject), so search children
+        EnemyIdentity id = GetComponentInChildren<EnemyIdentity>();
+        if (id != null)
+        {
+            // feel free to tune level buffs
+            stageLevel = (int)id.stage;
+            enemy.baseNRG += stageLevel * 1f; // +1 max energy per stage
+            enemy.baseATK += stageLevel * 2f; // +2 ATK per stage 
+        }
+        Debug.Log(gameObject.name + " stage level: " + (id != null ? stageLevel.ToString() : "no EnemyIdentity found"));
 
         enemy.currentHP = enemy.baseHP;
         enemy.currentATK = enemy.baseATK;
@@ -186,6 +198,11 @@ public class EnemyState : MonoBehaviour
         GameObject healTarget = FindMostHurtAlly();
         List<PlayerMove> protects = affordable.Where(m => m.kind == MoveKind.Protect).ToList();
         GameObject protectTarget = FindAllyToProtect();
+
+        // when a fellow enemy falls into protect threshold, filter out attacks for this turn that
+        // would make 'protect' not affordable the next turn (only use free attacks for right now)
+        if (protectTarget != null && protects.Count == 0 && attackMoves.Any(m => m.kind == MoveKind.Protect))
+            attacks = attacks.Where(m => m.energyCost == 0).ToList();
 
         HandleTurn myTurn = new HandleTurn();
         myTurn.Attacker = gameObject.name;

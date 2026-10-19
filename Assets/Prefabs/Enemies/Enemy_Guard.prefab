@@ -54,19 +54,29 @@ MonoBehaviour:
     baseATK: 20
     currentATK: 20
     agility: 0
-    nrgGain: 0
+    nrgGain: 1
   currentState: 0
   playerToAttack: {fileID: 0}
   attackMoves:
-  - moveName: Guard_Attack
+  - moveName: Baton Jab
+    energyCost: 0
+    dmgMultiplier: 0.6
+    kind: 0
+    healAmount: 0
+  - moveName: Protect
+    energyCost: 2
+    dmgMultiplier: 0
+    kind: 2
+    healAmount: 0
+  - moveName: Shield Bash
     energyCost: 1
     dmgMultiplier: 1
     kind: 0
     healAmount: 0
-  - moveName: Guard_Attack
-    energyCost: 0
-    dmgMultiplier: 0
-    kind: 2
+  - moveName: Riot Slam
+    energyCost: 3
+    dmgMultiplier: 1.5
+    kind: 0
     healAmount: 0
   healThreshold: 0.6
   protectThreshold: 0.4
