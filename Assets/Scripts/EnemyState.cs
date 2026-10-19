@@ -20,6 +20,10 @@ public class EnemyState : MonoBehaviour
     [FormerlySerializedAs("moves")]
     public List<PlayerMove> attackMoves = new List<PlayerMove>();
     public float healThreshold = 0.6f; // heal allies below this fraction of max HP
+    public float protectThreshold = 0.4f;      // how often the Guard protects when it can
+    [HideInInspector] public GameObject protector; // set on the enemy being covered
+    private GameObject protectedAlly;       // set on the Guard
+    private int stageLevel = 0; // 0 = Stage1, 1 = Stage2, 2 = Stage3
 
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
@@ -35,6 +39,17 @@ public class EnemyState : MonoBehaviour
         currentState = TurnState.WAITING;
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
+
+        // EnemyIdentity is on the child (EnemyObject), so search children
+        EnemyIdentity id = GetComponentInChildren<EnemyIdentity>();
+        if (id != null)
+        {
+            // feel free to tune level buffs
+            stageLevel = (int)id.stage;
+            enemy.baseNRG += stageLevel * 1f; // +1 max energy per stage
+            enemy.baseATK += stageLevel * 2f; // +2 ATK per stage 
+        }
+        Debug.Log(gameObject.name + " stage level: " + (id != null ? stageLevel.ToString() : "no EnemyIdentity found"));
 
         enemy.currentHP = enemy.baseHP;
         enemy.currentNRG = 0f;
@@ -104,6 +119,48 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
+    // guard protection
+    GameObject FindAllyToProtect()
+    {
+        GameObject best = null;
+        float lowest = protectThreshold;
+        foreach (GameObject ally in BSM.EnemyInBattle)
+        {
+            if (ally == null || ally == gameObject) continue;
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es == null || es.enemy.baseHP <= 0) continue;
+            float pct = es.enemy.currentHP / es.enemy.baseHP;
+            if (pct < lowest) { lowest = pct; best = ally; }
+        }
+        return best; // weakest ally under the threshold, or null
+    }
+
+    public void ClearProtection()
+    {
+        if (protectedAlly != null)
+        {
+            EnemyState es = protectedAlly.GetComponent<EnemyState>();
+            if (es != null && es.protector == gameObject) es.protector = null;
+        }
+        protectedAlly = null;
+    }
+
+    public void DoProtect(GameObject ally)
+    {
+        ClearProtection();
+        if (ally != null)
+        {
+            EnemyState es = ally.GetComponent<EnemyState>();
+            if (es != null)
+            {
+                es.protector = gameObject;
+                protectedAlly = ally;
+                Debug.Log(gameObject.name + " is protecting " + ally.name);
+            }
+        }
+        BSM.onActionComplete();
+    }
+
     // enemy AI
     public void TakeTurn()
     {
@@ -125,11 +182,20 @@ public class EnemyState : MonoBehaviour
         statuses.Remove(StatusId.Guard);
         statuses.Remove(StatusId.Focus);
 
+        ClearProtection();
+
         List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
         List<PlayerMove> summons = affordable.Where(m => m.kind == MoveKind.Summon && m.summonPrefab != null).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
         GameObject healTarget = FindMostHurtAlly();
+        List<PlayerMove> protects = affordable.Where(m => m.kind == MoveKind.Protect).ToList();
+        GameObject protectTarget = FindAllyToProtect();
+
+        // when a fellow enemy falls into protect threshold, filter out attacks for this turn that
+        // would make 'protect' not affordable the next turn (only use free attacks for right now)
+        if (protectTarget != null && protects.Count == 0 && attackMoves.Any(m => m.kind == MoveKind.Protect))
+            attacks = attacks.Where(m => m.energyCost == 0).ToList();
 
         // saving up: if there's a summon we can't afford yet (and room for it),
         // don't burn energy on paid attacks
@@ -158,6 +224,14 @@ public class EnemyState : MonoBehaviour
             myTurn.Action = "Heal";
             myTurn.Move = heals[Random.Range(0, heals.Count)];
             myTurn.AttackersTarget = healTarget;
+        }
+        else if (protects.Count > 0 && protectTarget != null)
+        {
+            PlayerMove prot = protects[Random.Range(0, protects.Count)];
+            currentMove = prot;
+            myTurn.Action = "Protect";
+            myTurn.AttackersTarget = protectTarget;
+            myTurn.MoveEnergyCost = prot.energyCost;
         }
         else if (attacks.Count > 0)
         {
@@ -267,7 +341,10 @@ public class EnemyState : MonoBehaviour
             enemy.currentHP = 0;
             currentState = TurnState.DEAD;
             Debug.Log(enemy.name + " has died.");
+
             BSM.OnEnemyDied(gameObject);
+            ClearProtection();
+
             gameObject.SetActive(false);
         }
     }

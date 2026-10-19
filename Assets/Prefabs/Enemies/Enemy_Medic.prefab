@@ -49,37 +49,36 @@ MonoBehaviour:
     name: Medic
     baseHP: 50
     currentHP: 50
-    baseNRG: 3
+    baseNRG: 1
     currentNRG: 0
-    dodgeChance: 10
-    critChance: 15
-    nrgGain: 0
+    baseATK: 12
+    currentATK: 12
+    agility: 1
+    nrgGain: 1
   currentState: 0
   playerToAttack: {fileID: 0}
   attackMoves:
   - moveName: Heal
-    energyCost: 0
-    damage: 0
-    cooldown: 0
-    kind: 1
-    target: 0
-    effect: 0
-    healAmount: 5
-    summonPrefab: {fileID: 0}
-  - moveName: Medic_Attack
     energyCost: 1
-    damage: 0
-    cooldown: 0
+    dmgMultiplier: 0
+    kind: 1
+    healAmount: 5
+  - moveName: Beaker Bash
+    energyCost: 1
+    dmgMultiplier: 0.6
     kind: 0
-    target: 0
-    effect: 0
     healAmount: 0
-    summonPrefab: {fileID: 0}
+  - moveName: Acid Assault
+    energyCost: 3
+    dmgMultiplier: 1.5
+    kind: 0
+    healAmount: 0
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
-  justSummoned: 0
 --- !u!1 &9126798691419569717
 GameObject:
   m_ObjectHideFlags: 0

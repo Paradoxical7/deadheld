@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum MoveKind { Attack, Heal, Buff, Summon }
+public enum MoveKind { Attack, Heal, Buff, Summon, Protect }
 public enum MoveTarget { SingleEnemy, AllEnemies, Self }
 public enum MoveEffect { None, Aim, Chamber }
 
