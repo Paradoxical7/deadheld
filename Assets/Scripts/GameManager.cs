@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Room 01 puzzle")]
     public bool codeFound = false;
     public bool doorUnlocked = false;
-    public const string PuzzleCode = "4172";
-
+    public string puzzleCode;
     void Awake()
     {
         // singleton: keep only one, and survive scene loads
@@ -31,6 +30,9 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        puzzleCode = Random.Range(0, 10000).ToString("D4");
     }
 
     public void SetPendingEnemy(EnemyIdentity.EnemyRole role, EnemyIdentity.EnemyStage stage)
@@ -61,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public bool TryUnlockDoor(string entered)
     {
-        if (entered != PuzzleCode) return false;
+        if (entered != puzzleCode) return false;
         doorUnlocked = true;
         return true;
     }
