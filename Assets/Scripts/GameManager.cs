@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Room 01 puzzle")]
     public bool codeFound = false;
     public bool doorUnlocked = false;
+    private HashSet<string> unlockedDoors = new HashSet<string>();  // per-door unlock, keyed by door id
     public const string PuzzleCode = "4172";
 
     void Awake()
@@ -63,6 +64,25 @@ public class GameManager : MonoBehaviour
     {
         if (entered != PuzzleCode) return false;
         doorUnlocked = true;
+        return true;
+    }
+    // --- Per-door unlock (use these so one door doesn't unlock all) ---
+    public void UnlockDoor(string doorId)
+    {
+        if (!string.IsNullOrEmpty(doorId))
+            unlockedDoors.Add(doorId);
+    }
+
+    public bool IsDoorUnlocked(string doorId)
+    {
+        return !string.IsNullOrEmpty(doorId) && unlockedDoors.Contains(doorId);
+    }
+
+    // code-checked unlock for a specific door
+    public bool TryUnlockDoor(string doorId, string entered)
+    {
+        if (entered != PuzzleCode) return false;
+        UnlockDoor(doorId);
         return true;
     }
 }
