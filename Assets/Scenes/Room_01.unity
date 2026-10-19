@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1290373508a5fc44da2761a1da0dd11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentity
-  role: 2
+  role: 0
   stage: 0
 --- !u!114 &101594515
 MonoBehaviour:

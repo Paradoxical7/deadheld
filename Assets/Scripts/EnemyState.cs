@@ -24,6 +24,7 @@ public class EnemyState : MonoBehaviour
     [HideInInspector] public GameObject protector; // set on the enemy being covered
     private GameObject protectedAlly;       // set on the Guard
     private int stageLevel = 0; // 0 = Stage1, 1 = Stage2, 2 = Stage3
+    private float stageDamageBonus = 0f;
 
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
@@ -46,8 +47,8 @@ public class EnemyState : MonoBehaviour
         {
             // feel free to tune level buffs
             stageLevel = (int)id.stage;
-            enemy.baseNRG += stageLevel * 1f; // +1 max energy per stage
-            enemy.baseATK += stageLevel * 2f; // +2 ATK per stage 
+            enemy.baseNRG += stageLevel * 1f;   // +1 max energy per stage
+            stageDamageBonus = stageLevel * 2f; // +2 damage per stage on every attack
         }
         Debug.Log(gameObject.name + " stage level: " + (id != null ? stageLevel.ToString() : "no EnemyIdentity found"));
 
@@ -227,11 +228,9 @@ public class EnemyState : MonoBehaviour
         }
         else if (protects.Count > 0 && protectTarget != null)
         {
-            PlayerMove prot = protects[Random.Range(0, protects.Count)];
-            currentMove = prot;
             myTurn.Action = "Protect";
+            myTurn.Move = protects[Random.Range(0, protects.Count)];
             myTurn.AttackersTarget = protectTarget;
-            myTurn.MoveEnergyCost = prot.energyCost;
         }
         else if (attacks.Count > 0)
         {
@@ -300,7 +299,7 @@ public class EnemyState : MonoBehaviour
         if (actionStarted) yield break;
         actionStarted = true;
 
-        AttackRoll roll = Combat.PrepareAttack(currentMove.damage, enemy.critChance, statuses);
+        AttackRoll roll = Combat.PrepareAttack(currentMove.damage + stageDamageBonus, enemy.critChance, statuses);
 
         Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x + 1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
         while (MoveTo(playerPosition)) { yield return null; }

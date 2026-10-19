@@ -1614,6 +1614,8 @@ MonoBehaviour:
     healAmount: 0
     summonPrefab: {fileID: 0}
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
@@ -2070,6 +2072,8 @@ MonoBehaviour:
     healAmount: 0
     summonPrefab: {fileID: 0}
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
@@ -4983,7 +4987,7 @@ MonoBehaviour:
   - role: 0
     stage: 0
     prefab: {fileID: 1388938893773664036, guid: 91440a1feadd1e448bc0948bfa9aa138, type: 3}
-    inRandomPool: 0
+    inRandomPool: 1
   enemySpawnPoints:
   - {fileID: 1634275014}
   - {fileID: 2042400620}
@@ -5223,6 +5227,8 @@ MonoBehaviour:
     healAmount: 0
     summonPrefab: {fileID: 0}
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
@@ -5464,6 +5470,8 @@ MonoBehaviour:
     healAmount: 0
     summonPrefab: {fileID: 0}
   healThreshold: 0.6
+  protectThreshold: 0.4
+  protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5

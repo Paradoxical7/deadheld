@@ -49,41 +49,57 @@ MonoBehaviour:
     name: Guard
     baseHP: 70
     currentHP: 70
-    baseNRG: 1
-    currentNRG: 1
-    baseATK: 20
-    currentATK: 20
-    agility: 0
+    baseNRG: 3
+    currentNRG: 0
+    dodgeChance: 10
+    critChance: 15
     nrgGain: 1
   currentState: 0
   playerToAttack: {fileID: 0}
   attackMoves:
   - moveName: Baton Jab
     energyCost: 0
-    dmgMultiplier: 0.6
+    damage: 3
+    cooldown: 0
     kind: 0
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
   - moveName: Protect
     energyCost: 2
-    dmgMultiplier: 0
+    damage: 0
+    cooldown: 4
     kind: 2
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
   - moveName: Shield Bash
     energyCost: 1
-    dmgMultiplier: 1
+    damage: 5
+    cooldown: 2
     kind: 0
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
   - moveName: Riot Slam
     energyCost: 3
-    dmgMultiplier: 1.5
+    damage: 10
+    cooldown: 3
     kind: 0
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
   healThreshold: 0.6
   protectThreshold: 0.4
   protector: {fileID: 0}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
+  justSummoned: 0
 --- !u!1 &4767703826607668592
 GameObject:
   m_ObjectHideFlags: 0

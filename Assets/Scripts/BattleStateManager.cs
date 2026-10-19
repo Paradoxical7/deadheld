@@ -245,7 +245,7 @@ public class BattleStateMachine : MonoBehaviour
                             break;
 
                         case "Protect":
-                            ES.SpendEnergy(turn.MoveEnergyCost);
+                            ES.SpendEnergy(turn.Move.energyCost);
                             ES.DoProtect(turn.AttackersTarget);
                             break;
 
@@ -269,10 +269,11 @@ public class BattleStateMachine : MonoBehaviour
                     switch (turn.Action)
                     {
                         case "Attack":
-                            PS.SpendEnergy(turn.MoveEnergyCost);
-                            PS.SetPendingDamageMultiplier(turn.MoveDamageMultiplier);
                             GameObject enemyTarget = turn.AttackersTarget;
 
+                            // only single-target moves have a target (AOE like Blast hits everyone)
+                            if (turn.Move.target == MoveTarget.SingleEnemy)
+                            {
                                 // redirect to a living protector
                                 if (enemyTarget != null)
                                 {
@@ -284,13 +285,14 @@ public class BattleStateMachine : MonoBehaviour
                                 // retarget if the chosen enemy already died
                                 if ((enemyTarget == null || !enemyTarget.activeInHierarchy) && EnemyInBattle.Count > 0)
                                     enemyTarget = EnemyInBattle[Random.Range(0, EnemyInBattle.Count)];
+                            }
 
-                            PS.enemyToAttack = enemyTarget;
-                            PS.currentState = PlayerState.TurnState.ACTION;
-                            break;
+                            PS.PerformAttack(turn.Move, enemyTarget);
+                            break;         
 
                         case "Buff":
                             PS.PerformBuff(turn.Move);
+                            break;
 
                         case "Guard":
                             PS.DoGuard();
@@ -381,20 +383,6 @@ public class BattleStateMachine : MonoBehaviour
     public void CollectActions(HandleTurn input)
     {
         PerformList.Add(input);
-    }
-
-    void EnemyButtons()
-    {
-        foreach (GameObject enemy in EnemyInBattle)
-        {
-            GameObject newButton = Instantiate(enemyButton) as GameObject;
-            EnemySelectButton button = newButton.GetComponent<EnemySelectButton>();
-            EnemyState currentEnemy = enemy.GetComponent<EnemyState>();
-            TMP_Text buttonText = newButton.transform.Find("Text (TMP)").gameObject.GetComponent<TMP_Text>();
-            buttonText.text = currentEnemy.enemy.name;
-            button.EnemyPrefab = enemy;
-            newButton.transform.SetParent(Spacer, false);
-        }
     }
 
     public void OpenAttackMenu()
