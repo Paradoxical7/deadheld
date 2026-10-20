@@ -9,9 +9,8 @@ public class TurnBasedPlayer
     public float baseNRG;
     public float currentNRG;
 
-    public float baseATK;
-    public float currentATK;
+    [Range(0, 100)] public float dodgeChance = 10f; // percent
+    [Range(0, 100)] public float critChance = 15f;  // percent
 
-    public int agility; // Dodge chance
     public int nrgGain; // Chance to gain extra energy
 }
