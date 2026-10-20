@@ -59,6 +59,8 @@ public class PlayerState : MonoBehaviour
             cooldowns[move]--;
             if (cooldowns[move] <= 0) cooldowns.Remove(move);
         }
+
+        statuses.Tick();
     }
 
     // energy & cooldowns

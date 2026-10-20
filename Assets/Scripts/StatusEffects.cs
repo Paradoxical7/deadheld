@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public enum StatusId { Guard, Focus, Aim, Chamber }
+public enum StatusId { Guard, Focus, Aim, Chamber, Fortify }
 
 public class StatusEffect
 {
@@ -10,6 +10,16 @@ public class StatusEffect
     public string description;
     public bool isDebuff;
     public int stacks;
+    public int turnsLeft;   // 0 = lasts until consumed or cleared
+    public float magnitude; // e.g. 0.2 = 20%
+
+    public string Title()
+    {
+        string t = displayName;
+        if (stacks > 1) t += " x" + stacks;
+        if (turnsLeft > 0) t += " (" + turnsLeft + (turnsLeft == 1 ? " turn)" : " turns)");
+        return t;
+    }
 }
 
 public class StatusEffects
@@ -26,6 +36,12 @@ public class StatusEffects
         return e != null ? e.stacks : 0;
     }
 
+    public float Magnitude(StatusId id)
+    {
+        StatusEffect e = Find(id);
+        return e != null ? e.magnitude : 0f;
+    }
+
     public void Apply(StatusId id, string displayName, bool isDebuff, int maxStacks, Func<int, string> describe)
     {
         StatusEffect e = Find(id);
@@ -37,6 +53,36 @@ public class StatusEffects
         e.stacks = Math.Min(e.stacks + 1, maxStacks);
         e.description = describe(e.stacks);
         Changed?.Invoke();
+    }
+
+    // timed effect: re-applying refreshes the duration
+    public void ApplyTimed(StatusId id, string displayName, bool isDebuff, float magnitude, int turns, string description)
+    {
+        StatusEffect e = Find(id);
+        if (e == null)
+        {
+            e = new StatusEffect { id = id, displayName = displayName, isDebuff = isDebuff };
+            list.Add(e);
+        }
+        e.stacks = 1;
+        e.magnitude = magnitude;
+        e.turnsLeft = turns;
+        e.description = description;
+        Changed?.Invoke();
+    }
+
+    // call at the start of the owner's turn
+    public void Tick()
+    {
+        bool changed = false;
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            if (list[i].turnsLeft <= 0) continue;
+            list[i].turnsLeft--;
+            if (list[i].turnsLeft <= 0) list.RemoveAt(i);
+            changed = true;
+        }
+        if (changed) Changed?.Invoke();
     }
 
     public void Remove(StatusId id)

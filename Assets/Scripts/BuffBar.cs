@@ -23,6 +23,18 @@ public class BuffBar : MonoBehaviour
 
     private StatusEffects bound;
 
+    void Awake()
+    {
+        if (tooltipPanel != null)
+        {
+            CanvasGroup cg = tooltipPanel.GetComponent<CanvasGroup>();
+            if (cg == null) cg = tooltipPanel.gameObject.AddComponent<CanvasGroup>();
+            cg.blocksRaycasts = false; // tooltip can never steal the hover
+            cg.interactable = false;
+            tooltipPanel.pivot = new Vector2(0.5f, 0f);
+        }
+    }
+
     void Start() { HideTooltip(); }
 
     public void Bind(StatusEffects statuses)
@@ -66,14 +78,19 @@ public class BuffBar : MonoBehaviour
 
     public void ShowTooltip(StatusEffect effect, RectTransform anchor)
     {
+        ShowTooltipText(effect.Title(), effect.description, anchor);
+    }
+
+    public void ShowTooltipText(string title, string body, RectTransform anchor)
+    {
         if (tooltipPanel == null) return;
 
-        tooltipTitle.text = effect.stacks > 1 ? effect.displayName + " x" + effect.stacks : effect.displayName;
-        tooltipBody.text = effect.description;
+        tooltipTitle.text = title;
+        tooltipBody.text = body;
         tooltipPanel.gameObject.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipPanel); // size to the text first
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipPanel);
 
-        // place just above the icon
+        // place just above the anchor
         tooltipPanel.position = anchor.TransformPoint(new Vector3(0f, anchor.rect.height * 0.5f, 0f)) + (Vector3)tooltipOffset;
 
         // keep the whole tooltip inside the canvas
@@ -97,17 +114,5 @@ public class BuffBar : MonoBehaviour
     public void HideTooltip()
     {
         if (tooltipPanel != null) tooltipPanel.gameObject.SetActive(false);
-    }
-
-    void Awake()
-    {
-        if (tooltipPanel != null)
-        {
-            CanvasGroup cg = tooltipPanel.GetComponent<CanvasGroup>();
-            if (cg == null) cg = tooltipPanel.gameObject.AddComponent<CanvasGroup>();
-            cg.blocksRaycasts = false; // tooltip can never steal the hover
-            cg.interactable = false;
-            tooltipPanel.pivot = new Vector2(0.5f, 0f); // bottom-center sits above the icon
-        }
     }
 }

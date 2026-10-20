@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum MoveKind { Attack, Heal, Buff, Summon, Protect }
 public enum MoveTarget { SingleEnemy, AllEnemies, Self }
-public enum MoveEffect { None, Aim, Chamber }
+public enum MoveEffect { None, Aim, Chamber, Fortify }
 
 [System.Serializable]
 public class PlayerMove
@@ -16,4 +16,6 @@ public class PlayerMove
     public MoveEffect effect = MoveEffect.None;
     public float healAmount; // only used when kind == Heal
     public GameObject summonPrefab; // only used by Summon moves
+    public float effectValue;   // Fortify: 0.2 = take 20% less damage
+    public int effectDuration;  // Fortify: how many of the owner's turns it lasts
 }

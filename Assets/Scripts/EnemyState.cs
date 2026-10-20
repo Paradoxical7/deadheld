@@ -25,6 +25,8 @@ public class EnemyState : MonoBehaviour
     private GameObject protectedAlly;       // set on the Guard
     private int stageLevel = 0; // 0 = Stage1, 1 = Stage2, 2 = Stage3
     private float stageDamageBonus = 0f;
+    public string displayName; // set by BattleManager, e.g. "Enemy Guard"
+    public bool reserveEnergyForProtect = true; // keep enough energy banked for Protect
 
     public float focusExtraEnergy = 1f;
     public float focusDamageIncrease = 0.15f;
@@ -182,32 +184,40 @@ public class EnemyState : MonoBehaviour
         GainEnergy(1f);
         statuses.Remove(StatusId.Guard);
         statuses.Remove(StatusId.Focus);
-
+        statuses.Tick(); // timed buffs like Fortify count down on this enemy's turn
         ClearProtection();
 
         List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
         List<PlayerMove> summons = affordable.Where(m => m.kind == MoveKind.Summon && m.summonPrefab != null).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
-        GameObject healTarget = FindMostHurtAlly();
         List<PlayerMove> protects = affordable.Where(m => m.kind == MoveKind.Protect).ToList();
+        List<PlayerMove> buffs = affordable.Where(m => m.kind == MoveKind.Buff
+            && m.effect == MoveEffect.Fortify && !statuses.Has(StatusId.Fortify)).ToList();
+        GameObject healTarget = FindMostHurtAlly();
         GameObject protectTarget = FindAllyToProtect();
 
-        // when a fellow enemy falls into protect threshold, filter out attacks for this turn that
-        // would make 'protect' not affordable the next turn (only use free attacks for right now)
-        if (protectTarget != null && protects.Count == 0 && attackMoves.Any(m => m.kind == MoveKind.Protect))
-            attacks = attacks.Where(m => m.energyCost == 0).ToList();
-
-        // saving up: if there's a summon we can't afford yet (and room for it),
-        // don't burn energy on paid attacks
+        // saving energy section
+        // 1) saving for a summon we can't afford yet
         PlayerMove savingFor = attackMoves.FirstOrDefault(m =>
             m.kind == MoveKind.Summon && m.summonPrefab != null
             && !HasEnoughEnergy(m.energyCost)
             && m.energyCost <= enemy.baseNRG
             && BSM.HasFreeEnemySlot());
 
-        if (savingFor != null)
-            attacks = attacks.Where(m => m.energyCost <= 0f).ToList();
+        // 2) keep enough energy banked for Protect while there are allies to protect
+        PlayerMove protectMove = attackMoves.Where(m => m.kind == MoveKind.Protect)
+                                            .OrderBy(m => m.energyCost).FirstOrDefault();
+        float reserve = 0f;
+        if (reserveEnergyForProtect && protectMove != null
+            && protectMove.energyCost <= enemy.baseNRG && BSM.EnemyInBattle.Count > 1)
+            reserve = protectMove.energyCost;
+
+        // free moves are always allowed; paid moves must leave the reserve intact
+        System.Func<PlayerMove, bool> canSpend = m =>
+            m.energyCost <= 0f || (savingFor == null && enemy.currentNRG - m.energyCost >= reserve);
+        attacks = attacks.Where(canSpend).ToList();
+        buffs = buffs.Where(canSpend).ToList();
 
         HandleTurn myTurn = new HandleTurn();
         myTurn.Attacker = gameObject.name;
@@ -231,6 +241,12 @@ public class EnemyState : MonoBehaviour
             myTurn.Action = "Protect";
             myTurn.Move = protects[Random.Range(0, protects.Count)];
             myTurn.AttackersTarget = protectTarget;
+        }
+        else if (buffs.Count > 0)
+        {
+            myTurn.Action = "Buff";
+            myTurn.Move = buffs[Random.Range(0, buffs.Count)];
+            myTurn.AttackersTarget = null;
         }
         else if (attacks.Count > 0)
         {
@@ -285,6 +301,26 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
+    public void PerformBuff(PlayerMove move)
+    {
+        SpendEnergy(move.energyCost);
+        Debug.Log(gameObject.name + " used " + move.moveName);
+
+        if (move.effect == MoveEffect.Fortify)
+        {
+            statuses.ApplyTimed(StatusId.Fortify, "Fortify", false, move.effectValue, move.effectDuration,
+                "Take " + Mathf.RoundToInt(move.effectValue * 100f) + "% less damage.");
+        }
+
+        StartCoroutine(FinishAfter(0.6f)); // short pause so the buff reads
+    }
+
+    private IEnumerator FinishAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        BSM.onActionComplete();
+    }
+
     public void DoFocus()
     {
         Debug.Log(gameObject.name + " used Focus");
@@ -331,6 +367,7 @@ public class EnemyState : MonoBehaviour
         float finalDamage = amount;
         if (statuses.Has(StatusId.Guard)) { finalDamage *= (1f - guardDamageReduction); }
         if (statuses.Has(StatusId.Focus)) { finalDamage *= (1f + focusDamageIncrease); }
+        if (statuses.Has(StatusId.Fortify)) { finalDamage *= (1f - statuses.Magnitude(StatusId.Fortify)); }
 
         enemy.currentHP -= finalDamage;
         Debug.Log(enemy.name + (wasCrit ? " took a CRITICAL hit: " : " took ") + finalDamage + " damage. HP now: " + enemy.currentHP);

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -35,6 +36,10 @@ public class BattleStateMachine : MonoBehaviour
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
     public BuffBar buffBar;
+    public BattleBanner banner;
+    public float preBannerDelay = 0.25f;
+    public List<CombatantHUD> playerHuds = new List<CombatantHUD>();
+    public List<CombatantHUD> enemyHuds = new List<CombatantHUD>(); // index = spawn slot
 
     // enemy spawning
     public bool randomizeEnemyCount = true;
@@ -45,6 +50,8 @@ public class BattleStateMachine : MonoBehaviour
     public GameObject debugMainEnemy;
     private GameObject[] slotOccupants;
     private readonly Dictionary<GameObject, GameObject> enemyButtonFor = new Dictionary<GameObject, GameObject>();
+    private readonly Dictionary<GameObject, CombatantHUD> enemyHudFor = new Dictionary<GameObject, CombatantHUD>();
+    private readonly Dictionary<string, int> nameCounts = new Dictionary<string, int>();
     private int enemySpawnCount = 0;
 
     void Start()
@@ -56,6 +63,10 @@ public class BattleStateMachine : MonoBehaviour
         attackPanel.SetActive(false);
         enemySelectPanel.SetActive(false);
         moveSelectPanel.SetActive(false);
+
+        // hide every panel until something is bound to it
+        foreach (CombatantHUD hud in enemyHuds) if (hud != null) hud.gameObject.SetActive(false);
+        BindPlayerHuds();
 
         GameObject mainEnemy = null;
         EnemyIdentity.EnemyStage stage = EnemyIdentity.EnemyStage.Stage1;
@@ -80,7 +91,6 @@ public class BattleStateMachine : MonoBehaviour
         }
         else
         {
-
             Debug.LogWarning("FALLBACK: using scene-placed enemies. mainEnemy="
                 + (mainEnemy != null ? mainEnemy.name : "none")
                 + ", spawn points=" + enemySpawnPoints.Length);
@@ -89,10 +99,32 @@ public class BattleStateMachine : MonoBehaviour
             EnemyInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
             EnemyInBattle = EnemyInBattle.OrderBy(e => TrailingNumber(e.name)).ThenBy(e => e.name).ToList();
             if (randomizeEnemyCount) RandomizeEnemyCount();
-            foreach (GameObject enemy in EnemyInBattle) CreateEnemyButton(enemy);
+
+            List<GameObject> placed = new List<GameObject>(EnemyInBattle);
+            EnemyInBattle.Clear();
+            for (int i = 0; i < placed.Count; i++) RegisterEnemy(placed[i], i, placed[i].name);
         }
 
         StartPlayerPhase();
+    }
+
+    void BindPlayerHuds()
+    {
+        for (int i = 0; i < playerHuds.Count; i++)
+        {
+            if (playerHuds[i] == null) continue;
+
+            if (i < PlayerInBattle.Count)
+            {
+                PlayerState ps = PlayerInBattle[i].GetComponent<PlayerState>();
+                if (ps != null)
+                {
+                    playerHuds[i].Bind(PlayerInBattle[i].name, ps.player, ps.statuses, buffBar);
+                    continue;
+                }
+            }
+            playerHuds[i].gameObject.SetActive(false);
+        }
     }
 
     static int TrailingNumber(string s)
@@ -100,6 +132,8 @@ public class BattleStateMachine : MonoBehaviour
         System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(s, @"\d+$");
         return m.Success ? int.Parse(m.Value) : int.MaxValue;
     }
+
+    // encounter spawning
 
     GameObject FindEnemyPrefab(EnemyIdentity.EnemyRole role, EnemyIdentity.EnemyStage stage)
     {
@@ -113,15 +147,18 @@ public class BattleStateMachine : MonoBehaviour
         return sameRole;
     }
 
+    // random extras: pick a random ROLE first, then that role's prefab at the matching stage.
     GameObject PickRandomExtra(EnemyIdentity.EnemyStage stage)
     {
-        // prefer extras at the same stage as the touched enemy
-        List<EnemyPrefabEntry> options = enemyRoster.Where(e => e.inRandomPool && e.prefab != null && e.stage == stage).ToList();
-        if (options.Count == 0)
-            options = enemyRoster.Where(e => e.inRandomPool && e.prefab != null).ToList();
-        if (options.Count == 0) return null;
+        List<EnemyPrefabEntry> pool = enemyRoster.Where(e => e.inRandomPool && e.prefab != null).ToList();
+        if (pool.Count == 0) return null;
 
-        return options[UnityEngine.Random.Range(0, options.Count)].prefab;
+        List<EnemyIdentity.EnemyRole> roles = pool.Select(e => e.role).Distinct().ToList();
+        EnemyIdentity.EnemyRole role = roles[UnityEngine.Random.Range(0, roles.Count)];
+
+        List<EnemyPrefabEntry> ofRole = pool.Where(e => e.role == role).ToList();
+        EnemyPrefabEntry exact = ofRole.FirstOrDefault(e => e.stage == stage);
+        return (exact != null ? exact : ofRole[0]).prefab;
     }
 
     void SpawnEncounter(GameObject mainPrefab, EnemyIdentity.EnemyStage stage)
@@ -134,7 +171,7 @@ public class BattleStateMachine : MonoBehaviour
         int total = UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
         total = Mathf.Clamp(total, 1, enemySpawnPoints.Length);
 
-        SpawnEnemyInSlot(mainPrefab, 0);
+        SpawnEnemyInSlot(mainPrefab, 0); // guaranteed: the enemy that hit you
 
         for (int slot = 1; slot < total; slot++)
         {
@@ -152,12 +189,41 @@ public class BattleStateMachine : MonoBehaviour
         GameObject enemy = Instantiate(prefab, point.position, point.rotation);
 
         enemySpawnCount++;
-        enemy.name = prefab.name + " " + enemySpawnCount; // unique names: "Engineer 1", "Medic 2"
+        enemy.name = prefab.name + " " + enemySpawnCount; // unique object names
 
         slotOccupants[slot] = enemy;
-        EnemyInBattle.Add(enemy);
-        CreateEnemyButton(enemy);
+        RegisterEnemy(enemy, slot, prefab.name);
         return enemy;
+    }
+
+    // names, select button and HUD panel for a new enemy
+    void RegisterEnemy(GameObject enemy, int hudIndex, string fallbackName)
+    {
+        EnemyState es = enemy.GetComponent<EnemyState>();
+        es.displayName = MakeDisplayName(enemy, fallbackName);
+
+        EnemyInBattle.Add(enemy);
+        CreateEnemyButton(enemy, es.displayName);
+
+        if (hudIndex >= 0 && hudIndex < enemyHuds.Count && enemyHuds[hudIndex] != null)
+        {
+            enemyHuds[hudIndex].Bind(es.displayName, es.enemy, es.statuses, buffBar);
+            enemyHudFor[enemy] = enemyHuds[hudIndex];
+        }
+    }
+
+    // "Enemy Guard", then "Enemy Guard 2", "Enemy Guard 3"...
+    string MakeDisplayName(GameObject enemy, string fallbackName)
+    {
+        EnemyIdentity id = enemy.GetComponentInChildren<EnemyIdentity>();
+        string baseName = id != null ? "Enemy " + id.role : fallbackName.Replace("_", " ");
+
+        int count;
+        nameCounts.TryGetValue(baseName, out count);
+        count++;
+        nameCounts[baseName] = count;
+
+        return count == 1 ? baseName : baseName + " " + count;
     }
 
     int FreeSlotIndex()
@@ -177,23 +243,29 @@ public class BattleStateMachine : MonoBehaviour
         int slot = FreeSlotIndex();
         if (slot < 0 || prefab == null) return null;
 
+        if (prefab.GetComponent<EnemyState>() == null)
+        {
+            Debug.LogWarning("Summon prefab '" + prefab.name + "' has no EnemyState component");
+            return null;
+        }
+
         GameObject enemy = SpawnEnemyInSlot(prefab, slot);
         enemy.GetComponent<EnemyState>().justSummoned = true;
         return enemy;
     }
 
-    void CreateEnemyButton(GameObject enemy)
+    void CreateEnemyButton(GameObject enemy, string label)
     {
         GameObject newButton = Instantiate(enemyButton) as GameObject;
         EnemySelectButton button = newButton.GetComponent<EnemySelectButton>();
         TMP_Text buttonText = newButton.transform.Find("Text (TMP)").gameObject.GetComponent<TMP_Text>();
-        buttonText.text = enemy.name;
+        buttonText.text = label;
         button.EnemyPrefab = enemy;
         newButton.transform.SetParent(Spacer, false);
         enemyButtonFor[enemy] = newButton;
     }
 
-    // called by EnemyState when an enemy dies (also removes its select button)
+    // called by EnemyState when an enemy dies (removes its select button and HUD panel)
     public void OnEnemyDied(GameObject enemy)
     {
         EnemyInBattle.Remove(enemy);
@@ -204,7 +276,16 @@ public class BattleStateMachine : MonoBehaviour
             Destroy(btn);
             enemyButtonFor.Remove(enemy);
         }
+
+        CombatantHUD hud;
+        if (enemyHudFor.TryGetValue(enemy, out hud))
+        {
+            hud.Unbind();
+            enemyHudFor.Remove(enemy);
+        }
     }
+
+    // battle loop
 
     void Update()
     {
@@ -219,90 +300,7 @@ public class BattleStateMachine : MonoBehaviour
 
             case (performAction.TAKEACTION):
                 battleState = performAction.PERFORMACTION;
-
-                HandleTurn turn = PerformList[0]; // cache: instant actions can change the list
-                GameObject performer = turn.AttackersGameObject;
-
-                if (turn.Type == "Enemy")
-                {
-                    EnemyState ES = performer.GetComponent<EnemyState>();
-
-                    switch (turn.Action)
-                    {
-                        case "Attack":
-                            {
-                                GameObject target = turn.AttackersTarget;
-                                if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
-                                    target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
-
-                                ES.PerformAttack(turn.Move, target);
-                                break;
-                            }
-
-                        case "Heal":
-                            ES.SpendEnergy(turn.Move.energyCost);
-                            ES.DoHeal(turn.AttackersTarget, turn.Move.healAmount);
-                            break;
-
-                        case "Protect":
-                            ES.SpendEnergy(turn.Move.energyCost);
-                            ES.DoProtect(turn.AttackersTarget);
-                            break;
-
-                        case "Guard":
-                            ES.DoGuard();
-                            break;
-
-                        case "Focus":
-                            ES.DoFocus();
-                            break;
-
-                        case "Summon":
-                            ES.PerformSummon(turn.Move);
-                            break;
-                    }
-                }
-                else if (turn.Type == "Player")
-                {
-                    PlayerState PS = performer.GetComponent<PlayerState>();
-
-                    switch (turn.Action)
-                    {
-                        case "Attack":
-                            GameObject enemyTarget = turn.AttackersTarget;
-
-                            // only single-target moves have a target (AOE like Blast hits everyone)
-                            if (turn.Move.target == MoveTarget.SingleEnemy)
-                            {
-                                // redirect to a living protector
-                                if (enemyTarget != null)
-                                {
-                                    EnemyState targetState = enemyTarget.GetComponent<EnemyState>();
-                                    if (targetState != null && targetState.protector != null && targetState.protector.activeInHierarchy)
-                                        enemyTarget = targetState.protector;
-                                }
-
-                                // retarget if the chosen enemy already died
-                                if ((enemyTarget == null || !enemyTarget.activeInHierarchy) && EnemyInBattle.Count > 0)
-                                    enemyTarget = EnemyInBattle[Random.Range(0, EnemyInBattle.Count)];
-                            }
-
-                            PS.PerformAttack(turn.Move, enemyTarget);
-                            break;         
-
-                        case "Buff":
-                            PS.PerformBuff(turn.Move);
-                            break;
-
-                        case "Guard":
-                            PS.DoGuard();
-                            break;
-
-                        case "Focus":
-                            PS.DoFocus();
-                            break;
-                    }
-                }
+                StartCoroutine(RunTurn(PerformList[0]));
                 break;
 
             case (performAction.PERFORMACTION):
@@ -331,6 +329,128 @@ public class BattleStateMachine : MonoBehaviour
             case (PlayerGUI.DONE):
                 playerInputDone();
                 break;
+        }
+    }
+
+    // announce the move, THEN let the character act (slide, damage, etc.)
+    private IEnumerator RunTurn(HandleTurn turn)
+    {
+        GameObject performer = turn.AttackersGameObject;
+
+        if (performer == null || !performer.activeInHierarchy)
+        {
+            onActionComplete(); // performer is gone, skip this action
+            yield break;
+        }
+
+        yield return new WaitForSeconds(preBannerDelay);
+
+        if (banner != null)
+        {
+            string actionName = turn.Move != null ? turn.Move.moveName : turn.Action;
+            yield return StartCoroutine(banner.Show(ActorName(turn, performer) + " used " + actionName));
+        }
+
+        DispatchTurn(turn, performer);
+    }
+
+    string ActorName(HandleTurn turn, GameObject performer)
+    {
+        if (turn.Type == "Enemy")
+        {
+            EnemyState es = performer.GetComponent<EnemyState>();
+            if (es != null && !string.IsNullOrEmpty(es.displayName)) return es.displayName;
+        }
+        return performer.name;
+    }
+
+    void DispatchTurn(HandleTurn turn, GameObject performer)
+    {
+        if (turn.Type == "Enemy")
+        {
+            EnemyState ES = performer.GetComponent<EnemyState>();
+
+            switch (turn.Action)
+            {
+                case "Attack":
+                    {
+                        GameObject target = turn.AttackersTarget;
+                        if ((target == null || !target.activeInHierarchy) && PlayerInBattle.Count > 0)
+                            target = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
+
+                        ES.PerformAttack(turn.Move, target);
+                        break;
+                    }
+
+                case "Heal":
+                    ES.SpendEnergy(turn.Move.energyCost);
+                    ES.DoHeal(turn.AttackersTarget, turn.Move.healAmount);
+                    break;
+
+                case "Protect":
+                    ES.SpendEnergy(turn.Move.energyCost);
+                    ES.DoProtect(turn.AttackersTarget);
+                    break;
+
+                case "Buff":
+                    ES.PerformBuff(turn.Move);
+                    break;
+
+                case "Guard":
+                    ES.DoGuard();
+                    break;
+
+                case "Focus":
+                    ES.DoFocus();
+                    break;
+
+                case "Summon":
+                    ES.PerformSummon(turn.Move);
+                    break;
+            }
+        }
+        else if (turn.Type == "Player")
+        {
+            PlayerState PS = performer.GetComponent<PlayerState>();
+
+            switch (turn.Action)
+            {
+                case "Attack":
+                    {
+                        GameObject enemyTarget = turn.AttackersTarget;
+
+                        // only single-target moves have a target (AOE like Blast hits everyone)
+                        if (turn.Move.target == MoveTarget.SingleEnemy)
+                        {
+                            // redirect to a living protector
+                            if (enemyTarget != null)
+                            {
+                                EnemyState targetState = enemyTarget.GetComponent<EnemyState>();
+                                if (targetState != null && targetState.protector != null && targetState.protector.activeInHierarchy)
+                                    enemyTarget = targetState.protector;
+                            }
+
+                            // retarget if the chosen enemy already died
+                            if ((enemyTarget == null || !enemyTarget.activeInHierarchy) && EnemyInBattle.Count > 0)
+                                enemyTarget = EnemyInBattle[Random.Range(0, EnemyInBattle.Count)];
+                        }
+
+                        PS.PerformAttack(turn.Move, enemyTarget);
+                        break;
+                    }
+
+                case "Buff":
+                    PS.PerformBuff(turn.Move);
+                    break;
+
+                case "Guard":
+                    PS.DoGuard();
+                    break;
+
+                case "Focus":
+                    PS.DoFocus();
+                    break;
+            }
         }
     }
 
@@ -385,6 +505,7 @@ public class BattleStateMachine : MonoBehaviour
         PerformList.Add(input);
     }
 
+    // player input
     public void OpenAttackMenu()
     {
         attackPanel.SetActive(false);
