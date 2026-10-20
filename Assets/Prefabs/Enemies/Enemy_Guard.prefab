@@ -47,26 +47,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyState
   enemy:
     name: Guard
-    baseHP: 70
-    currentHP: 70
-    baseNRG: 1
-    currentNRG: 1
-    baseATK: 20
-    currentATK: 20
-    agility: 0
-    nrgGain: 0
+    baseHP: 80
+    currentHP: 80
+    baseNRG: 5
+    currentNRG: 0
+    dodgeChance: 10
+    critChance: 15
+    nrgGain: 1
   currentState: 0
   playerToAttack: {fileID: 0}
   attackMoves:
-  - moveName: Guard_Attack
-    energyCost: 1
-    dmgMultiplier: 1
+  - moveName: Shield Bash
+    energyCost: 0
+    damage: 3
+    cooldown: 0
     kind: 0
+    target: 0
+    effect: 0
     healAmount: 0
+    summonPrefab: {fileID: 0}
+    effectValue: 0
+    effectDuration: 0
+  - moveName: Protect
+    energyCost: 3
+    damage: 0
+    cooldown: 4
+    kind: 4
+    target: 2
+    effect: 0
+    healAmount: 0
+    summonPrefab: {fileID: 0}
+    effectValue: 0
+    effectDuration: 0
+  - moveName: Brace
+    energyCost: 1
+    damage: 0
+    cooldown: 0
+    kind: 2
+    target: 2
+    effect: 3
+    healAmount: 0
+    summonPrefab: {fileID: 0}
+    effectValue: 0.2
+    effectDuration: 2
   healThreshold: 0.6
+  protectThreshold: 0.7
+  protector: {fileID: 0}
+  displayName: 
+  reserveEnergyForProtect: 1
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
+  justSummoned: 0
 --- !u!1 &4767703826607668592
 GameObject:
   m_ObjectHideFlags: 0
