@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'E - INSPECT
+  m_text: 'E - INSPECT POD
 
 '
   m_isRightToLeft: 0
@@ -4206,7 +4206,7 @@ Transform:
   m_GameObject: {fileID: 8655190247977170683}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.041610956, y: 2.7669218, z: 5.85}
+  m_LocalPosition: {x: -1.84, y: 2.98, z: 5.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4429,7 +4429,7 @@ Transform:
   m_GameObject: {fileID: 9098601455076298262}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.6, y: 1.07, z: 0.06}
+  m_LocalPosition: {x: -1.84, y: 1.3757539, z: 5.85}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4454,7 +4454,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 1, y: 0.73, z: 0.88}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5431094547964807006
 MonoBehaviour:
@@ -4632,6 +4632,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6239098653918986761}
     m_Modifications:
+    - target: {fileID: 1002508856145170858, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1800301104220474576, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -4642,11 +4646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2507642023042140292, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0005212097
       objectReference: {fileID: 0}
     - target: {fileID: 2507642023042140292, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2507642023042140292, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4691,6 +4695,10 @@ PrefabInstance:
     - target: {fileID: 6724917237362063898, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_Name
       value: PodStation_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076847702947487671, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: state
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4855,7 +4863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1002508856145170858, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1800301104220474576, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -4901,6 +4909,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2763730728141596391, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2763730728141596391, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.63
+      objectReference: {fileID: 0}
     - target: {fileID: 4944226263037359317, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: prompt
       value: 
@@ -4913,13 +4929,25 @@ PrefabInstance:
       propertyPath: readPrompt
       value: 
       objectReference: {fileID: 6867296777807820777}
+    - target: {fileID: 6038782780281856043, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038782780281856043, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_Size.y
+      value: 1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038782780281856043, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6724917237362063898, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_Name
       value: PodStation_2
       objectReference: {fileID: 0}
     - target: {fileID: 8076847702947487671, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: state
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4957,7 +4985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2507642023042140292, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2507642023042140292, guid: 7827f8d30a828b146b698cc109deb81c, type: 3}
       propertyPath: m_LocalRotation.w
