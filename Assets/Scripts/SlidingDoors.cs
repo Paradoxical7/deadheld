@@ -27,6 +27,7 @@ public class SlidingDoors : MonoBehaviour
     private bool heldOpen;
     private bool sawPlayer;
     public bool IsOpen => heldOpen;
+    public bool IsUnlocked => Unlocked;
 
     public void Open() { heldOpen = true; }
     public void Close() { heldOpen = false; }
