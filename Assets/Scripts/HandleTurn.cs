@@ -5,12 +5,8 @@ public class HandleTurn
 {
     public string Attacker; // Name of Attacker
     public string Type;
-
-    public string Action = "Attack"; // Attack, Guard, Focus
+    public string Action = "Attack"; // Attack, Guard, Focus, Heal, Buff
     public GameObject AttackersGameObject; // Who attacked
     public GameObject AttackersTarget; // Who's going to be attacked
-
-    public float MoveEnergyCost;
-    public float MoveDamageMultiplier = 1f;
-    public float MoveHealAmount;
+    public PlayerMove Move; // NULL for guard/focus
 }

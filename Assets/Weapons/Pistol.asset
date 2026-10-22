@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0f4ceed277a1240a76b56ab73e227a, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponName: Pistol
+  moves:
+  - moveName: Pistol Whip
+    energyCost: 0
+    damage: 5
+    cooldown: 0
+    kind: 0
+    target: 0
+    effect: 0
+    healAmount: 0
+  - moveName: Aim
+    energyCost: 1
+    damage: 0
+    cooldown: 2
+    kind: 2
+    target: 2
+    effect: 1
+    healAmount: 0
+  - moveName: Shoot
+    energyCost: 3
+    damage: 20
+    cooldown: 2
+    kind: 0
+    target: 0
+    effect: 0
+    healAmount: 0
