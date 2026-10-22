@@ -35,7 +35,7 @@ public class BattleOutcome : MonoBehaviour
                 GameManager.Instance.lastOutcome = GameManager.Outcome.Won;
                 GameManager.Instance.MarkEnemyDefeated(GameManager.Instance.pendingEnemyId);
             }
-            SceneManager.LoadScene("Room_01");
+            ReturnFromBattle();
         }
         else if (bsm.PlayerInBattle.Count == 0)
         {
@@ -43,7 +43,16 @@ public class BattleOutcome : MonoBehaviour
             Debug.Log("BattleOutcome: PLAYER LOST");
             if (GameManager.Instance != null)
                 GameManager.Instance.lastOutcome = GameManager.Outcome.Lost;
-            SceneManager.LoadScene("Room_01");
+            ReturnFromBattle();
         }
+    }
+
+    private void ReturnFromBattle()
+    {
+        // go back to whatever scene we fought in, not a hardcoded room
+        string back = (GameManager.Instance != null && !string.IsNullOrEmpty(GameManager.Instance.returnScene))
+            ? GameManager.Instance.returnScene
+            : "Room_01";
+        SceneManager.LoadScene(back);
     }
 }

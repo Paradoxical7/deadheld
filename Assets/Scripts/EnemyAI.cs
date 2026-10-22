@@ -11,6 +11,10 @@ public class EnemyAI : MonoBehaviour
     private EnemySight sight;             // reference to the sight script on this enemy
     private int currentPoint = 0;
     private bool combatStarted = false;  // so we only fire the stub once
+    public float spawnGraceTime = 3f;    // after (re)spawn, combat won't trigger for this long (lets you run after a loss)
+    private float graceTimer = 0f;
+    public float leashRange = 15f;       // how far from its post it will chase before giving up
+    private Vector3 homePos;             // where it started / the area it guards
 
     private enum State { Patrol, Chase }   // the two behaviors
     private State state = State.Patrol;    // start out patrolling
@@ -25,6 +29,9 @@ public class EnemyAI : MonoBehaviour
 
         if (sight == null)
             Debug.LogWarning("EnemyAI: no EnemySight component found, enemy will only patrol.");
+
+        graceTimer = spawnGraceTime;
+        homePos = transform.position;
     }
 
         void Update()
@@ -36,15 +43,37 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (sight.canSeePlayer)
-            state = State.Chase;
-        else
-            state = State.Patrol;
+        // count down the post-spawn grace window
+        if (graceTimer > 0f) graceTimer -= Time.deltaTime;
 
-        if (state == State.Chase)
+        // during grace (e.g. just respawned after a loss) ignore the player and back off,
+        // so you get a real chance to run instead of being instantly re-caught
+        if (graceTimer > 0f)
+        {
+            ReturnOrPatrol();
+            return;
+        }
+
+        // proximity trigger: touching the enemy starts combat even if it can't "see" you
+        float distToPlayer = Vector3.Distance(transform.position, sight.player.position);
+        if (distToPlayer <= catchDistance && !combatStarted && graceTimer <= 0f)
+        {
+            StartCombat();
+            return;
+        }
+
+        // leash: only chase while within range of its post; otherwise return home and patrol
+        float distFromHome = Vector3.Distance(transform.position, homePos);
+        if (sight.canSeePlayer && distFromHome <= leashRange)
+        {
+            state = State.Chase;
             Chase();
+        }
         else
-            Patrol();
+        {
+            state = State.Patrol;
+            ReturnOrPatrol();
+        }
     }
 
     void Patrol()
@@ -58,12 +87,23 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void ReturnOrPatrol()
+    {
+        // if we chased out past our leash, walk back to our post before patrolling again
+        if (Vector3.Distance(transform.position, homePos) > 2f)
+        {
+            agent.SetDestination(homePos);
+            return;
+        }
+        Patrol();
+    }
+
     void Chase()
     {
         agent.SetDestination(sight.player.position);  // walk straight at the player
 
         float dist = Vector3.Distance(transform.position, sight.player.position);
-        if (dist <= catchDistance && !combatStarted)
+        if (dist <= catchDistance && !combatStarted && graceTimer <= 0f)
         {
             StartCombat();
         }
@@ -83,6 +123,10 @@ public class EnemyAI : MonoBehaviour
         EnemyID enemyId = GetComponent<EnemyID>();
         if (enemyId != null && GameManager.Instance != null)
             GameManager.Instance.pendingEnemyId = enemyId.id;
+
+        // remember where to come back to, and where the player was standing
+        if (GameManager.Instance != null)
+            GameManager.Instance.SetReturnPoint(SceneManager.GetActiveScene().name, sight.player.position);
 
         SceneManager.LoadScene("TurnBasedScene");
     }
