@@ -16,6 +16,10 @@ public class SlidingDoors : MonoBehaviour
     [Header("Keypad")]
     [SerializeField] private bool requiresUnlock = false;
     [SerializeField] private bool openByProximity = true;
+    [Tooltip("Which GameManager flag unlocks this door.")]
+    [SerializeField] private UnlockFlag unlockFlag = UnlockFlag.RoomOneDoor;
+
+    public enum UnlockFlag { RoomOneDoor, MainHub }
 
     private Vector3 leftClosed;
     private Vector3 rightClosed;
@@ -31,9 +35,14 @@ public class SlidingDoors : MonoBehaviour
     public void Open() { heldOpen = true; }
     public void Close() { heldOpen = false; }
 
-    private bool Unlocked =>
-        !requiresUnlock ||
-        (GameManager.Instance != null && GameManager.Instance.doorUnlocked);
+    private bool Unlocked => !requiresUnlock || FlagSet();
+
+    private bool FlagSet()
+    {
+        var gm = GameManager.Instance;
+        if (gm == null) return false;
+        return unlockFlag == UnlockFlag.MainHub ? gm.hubUnlocked : gm.doorUnlocked;
+    }
 
     private void Start()
     {
@@ -57,7 +66,10 @@ public class SlidingDoors : MonoBehaviour
         {
             var kb = Keyboard.current;
             if (kb != null && kb.f8Key.wasPressedThisFrame && GameManager.Instance != null)
-                GameManager.Instance.doorUnlocked = true;
+            {
+                if (unlockFlag == UnlockFlag.MainHub) GameManager.Instance.hubUnlocked = true;
+                else GameManager.Instance.doorUnlocked = true;
+            }
         }
 
         nearby.RemoveWhere(c => c == null ||

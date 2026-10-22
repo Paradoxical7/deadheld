@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     public bool doorUnlocked = false;
     public string puzzleCode;                     // generated once per run
 
+    [Header("Zone 1 progress")]
+    public bool hubUnlocked = false;              // set by the guide NPC; opens the Main Hub doors
+    public bool hasZoneMap = false;               // player can view the Zone 1 map (M)
+
     [Header("Battle return")]
     public string returnScene;            // scene to come back to after a battle
     public Vector3 returnPosition;        // where the player stood when combat started
@@ -96,6 +100,13 @@ public class GameManager : MonoBehaviour
     {
         codeFound = true;
         Debug.Log("GameManager: puzzle code found");
+    }
+
+    public void UnlockHubAndGiveMap()
+    {
+        hubUnlocked = true;
+        hasZoneMap = true;
+        Debug.Log("GameManager: Main Hub unlocked, Zone 1 map given");
     }
 
     public bool TryUnlockDoor(string entered)
