@@ -20,6 +20,7 @@ public class KeypadStation : MonoBehaviour
     [SerializeField] private string promptClosed = "E - OPEN";
     [SerializeField] private string promptOpen = "E - CLOSE";
     private TMP_Text promptLabel;
+    [SerializeField] private Vector2 promptOffset = new Vector2(-150f, 0f);
 
     private const int CodeLength = 4;
 
@@ -28,6 +29,9 @@ public class KeypadStation : MonoBehaviour
     private bool solved;
     private string entered = "";
     private TankController player;
+
+    // Play Mode Options skips the reload, so these keep their last-session values.
+    private void OnEnable() { playerInside = false; open = false; solved = false; entered = ""; }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -57,9 +61,13 @@ public class KeypadStation : MonoBehaviour
             if (open) Close();
         }
 
-                if (prompt != null)
+        if (prompt != null)
         {
-            prompt.SetActive(playerInside && !open);
+            bool show = playerInside && !open;
+            prompt.SetActive(show);
+            if (show && Camera.allCameras.Length > 0) 
+                prompt.transform.position = Camera.allCameras[0].WorldToScreenPoint(transform.position) + (Vector3)promptOffset;
+
             UpdatePromptText();
         }
         if (!open)
@@ -79,7 +87,7 @@ public class KeypadStation : MonoBehaviour
         else if (kb.backspaceKey.wasPressedThisFrame) Backspace();
         else if (kb.enterKey.wasPressedThisFrame || kb.numpadEnterKey.wasPressedThisFrame) Submit();
     }
-    
+
     private void ToggleDoor()
     {
         if (door != null)
@@ -164,6 +172,7 @@ public class KeypadStation : MonoBehaviour
             solved = true;
             message.text = "ACCESS GRANTED";
             onSolved.Invoke();
+            ToggleDoor();
             Invoke(nameof(Close), 1f);
         }
         else
@@ -173,7 +182,7 @@ public class KeypadStation : MonoBehaviour
             Refresh();
         }
     }
-    
+
     private void UpdateHint()
     {
         if (hintText == null) return;

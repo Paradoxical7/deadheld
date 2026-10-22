@@ -12,9 +12,16 @@ public class PodInteract : MonoBehaviour
 
     private bool playerInside;
     private bool inspecting;
+    private bool promptShown;
     private bool noteOpen;
     private TankController player;
     private readonly List<Camera> hiddenCameras = new List<Camera>();
+    // Play Mode Options skips the reload, so these keep their last-session values.
+    private void OnEnable() 
+    { 
+        playerInside = false; inspecting = false;
+        promptShown = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -32,8 +39,13 @@ public class PodInteract : MonoBehaviour
     {
         bool canInspect = playerInside && pod.State == Pod.PodState.Pulse;
 
-        if (prompt != null) prompt.SetActive(canInspect && !inspecting);
-
+        if (prompt != null)
+        {
+            bool show = canInspect && !inspecting;
+            if (show || promptShown) { prompt.SetActive(show); promptShown = show; }
+            if (show) prompt.transform.position = Camera.allCameras[0].WorldToScreenPoint(pod.transform.position + Vector3.up * 1f);
+        }
+        
         var kb = Keyboard.current;
         if (kb == null) return;
 

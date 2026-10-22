@@ -15,6 +15,7 @@ public class SlidingDoors : MonoBehaviour
 
     [Header("Keypad")]
     [SerializeField] private bool requiresUnlock = false;
+    [SerializeField] private bool openByProximity = true;
 
     private Vector3 leftClosed;
     private Vector3 rightClosed;
@@ -24,7 +25,7 @@ public class SlidingDoors : MonoBehaviour
     private readonly HashSet<Collider> nearby = new();
     private float lastOccupiedTime;
     private bool heldOpen;
-
+    private bool sawPlayer;
     public bool IsOpen => heldOpen;
 
     public void Open() { heldOpen = true; }
@@ -55,7 +56,7 @@ public class SlidingDoors : MonoBehaviour
         if (requiresUnlock && Debug.isDebugBuild)
         {
             var kb = Keyboard.current;
-            if (kb != null && kb.f9Key.wasPressedThisFrame && GameManager.Instance != null)
+            if (kb != null && kb.f8Key.wasPressedThisFrame && GameManager.Instance != null)
                 GameManager.Instance.doorUnlocked = true;
         }
 
@@ -65,8 +66,19 @@ public class SlidingDoors : MonoBehaviour
         if (nearby.Count > 0)
             lastOccupiedTime = Time.time;
 
-        bool wantsOpen = heldOpen || nearby.Count > 0 ||
-            Time.time - lastOccupiedTime < closingDelay;
+
+
+        if (nearby.Count > 0) sawPlayer = true;
+        else if (heldOpen && sawPlayer
+                 && Time.time - lastOccupiedTime > closingDelay)
+        {
+            heldOpen = false;
+            sawPlayer = false;
+        }
+
+
+        bool wantsOpen = heldOpen || (openByProximity && (nearby.Count > 0 ||
+            Time.time - lastOccupiedTime < closingDelay));
         bool shouldOpen = Unlocked && wantsOpen;
 
         if (leftDoor != null)
