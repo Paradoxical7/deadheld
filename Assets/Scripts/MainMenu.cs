@@ -19,6 +19,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        // a GameManager left over from an earlier run would carry its HP/stamina into the new game
+        if (GameManager.Instance != null) GameManager.Instance.ResetPlayerStats();
         SceneManager.LoadScene(gameScene);
     }
 

@@ -36,7 +36,17 @@ public class PlayerState : MonoBehaviour
         BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         currentState = TurnState.WAITING;
 
-        player.currentHP = player.baseHP;
+        // enter the fight at the health carried over from exploration (GameManager is the source of truth)
+        var gm = GameManager.Instance;
+        if (gm != null)
+        {
+            player.baseHP = gm.maxHP;
+            player.currentHP = Mathf.Clamp(gm.currentHP, 1f, gm.maxHP);
+        }
+        else
+        {
+            player.currentHP = player.baseHP;   // battle scene played on its own
+        }
         player.currentNRG = 0;
     }
 

@@ -31,6 +31,21 @@ public class GameManager : MonoBehaviour
     public Vector3 returnPosition;        // where the player stood when combat started
     public bool hasReturnPoint = false;
 
+    [Header("Player stats (persist across scenes)")]
+    public float maxHP = 100f;                    // matches the battle player's baseHP
+    public float currentHP = 100f;
+    [Range(0f, 1f)] public float lossRecoverFraction = 0.25f;   // HP you come back with after losing a fight
+
+    [Header("Exploration stamina (separate from battle NRG)")]
+    public float maxEnergy = 100f;
+    public float currentEnergy = 100f;
+    public float sprintDrainPerSecond = 20f;
+    public float energyRegenPerSecond = 12f;
+    public float regenDelay = 0.75f;              // pause after sprinting before energy refills
+    public float sprintResumeEnergy = 15f;        // after running dry, wait for this much before sprinting again
+    private bool sprintExhausted;
+    private float lastSprintTime;
+
     void Awake()
     {
         // singleton: keep only one, and survive scene loads
@@ -43,6 +58,43 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
         puzzleCode = Random.Range(0, 10000).ToString("D4");
+        ResetPlayerStats();
+    }
+
+    // fresh run: full health and stamina
+    public void ResetPlayerStats()
+    {
+        currentHP = maxHP;
+        currentEnergy = maxEnergy;
+        sprintExhausted = false;
+    }
+
+    // called by the battle scene when a fight ends
+    public void SetHPFromBattle(float remainingHP, bool lost)
+    {
+        currentHP = lost
+            ? Mathf.Max(1f, maxHP * lossRecoverFraction)   // no game over yet, so a loss sends you back weakened
+            : Mathf.Clamp(remainingHP, 1f, maxHP);
+        Debug.Log("GameManager: player HP after battle " + currentHP + "/" + maxHP);
+    }
+
+    // called every frame by the exploration controller; returns whether the player may sprint this frame
+    public bool TickSprint(bool wantsToSprint, float deltaTime)
+    {
+        if (currentEnergy <= 0f) sprintExhausted = true;
+        else if (sprintExhausted && currentEnergy >= sprintResumeEnergy) sprintExhausted = false;
+
+        bool sprinting = wantsToSprint && !sprintExhausted;
+        if (sprinting)
+        {
+            currentEnergy = Mathf.Max(0f, currentEnergy - sprintDrainPerSecond * deltaTime);
+            lastSprintTime = Time.time;
+        }
+        else if (Time.time - lastSprintTime >= regenDelay)
+        {
+            currentEnergy = Mathf.Min(maxEnergy, currentEnergy + energyRegenPerSecond * deltaTime);
+        }
+        return sprinting;
     }
 
     void OnDestroy()

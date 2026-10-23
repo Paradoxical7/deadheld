@@ -35,6 +35,7 @@ public class BattleOutcome : MonoBehaviour
                 GameManager.Instance.lastOutcome = GameManager.Outcome.Won;
                 GameManager.Instance.MarkEnemyDefeated(GameManager.Instance.pendingEnemyId);
             }
+            SavePlayerHP(false);
             ReturnFromBattle();
         }
         else if (bsm.PlayerInBattle.Count == 0)
@@ -43,8 +44,18 @@ public class BattleOutcome : MonoBehaviour
             Debug.Log("BattleOutcome: PLAYER LOST");
             if (GameManager.Instance != null)
                 GameManager.Instance.lastOutcome = GameManager.Outcome.Lost;
+            SavePlayerHP(true);
             ReturnFromBattle();
         }
+    }
+
+    // write the player's remaining HP back to GameManager before leaving the battle
+    private void SavePlayerHP(bool lost)
+    {
+        if (GameManager.Instance == null) return;
+        // a defeated player has already been deactivated, so include inactive objects
+        PlayerState ps = FindAnyObjectByType<PlayerState>(FindObjectsInactive.Include);
+        if (ps != null) GameManager.Instance.SetHPFromBattle(ps.player.currentHP, lost);
     }
 
     private void ReturnFromBattle()
