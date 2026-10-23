@@ -10653,7 +10653,6 @@ MonoBehaviour:
   - Take this map of Zone 1. Press M to look at it.
   - And stay out of the dark corners.
   repeatLine: The Hub is open. Check your map with M. Go.
-  parasiteLine: Check your parasite meter. That's all the time you've got. Don't let it hit zero - that's how they get you.
 --- !u!135 &2103573982
 SphereCollider:
   m_ObjectHideFlags: 0
