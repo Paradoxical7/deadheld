@@ -46,6 +46,17 @@ public class GameManager : MonoBehaviour
     private bool sprintExhausted;
     private float lastSprintTime;
 
+    [Header("Parasite meter (granted by the guide NPC)")]
+    public bool parasiteActive = false;
+    public float parasiteMax = 900f;              // seconds of life when full (15 min)
+    public float parasiteCurrent = 900f;
+    public float parasiteDrainPerSecond = 1f;     // 1 = the meter counts down in real seconds
+    public float parasiteRestorePerKill = 120f;   // time bought back per fight won
+    public string battleSceneName = "TurnBasedScene";   // the meter is paused while this scene is active
+    public string mainMenuScene = "MainMenu";
+    public float deathScreenSeconds = 3f;
+    private bool dying;
+
     void Awake()
     {
         // singleton: keep only one, and survive scene loads
@@ -99,8 +110,86 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
-        if (Instance == this)
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+        // unsubscribing a handler that was never added is harmless, and a dying GameManager clears Instance first
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (dying) Time.timeScale = 1f;
+    }
+
+    void Update()
+    {
+        if (!parasiteActive || dying) return;
+        if (SceneManager.GetActiveScene().name == battleSceneName) return;   // the parasite waits out battles
+
+        parasiteCurrent = Mathf.Max(0f, parasiteCurrent - parasiteDrainPerSecond * Time.deltaTime);
+        if (parasiteCurrent <= 0f) StartCoroutine(ParasiteDeath());
+    }
+
+    // the guide NPC hands the parasite over: the meter starts full and begins draining
+    public void ActivateParasite()
+    {
+        parasiteActive = true;
+        parasiteCurrent = parasiteMax;
+        Debug.Log("GameManager: parasite meter active (" + parasiteMax + "s)");
+    }
+
+    private System.Collections.IEnumerator ParasiteDeath()
+    {
+        dying = true;
+        Debug.Log("GameManager: parasite meter hit zero - the player is dead");
+
+        ShowDeathScreen();
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(deathScreenSeconds);
+        Time.timeScale = 1f;
+
+        // Fresh run: drop this GameManager so the one in the level scene starts clean
+        // (parasite off, full HP, puzzles and enemies reset).
+        Instance = null;
+        SceneManager.LoadScene(mainMenuScene);
+        Destroy(gameObject);
+    }
+
+    // A plain "they got you" card; it lives under this object, so it goes when the GameManager does.
+    private void ShowDeathScreen()
+    {
+        var canvasGO = new GameObject("ParasiteDeathScreen", typeof(RectTransform), typeof(Canvas), typeof(UnityEngine.UI.CanvasScaler));
+        canvasGO.transform.SetParent(transform, false);
+        var canvas = canvasGO.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 1000;
+        var scaler = canvasGO.GetComponent<UnityEngine.UI.CanvasScaler>();
+        scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920f, 1080f);
+
+        var bg = new GameObject("Black", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+        bg.transform.SetParent(canvasGO.transform, false);
+        var bgRect = (RectTransform)bg.transform;
+        bgRect.anchorMin = Vector2.zero;
+        bgRect.anchorMax = Vector2.one;
+        bgRect.offsetMin = Vector2.zero;
+        bgRect.offsetMax = Vector2.zero;
+        bg.GetComponent<UnityEngine.UI.Image>().color = new Color(0.02f, 0f, 0f, 0.96f);
+
+        DeathText(canvasGO.transform, "THEY GOT YOU", 110f, new Color(0.75f, 0.08f, 0.06f), 40f);
+        DeathText(canvasGO.transform, "the parasite took over", 32f, new Color(0.55f, 0.55f, 0.55f), -60f);
+    }
+
+    private static void DeathText(Transform parent, string text, float size, Color color, float y)
+    {
+        var go = new GameObject("Text", typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+        var rt = (RectTransform)go.transform;
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(1600f, 160f);
+        rt.anchoredPosition = new Vector2(0f, y);
+        var t = go.AddComponent<TMPro.TextMeshProUGUI>();
+        if (TMPro.TMP_Settings.defaultFontAsset != null) t.font = TMPro.TMP_Settings.defaultFontAsset;
+        t.text = text;
+        t.fontSize = size;
+        t.color = color;
+        t.alignment = TMPro.TextAlignmentOptions.Center;
+        t.characterSpacing = 12f;
+        t.raycastTarget = false;
     }
 
     // after returning from a battle, drop the player back where they were
@@ -137,8 +226,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: battle queued vs " + role + " (" + stage + ")");
     }
 
+    // called once per won fight (BattleOutcome); also buys back parasite time
     public void MarkEnemyDefeated(string id)
     {
+        if (parasiteActive)
+            parasiteCurrent = Mathf.Min(parasiteMax, parasiteCurrent + parasiteRestorePerKill);
+
         if (!string.IsNullOrEmpty(id))
             defeatedEnemies.Add(id);
     }

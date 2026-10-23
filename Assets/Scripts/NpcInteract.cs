@@ -18,6 +18,9 @@ public class NpcInteract : MonoBehaviour
         "And stay out of the dark corners."
     };
     [SerializeField, TextArea] private string repeatLine = "The Hub is open. Check your map with M. Go.";
+    // Kept separate from `lines` because the scene already saves its own copy of those.
+    [SerializeField, TextArea] private string parasiteLine =
+        "Check your parasite meter. That's all the time you've got. Don't let it hit zero - that's how they get you.";
 
     private bool playerInside;
     private bool talking;
@@ -69,8 +72,16 @@ public class NpcInteract : MonoBehaviour
 
     private void StartTalk()
     {
-        bool alreadyHelped = GameManager.Instance != null && GameManager.Instance.hubUnlocked;
-        current = alreadyHelped ? new[] { repeatLine } : lines;
+        var gm = GameManager.Instance;
+        bool alreadyHelped = gm != null && gm.hubUnlocked && gm.parasiteActive;
+        if (alreadyHelped) current = new[] { repeatLine };
+        else if (string.IsNullOrEmpty(parasiteLine)) current = lines;
+        else
+        {
+            current = new string[lines.Length + 1];
+            lines.CopyTo(current, 0);
+            current[lines.Length] = parasiteLine;   // closing line: the parasite handoff
+        }
         lineIndex = 0;
         talking = true;
         dialogueText.text = current[0];
@@ -93,10 +104,15 @@ public class NpcInteract : MonoBehaviour
         LockPlayer(false);
 
         var gm = GameManager.Instance;
-        if (!finished || gm == null || gm.hubUnlocked) return;
+        if (!finished || gm == null) return;
 
-        gm.UnlockHubAndGiveMap();
-        if (zoneMap != null) zoneMap.AnnounceMap();
+        if (!gm.hubUnlocked)
+        {
+            gm.UnlockHubAndGiveMap();
+            if (zoneMap != null) zoneMap.AnnounceMap();
+        }
+        // Checked on its own so the meter still starts if the hub was opened another way (e.g. the F8 debug key).
+        if (!gm.parasiteActive) gm.ActivateParasite();
     }
 
     private void PlacePrompt()
