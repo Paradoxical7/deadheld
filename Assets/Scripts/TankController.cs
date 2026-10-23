@@ -35,7 +35,7 @@ public class TankController : MonoBehaviour{
         turnInput = (kb.dKey.isPressed ?1f:0f)-(kb.aKey.isPressed ? 1f:0f);
         moveInput = (kb.wKey.isPressed ? 1f:0f)-(kb.sKey.isPressed ? 1f:0f);
         // sprint only while moving forward, and only while there's stamina (GameManager owns it)
-        bool wantsSprint = kb.leftShiftKey.isPressed && moveInput > 0f;
+        bool wantsSprint = (kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed) && moveInput > 0f;
         runHeld = GameManager.Instance != null
             ? GameManager.Instance.TickSprint(wantsSprint, Time.deltaTime)
             : wantsSprint;
