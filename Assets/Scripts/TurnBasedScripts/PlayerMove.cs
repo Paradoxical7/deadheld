@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum MoveKind { Attack, Heal, Buff, Summon, Protect }
 public enum MoveTarget { SingleEnemy, AllEnemies, Self }
-public enum MoveEffect { None, Aim, Chamber, Fortify }
+public enum MoveEffect { None, Aim, Chamber, Fortify, CoatToggle }
 
 [System.Serializable]
 public class PlayerMove
@@ -18,4 +18,6 @@ public class PlayerMove
     public GameObject summonPrefab; // only used by Summon moves
     public float effectValue;   // Fortify: 0.2 = take 20% less damage
     public int effectDuration;  // Fortify: how many of the owner's turns it lasts
+    [TextArea] public string description; // shown in the inventory
+    public int hits = 1; // flurry = 3
 }

@@ -9,4 +9,5 @@ public class HandleTurn
     public GameObject AttackersGameObject; // Who attacked
     public GameObject AttackersTarget; // Who's going to be attacked
     public PlayerMove Move; // NULL for guard/focus
+    public ItemData Item; // set when the action is "Item"
 }

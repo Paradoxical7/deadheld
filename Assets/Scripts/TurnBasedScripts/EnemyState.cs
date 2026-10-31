@@ -20,9 +20,9 @@ public class EnemyState : MonoBehaviour
     [FormerlySerializedAs("moves")]
     public List<PlayerMove> attackMoves = new List<PlayerMove>();
     public float healThreshold = 0.6f; // heal allies below this fraction of max HP
-    public float protectThreshold = 0.4f;      // how often the Guard protects when it can
+    public float protectThreshold = 0.4f; // protect allies below this fraction of max HP
     [HideInInspector] public GameObject protector; // set on the enemy being covered
-    private GameObject protectedAlly;       // set on the Guard
+    private GameObject protectedAlly; // set on the Guard
     private int stageLevel = 0; // 0 = Stage1, 1 = Stage2, 2 = Stage3
     private float stageDamageBonus = 0f;
     public string displayName; // set by BattleManager, e.g. "Enemy Guard"
@@ -32,10 +32,12 @@ public class EnemyState : MonoBehaviour
     public float focusDamageIncrease = 0.15f;
     public float guardDamageReduction = 0.5f;
 
-    public StatusEffects statuses = new StatusEffects();
+    [System.NonSerialized] public StatusEffects statuses = new StatusEffects();
+    private readonly Dictionary<PlayerMove, int> cooldowns = new Dictionary<PlayerMove, int>();
     private PlayerMove currentMove;
 
     public bool justSummoned; // set by BSM, makes a new arrival skip its first turn
+    public bool IsAlive { get { return currentState != TurnState.DEAD; } }
 
     void Start()
     {
@@ -47,7 +49,6 @@ public class EnemyState : MonoBehaviour
         EnemyIdentity id = GetComponentInChildren<EnemyIdentity>();
         if (id != null)
         {
-            // feel free to tune level buffs
             stageLevel = (int)id.stage;
             enemy.baseNRG += stageLevel * 1f;   // +1 max energy per stage
             stageDamageBonus = stageLevel * 2f; // +2 damage per stage on every attack
@@ -66,7 +67,7 @@ public class EnemyState : MonoBehaviour
         }
     }
 
-    // energy
+    // energy and cooldowns
     public void GainEnergy(float amount)
     {
         enemy.currentNRG = Mathf.Min(enemy.currentNRG + amount, enemy.baseNRG);
@@ -77,6 +78,33 @@ public class EnemyState : MonoBehaviour
     public void SpendEnergy(float amount)
     {
         enemy.currentNRG = Mathf.Max(0f, enemy.currentNRG - amount);
+    }
+
+    public int CooldownRemaining(PlayerMove move)
+    {
+        int c;
+        return cooldowns.TryGetValue(move, out c) ? c : 0;
+    }
+
+    public bool CanUse(PlayerMove move)
+    {
+        return HasEnoughEnergy(move.energyCost) && CooldownRemaining(move) == 0;
+    }
+
+    // spend the energy and start the cooldown (same rule as the player)
+    public void BeginMove(PlayerMove move)
+    {
+        SpendEnergy(move.energyCost);
+        if (move.cooldown > 0) cooldowns[move] = move.cooldown + 1;
+    }
+
+    private void TickCooldowns()
+    {
+        foreach (PlayerMove move in new List<PlayerMove>(cooldowns.Keys))
+        {
+            cooldowns[move]--;
+            if (cooldowns[move] <= 0) cooldowns.Remove(move);
+        }
     }
 
     // healing
@@ -164,6 +192,42 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
+    // weapon passives (Machete)
+    public void ApplyBleedStack()
+    {
+        statuses.ApplyStack(StatusId.Bleed, "Bleed", true, PassiveRules.BleedBurstStacks, 0,
+            s => s + "/" + PassiveRules.BleedBurstStacks + " stacks. Takes " + PassiveRules.BleedTickDamage
+                 + " damage each turn. At " + PassiveRules.BleedBurstStacks + " stacks it bursts for "
+                 + Mathf.RoundToInt(PassiveRules.BleedBurstPercent * 100f) + "% of max HP.");
+
+        if (statuses.Stacks(StatusId.Bleed) >= PassiveRules.BleedBurstStacks)
+        {
+            statuses.Remove(StatusId.Bleed);
+            float burst = enemy.baseHP * PassiveRules.BleedBurstPercent;
+            Debug.Log(enemy.name + " bleed burst for " + burst);
+            LoseHP(burst);
+        }
+    }
+
+    public void ApplyPoisonStack()
+    {
+        statuses.ApplyStack(StatusId.Poison, "Poison", true, PassiveRules.PoisonMaxStacks, PassiveRules.PoisonDuration,
+            s => s + "/" + PassiveRules.PoisonMaxStacks + " stacks. Takes "
+                 + (s * PassiveRules.PoisonDamagePerStack) + " damage each turn.");
+    }
+
+    // bleed and poison hurt at the start of this enemy's turn. Returns false if it died.
+    private bool TickDamageOverTime()
+    {
+        float dot = 0f;
+        if (statuses.Has(StatusId.Bleed)) dot += PassiveRules.BleedTickDamage;
+        if (statuses.Has(StatusId.Poison)) dot += PassiveRules.PoisonDamagePerStack * statuses.Stacks(StatusId.Poison);
+        if (dot <= 0f) return true;
+
+        Debug.Log(enemy.name + " takes " + dot + " damage from bleed/poison");
+        return LoseHP(dot);
+    }
+
     // enemy AI
     public void TakeTurn()
     {
@@ -182,12 +246,20 @@ public class EnemyState : MonoBehaviour
         }
 
         GainEnergy(1f);
+
+        if (!TickDamageOverTime())
+        {
+            BSM.onActionComplete(); // it died to bleed/poison, hand the turn on
+            return;
+        }
+
         statuses.Remove(StatusId.Guard);
         statuses.Remove(StatusId.Focus);
-        statuses.Tick(); // timed buffs like Fortify count down on this enemy's turn
+        statuses.Tick(); // timed effects (Fortify, Poison) count down on this enemy's turn
+        TickCooldowns();
         ClearProtection();
 
-        List<PlayerMove> affordable = attackMoves.Where(m => HasEnoughEnergy(m.energyCost)).ToList();
+        List<PlayerMove> affordable = attackMoves.Where(m => CanUse(m)).ToList(); // energy AND cooldown
         List<PlayerMove> summons = affordable.Where(m => m.kind == MoveKind.Summon && m.summonPrefab != null).ToList();
         List<PlayerMove> heals = affordable.Where(m => m.kind == MoveKind.Heal).ToList();
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
@@ -210,7 +282,9 @@ public class EnemyState : MonoBehaviour
                                             .OrderBy(m => m.energyCost).FirstOrDefault();
         float reserve = 0f;
         if (reserveEnergyForProtect && protectMove != null
-            && protectMove.energyCost <= enemy.baseNRG && BSM.EnemyInBattle.Count > 1)
+            && protectMove.energyCost <= enemy.baseNRG
+            && CooldownRemaining(protectMove) <= 1 // ready now or next turn
+            && BSM.EnemyInBattle.Count > 1)
             reserve = protectMove.energyCost;
 
         // free moves are always allowed; paid moves must leave the reserve intact
@@ -269,7 +343,7 @@ public class EnemyState : MonoBehaviour
     // actions
     public void PerformAttack(PlayerMove move, GameObject target)
     {
-        SpendEnergy(move.energyCost);
+        BeginMove(move);
         currentMove = move;
         playerToAttack = target;
         currentState = TurnState.ACTION;
@@ -277,7 +351,7 @@ public class EnemyState : MonoBehaviour
 
     public void PerformSummon(PlayerMove move)
     {
-        SpendEnergy(move.energyCost);
+        BeginMove(move);
         StartCoroutine(SummonRoutine(move));
     }
 
@@ -303,7 +377,7 @@ public class EnemyState : MonoBehaviour
 
     public void PerformBuff(PlayerMove move)
     {
-        SpendEnergy(move.energyCost);
+        BeginMove(move);
         Debug.Log(gameObject.name + " used " + move.moveName);
 
         if (move.effect == MoveEffect.Fortify)
@@ -356,12 +430,13 @@ public class EnemyState : MonoBehaviour
         BSM.onActionComplete();
     }
 
-    public void TakeDamage(float amount, bool wasCrit = false)
+    // returns true if the hit landed (false if dodged)
+    public bool TakeDamage(float amount, bool wasCrit = false)
     {
         if (Combat.RollDodge(enemy.dodgeChance))
         {
             Debug.Log(enemy.name + " dodged the attack!");
-            return;
+            return false;
         }
 
         float finalDamage = amount;
@@ -372,17 +447,34 @@ public class EnemyState : MonoBehaviour
         enemy.currentHP -= finalDamage;
         Debug.Log(enemy.name + (wasCrit ? " took a CRITICAL hit: " : " took ") + finalDamage + " damage. HP now: " + enemy.currentHP);
 
+        if (enemy.currentHP <= 0) Die();
+        return true;
+    }
+
+    // true damage (bleed, poison, burst): no dodge, guard or fortify. Returns false if it died.
+    private bool LoseHP(float amount)
+    {
+        enemy.currentHP -= amount;
         if (enemy.currentHP <= 0)
         {
-            enemy.currentHP = 0;
-            currentState = TurnState.DEAD;
-            Debug.Log(enemy.name + " has died.");
-
-            BSM.OnEnemyDied(gameObject);
-            ClearProtection();
-
-            gameObject.SetActive(false);
+            Die();
+            return false;
         }
+        return true;
+    }
+
+    private void Die()
+    {
+        if (currentState == TurnState.DEAD) return;
+
+        enemy.currentHP = 0;
+        currentState = TurnState.DEAD;
+        Debug.Log(enemy.name + " has died.");
+
+        BSM.OnEnemyDied(gameObject);
+        ClearProtection();
+
+        gameObject.SetActive(false);
     }
 
     private bool MoveTo(Vector3 target)
