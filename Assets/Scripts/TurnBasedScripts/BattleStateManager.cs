@@ -15,6 +15,7 @@ public class BattleStateMachine : MonoBehaviour
     public enum BattlePhase { PLAYER_PHASE, ENEMY_PHASE }
     public BattlePhase currentPhase;
     private int currentEnemyIndex = 0;
+    public bool battleOver;
 
     // entities currently in scene + turn based logic
     public List<HandleTurn> PerformList = new List<HandleTurn>();
@@ -298,6 +299,8 @@ public class BattleStateMachine : MonoBehaviour
 
     void Update()
     {
+        if (battleOver) return;
+
         switch (battleState)
         {
             case (performAction.WAIT):
@@ -708,5 +711,12 @@ public class BattleStateMachine : MonoBehaviour
         }
 
         Debug.Log("Fighting " + EnemyInBattle.Count + " enemies");
+    }
+
+    // called by BattleOutcome when the fight is decided
+    public void FreezeBattle()
+    {
+        battleOver = true;
+        HideAllPanels();
     }
 }
