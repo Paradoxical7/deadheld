@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject panel;              // can be the same object this script is on
     public WeaponData startingWeapon;     // Pistol: what a new game owns
     public bool pauseWhileOpen = true;
 
@@ -23,13 +23,18 @@ public class InventoryUI : MonoBehaviour
 
     [Header("Weapon")]
     public TMP_Dropdown weaponDropdown;
-    public TMP_Text movesText;
+    public TMP_Text movesText;            // the text INSIDE the moves box
 
     [Header("Items")]
-    public Transform itemGrid;
+    public Transform itemGrid;            // the container the slots spawn into (e.g. a Scroll View's Content)
     public GameObject itemSlotPrefab;
     public TMP_Text itemDescriptionText;
 
+    [Header("Testing (clear before shipping)")]
+    public List<ItemData> debugItems;
+    public List<WeaponData> debugWeapons;
+
+    private CanvasGroup group;
     private bool isOpen;
     private CursorLockMode prevLock;
     private bool prevVisible;
@@ -37,7 +42,17 @@ public class InventoryUI : MonoBehaviour
     void Awake()
     {
         PlayerProgress.EnsureInit(startingWeapon);
-        if (panel != null) panel.SetActive(false);
+
+        // testing: give a couple of each item (only when the bag is empty) and the listed weapons
+        if (PlayerProgress.items.Count == 0)
+            foreach (ItemData i in debugItems) if (i != null) PlayerProgress.AddItem(i, 2);
+        foreach (WeaponData w in debugWeapons) if (w != null) PlayerProgress.AddWeapon(w);
+
+        // hide with a CanvasGroup so this script keeps running even if it lives on the panel
+        group = panel.GetComponent<CanvasGroup>();
+        if (group == null) group = panel.AddComponent<CanvasGroup>();
+        SetVisible(false);
+
         if (weaponDropdown != null) weaponDropdown.onValueChanged.AddListener(OnWeaponChosen);
     }
 
@@ -58,10 +73,17 @@ public class InventoryUI : MonoBehaviour
 #endif
     }
 
+    void SetVisible(bool visible)
+    {
+        group.alpha = visible ? 1f : 0f;
+        group.blocksRaycasts = visible;
+        group.interactable = visible;
+    }
+
     void Open()
     {
         isOpen = true;
-        panel.SetActive(true);
+        SetVisible(true);
         RefreshAll();
 
         prevLock = Cursor.lockState;
@@ -74,7 +96,7 @@ public class InventoryUI : MonoBehaviour
     void Close()
     {
         isOpen = false;
-        panel.SetActive(false);
+        SetVisible(false);
 
         Cursor.lockState = prevLock;
         Cursor.visible = prevVisible;
@@ -98,11 +120,11 @@ public class InventoryUI : MonoBehaviour
     {
         GameManager gm = GameManager.Instance;
         if (hpText != null)
-            hpText.text = gm != null ? "HP: " + Mathf.CeilToInt(gm.currentHP) + "/" + Mathf.CeilToInt(gm.maxHP) : "HP: --";
-        if (nrgText != null) nrgText.text = "NRG: " + PlayerProgress.MaxEnergy;
-        if (dodgeText != null) dodgeText.text = "Dodge chance: " + PlayerProgress.Dodge + "%";
-        if (critText != null) critText.text = "Crit chance: " + PlayerProgress.Crit + "%";
-        if (extraEnergyText != null) extraEnergyText.text = "Extra Energy Gain: " + PlayerProgress.ExtraEnergyChance + "%";
+            hpText.text = gm != null ? "Max HP: " + Mathf.CeilToInt(gm.maxHP) : "Max HP: --";
+        if (nrgText != null) nrgText.text = "Max Energy: " + PlayerProgress.MaxEnergy;
+        if (dodgeText != null) dodgeText.text = "Dodge Chance: " + PlayerProgress.Dodge + "%";
+        if (critText != null) critText.text = "Crit Chance: " + PlayerProgress.Crit + "%";
+        if (extraEnergyText != null) extraEnergyText.text = "Extra Energy Chance: " + PlayerProgress.ExtraEnergyChance + "%";
     }
 
     void RefreshWeaponDropdown()
@@ -146,8 +168,10 @@ public class InventoryUI : MonoBehaviour
 
     void RefreshItems()
     {
+        // only ever delete old item slots
         foreach (Transform child in itemGrid)
         {
+            if (child.GetComponent<ItemSlot>() == null) continue;
             child.gameObject.SetActive(false);
             Destroy(child.gameObject);
         }
@@ -156,8 +180,16 @@ public class InventoryUI : MonoBehaviour
         foreach (KeyValuePair<ItemData, int> pair in PlayerProgress.items)
         {
             if (pair.Value <= 0) continue;
+
             GameObject go = Instantiate(itemSlotPrefab, itemGrid);
-            go.GetComponent<ItemSlot>().Setup(pair.Key, pair.Value, ShowItem, ShowItem);
+            ItemSlot slot = go.GetComponent<ItemSlot>();
+            if (slot == null)
+            {
+                Debug.LogError("Item Slot Prefab has no ItemSlot script on its root.");
+                Destroy(go);
+                return;
+            }
+            slot.Setup(pair.Key, pair.Value, ShowItem, ShowItem);
         }
     }
 

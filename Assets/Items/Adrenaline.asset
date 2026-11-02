@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Adrenaline
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Adrenaline
-  description: Gives an extra energy for 2 turns
-  icon: {fileID: 0}
+  description: Gain 1 extra energy at the start of your next 2 turns.
+  icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
   effect: 1
   amount: 1
   duration: 2

@@ -2,17 +2,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class RarityFrame
+{
+    public Sprite normal;       // the card frame for this rarity
+    public Sprite highlighted;  // optional: shown on hover (falls back to normal)
+    public Sprite pressed;      // optional: shown while clicking (falls back to highlighted)
+}
+
 public class RewardCard : MonoBehaviour
 {
     public Button button;
+    public Image frameImage;          // the Image that shows the card frame
     public TMP_Text titleText;
     public TMP_Text descriptionText;
     public TMP_Text rarityText;
     public Image iconImage;
-    public Image rarityBar;
-    public Color commonColor = new Color(0.7f, 0.7f, 0.7f);
-    public Color uncommonColor = new Color(0.3f, 0.7f, 1f);
-    public Color rareColor = new Color(1f, 0.7f, 0.2f);
+
+    [Header("Frame sprites per rarity")]
+    public RarityFrame common;
+    public RarityFrame uncommon;
+    public RarityFrame rare;
 
     public void Setup(RewardOption option, System.Action<RewardOption> onPick)
     {
@@ -21,12 +31,29 @@ public class RewardCard : MonoBehaviour
         if (rarityText != null) rarityText.text = option.rarity.ToString();
         if (iconImage != null) { iconImage.sprite = option.icon; iconImage.enabled = option.icon != null; }
 
-        Color c = option.rarity == RewardRarity.Rare ? rareColor
-                : option.rarity == RewardRarity.Uncommon ? uncommonColor : commonColor;
-        if (rarityBar != null) rarityBar.color = c;
-        if (rarityText != null) rarityText.color = c;
+        ApplyFrame(option.rarity);
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => onPick(option));
+    }
+
+    private void ApplyFrame(RewardRarity rarity)
+    {
+        RarityFrame f = rarity == RewardRarity.Rare ? rare
+                      : rarity == RewardRarity.Uncommon ? uncommon : common;
+
+        if (frameImage == null || f == null || f.normal == null) return; // nothing assigned: keep the current look
+
+        frameImage.sprite = f.normal;
+
+        // hover and click use sprite swap, with this rarity's sprites
+        button.targetGraphic = frameImage;
+        button.transition = Selectable.Transition.SpriteSwap;
+
+        SpriteState state = new SpriteState();
+        state.highlightedSprite = f.highlighted != null ? f.highlighted : f.normal;
+        state.selectedSprite = state.highlightedSprite;
+        state.pressedSprite = f.pressed != null ? f.pressed : state.highlightedSprite;
+        button.spriteState = state;
     }
 }

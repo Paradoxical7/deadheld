@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Medicine
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Medicine
-  description: Heals 25 HP
-  icon: {fileID: 0}
+  description: Restores 25 HP.
+  icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
   effect: 0
   amount: 25
   duration: 0
