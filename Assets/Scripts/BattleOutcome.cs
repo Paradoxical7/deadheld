@@ -57,8 +57,20 @@ public class BattleOutcome : MonoBehaviour
     {
         yield return new WaitForSeconds(winDelay);
 
-        if (rewards != null) rewards.Show(FinishWin);
-        else FinishWin();
+        // fallback: find the reward screen even if the field is empty or the object is disabled
+        if (rewards == null)
+            rewards = FindAnyObjectByType<RewardScreen>(FindObjectsInactive.Include);
+
+        if (rewards != null)
+        {
+            Debug.Log("BattleOutcome: showing the reward screen");
+            rewards.Show(FinishWin);
+        }
+        else
+        {
+            Debug.LogWarning("BattleOutcome: no RewardScreen found in the scene, skipping rewards");
+            FinishWin();
+        }
     }
 
     // runs after the player picks a reward

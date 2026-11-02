@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0f4ceed277a1240a76b56ab73e227a, type: 3}
+  m_Name: DevWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponName: Dev Weapon
+  description: for testing
+  passive: 0
+  moves:
+  - moveName: Kill All
+    energyCost: 0
+    damage: 999
+    cooldown: 0
+    kind: 0
+    target: 1
+    effect: 0
+    healAmount: 0
+    summonPrefab: {fileID: 0}
+    effectValue: 0
+    effectDuration: 0
+    description: 
+    hits: 0

@@ -1668,7 +1668,7 @@ MonoBehaviour:
   currentState: 0
   selector: {fileID: 244922183}
   enemyToAttack: {fileID: 0}
-  weapon: {fileID: 11400000, guid: ea8592dc16c67474c8c94a2c7cd9028c, type: 2}
+  weapon: {fileID: 11400000, guid: 1722cb9a9dc7c7e47b3f9339854541f5, type: 2}
   focusExtraEnergy: 1
   focusDamageIncrease: 0.15
   guardDamageReduction: 0.5
@@ -4779,12 +4779,12 @@ MonoBehaviour:
   panel: {fileID: 2053138952}
   cards:
   - {fileID: 1902762899}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 829056070}
+  - {fileID: 1425073438}
   pool:
   - title: Antidote
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 0
     rarity: 0
     weight: 10
@@ -4793,7 +4793,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Crit Chance
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 1
     rarity: 0
     weight: 10
@@ -4802,7 +4802,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Dodge Chance
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 2
     rarity: 0
     weight: 5
@@ -4811,7 +4811,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Energy Chance
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 3
     rarity: 0
     weight: 10
@@ -4820,7 +4820,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Damage Boost
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 4
     rarity: 1
     weight: 8
@@ -4829,7 +4829,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Health Boost
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 5
     rarity: 1
     weight: 6
@@ -4838,7 +4838,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Max Energy
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 6
     rarity: 1
     weight: 6
@@ -4847,7 +4847,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Medicine
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 7
     rarity: 0
     weight: 10
@@ -4856,7 +4856,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Adrenaline
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 7
     rarity: 1
     weight: 8
@@ -4865,7 +4865,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   - title: Shotgun
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 8
     rarity: 0
     weight: 3
@@ -4874,7 +4874,7 @@ MonoBehaviour:
     weapon: {fileID: 11400000, guid: ea8592dc16c67474c8c94a2c7cd9028c, type: 2}
   - title: Machete
     description: 'reminder: put desciprtion'
-    icon: {fileID: 0}
+    icon: {fileID: -4309052813879496664, guid: 66c76b3c2f114d9438943eeadaeecdfa, type: 3}
     type: 8
     rarity: 2
     weight: 2

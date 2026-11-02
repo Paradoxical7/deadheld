@@ -19,11 +19,21 @@ public class RewardScreen : MonoBehaviour
     public void Show(System.Action done)
     {
         onDone = done;
+
         List<RewardOption> options = Pick(cards.Count);
+        Debug.Log("RewardScreen: pool=" + pool.Count + ", cards=" + cards.Count + ", options picked=" + options.Count);
 
-        if (options.Count == 0) { Finish(); return; }
+        if (options.Count == 0)
+        {
+            Debug.LogWarning("RewardScreen: nothing to offer (empty pool, no cards assigned, or every entry is missing its item/weapon). Skipping rewards.");
+            Finish();
+            return;
+        }
 
+        gameObject.SetActive(true);        // works even if this object was left disabled in the editor
+        transform.SetAsLastSibling();      // draw on top of the other battle UI
         panel.SetActive(true);
+
         for (int i = 0; i < cards.Count; i++)
         {
             if (i < options.Count)
