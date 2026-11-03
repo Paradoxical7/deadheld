@@ -40,6 +40,7 @@ public class CameraZone : MonoBehaviour
     {
         registered.RemoveWhere(c => c == null);
         foreach(var c in registered) SetActive(c, c == cam);
+        foreach(var c in Camera.allCameras) if(c != cam && c.depth >= 0f) SetActive(c, false);
     }
 
     private static void SetActive(Camera cam, bool on)
