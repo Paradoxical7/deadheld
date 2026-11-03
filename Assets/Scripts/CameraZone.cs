@@ -31,15 +31,6 @@ public class CameraZone : MonoBehaviour
         if(other.CompareTag("Player")) Show(zoneCamera);
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        // Only revert if this zone's camera is still the one showing; a neighbouring zone may already have taken over.
-        if(!other.CompareTag("Player") || !zoneCamera.enabled) return;
-        // No fallback: turn this camera off so the scene's base camera underneath shows again.
-        if(fallbackCamera != null) Show(fallbackCamera);
-        else SetActive(zoneCamera, false);
-    }
-
     private static void Register(Camera cam)
     {
         if(cam != null) registered.Add(cam);

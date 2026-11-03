@@ -2171,6 +2171,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6579526661677885519, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+      propertyPath: field of view
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622259771169321350, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.000000043471935
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622259771169321350, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0000000045690842
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622259771169321350, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9945219
+      objectReference: {fileID: 0}
+    - target: {fileID: 8622259771169321350, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.104528464
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4797,9 +4817,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: HallwayStraightShort
       objectReference: {fileID: 0}
+    - target: {fileID: 5833338544494073437, guid: 07fd951b31559406882a2659f205cd95, type: 3}
+      propertyPath: zoneCamera
+      value: 
+      objectReference: {fileID: 2142501050}
     - target: {fileID: 6941205740700231292, guid: 07fd951b31559406882a2659f205cd95, type: 3}
       propertyPath: m_Center.z
       value: -3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678741092041589271, guid: 07fd951b31559406882a2659f205cd95, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10653,6 +10681,7 @@ MonoBehaviour:
   - Take this map of Zone 1. Press M to look at it.
   - And stay out of the dark corners.
   repeatLine: The Hub is open. Check your map with M. Go.
+  parasiteLine: Check your parasite meter. That's all the time you've got. Don't let it hit zero - that's how they get you.
 --- !u!135 &2103573982
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10897,6 +10926,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!20 &2142501050 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6579526661677885519, guid: 54e6fae28ac8c43e29136addc3fc5b74, type: 3}
+  m_PrefabInstance: {fileID: 468446989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2143463764
 GameObject:
   m_ObjectHideFlags: 0
