@@ -6,6 +6,7 @@ public class PodInteract : MonoBehaviour
 {
     [SerializeField] private Pod pod;
     [SerializeField] private GameObject prompt;
+    [SerializeField] private Transform promptAnchor;    // optional spot above the pod for the prompt
     [SerializeField] private Camera inspectCamera;
     [SerializeField] private GameObject readPrompt;
     [SerializeField] private GameObject notePanel;
@@ -43,7 +44,15 @@ public class PodInteract : MonoBehaviour
         {
             bool show = canInspect && !inspecting;
             if (show || promptShown) { prompt.SetActive(show); promptShown = show; }
-            if (show) prompt.transform.position = Camera.allCameras[0].WorldToScreenPoint(pod.transform.position + Vector3.up * 1f);
+            if (show)
+            {
+                // float above the anchor if one is set, otherwise 1 m above the pod
+                Vector3 at = promptAnchor != null ? promptAnchor.position : pod.transform.position + Vector3.up;
+                Vector3 screen = NpcInteract.ViewCamera().WorldToScreenPoint(at);
+                // behind the camera: hide it
+                if (screen.z < 0f) prompt.SetActive(false);
+                else prompt.transform.position = screen;
+            }
         }
         
         var kb = Keyboard.current;
