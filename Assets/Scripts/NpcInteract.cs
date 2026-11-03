@@ -125,7 +125,8 @@ public class NpcInteract : MonoBehaviour
     }
 
     // The fixed zone cameras sit above the Main Camera by depth, so the deepest enabled one is what's on screen.
-    private static Camera ViewCamera()
+    // Public so the keypad and pod prompts place themselves with the same camera.
+    public static Camera ViewCamera()
     {
         Camera best = null;
         foreach (var c in Camera.allCameras)
