@@ -260,4 +260,25 @@ public class GameManager : MonoBehaviour
         doorUnlocked = true;
         return true;
     }
+
+    // the Antidote item: buys back parasite time. Returns false (with a message) if it can't be used now.
+    public bool TryAddParasiteTime(float seconds, out string message)
+    {
+        if (!parasiteActive || dying)
+        {
+            message = "You aren't infected yet. Save it for later.";
+            return false;
+        }
+        if (parasiteCurrent >= parasiteMax)
+        {
+            message = "The parasite meter is already full.";
+            return false;
+        }
+
+        float before = parasiteCurrent;
+        parasiteCurrent = Mathf.Min(parasiteMax, parasiteCurrent + seconds);
+        message = "Antidote used: +" + Mathf.RoundToInt(parasiteCurrent - before) + " seconds.";
+        Debug.Log("GameManager: " + message);
+        return true;
+    }
 }
