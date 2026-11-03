@@ -625,6 +625,7 @@ public class BattleStateMachine : MonoBehaviour
         foreach (KeyValuePair<ItemData, int> pair in PlayerProgress.items)
         {
             if (pair.Value <= 0) continue;
+            if (pair.Key.effect == ItemEffect.Antidote) continue; // overworld only: the meter is paused in battle
             any = true;
             GameObject go = Instantiate(itemSlotPrefab, itemListParent);
             go.GetComponent<ItemSlot>().Setup(pair.Key, pair.Value, InputItem, ShowItemDescription);

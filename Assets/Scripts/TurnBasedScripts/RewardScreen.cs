@@ -48,7 +48,7 @@ public class RewardScreen : MonoBehaviour
     bool IsEligible(RewardOption r)
     {
         if (r.type == RewardType.Weapon) return r.weapon != null && !PlayerProgress.Owns(r.weapon);
-        if (r.type == RewardType.Item) return r.item != null;
+        if (r.type == RewardType.Item || r.type == RewardType.Antidote) return r.item != null;
         return true;
     }
 
@@ -97,11 +97,6 @@ public class RewardScreen : MonoBehaviour
 
         switch (r.type)
         {
-            case RewardType.Antidote:
-                // collected by the overworld's parasite meter (see the note below)
-                PlayerProgress.pendingParasiteSeconds += r.amount;
-                break;
-
             case RewardType.CritChance: PlayerProgress.bonusCrit += r.amount; break;
             case RewardType.DodgeChance: PlayerProgress.bonusDodge += r.amount; break;
             case RewardType.ExtraEnergyChance: PlayerProgress.bonusExtraEnergyChance += r.amount; break;
@@ -129,6 +124,7 @@ public class RewardScreen : MonoBehaviour
                 }
 
             case RewardType.Item:
+            case RewardType.Antidote:
                 PlayerProgress.AddItem(r.item, Mathf.Max(1, Mathf.RoundToInt(r.amount)));
                 break;
 

@@ -23,7 +23,7 @@ public class InventoryUI : MonoBehaviour
 
     [Header("Weapon")]
     public TMP_Dropdown weaponDropdown;
-    public TMP_Text movesText;            // the text INSIDE the moves box
+    public TMP_Text weaponDescriptionText;   // the text inside the box under the dropdown
 
     [Header("Items")]
     public Transform itemGrid;            // the container the slots spawn into (e.g. a Scroll View's Content)
@@ -152,18 +152,8 @@ public class InventoryUI : MonoBehaviour
         if (selectedWeaponText != null)
             selectedWeaponText.text = "Selected Weapon: " + (w != null ? w.weaponName : "None");
 
-        if (movesText == null) return;
-        if (w == null) { movesText.text = ""; return; }
-
-        StringBuilder sb = new StringBuilder();
-        if (!string.IsNullOrEmpty(w.description)) sb.Append(w.description).Append("\n\n");
-        foreach (PlayerMove m in w.moves)
-        {
-            sb.Append("<b>").Append(m.moveName).Append("</b>  (").Append(m.energyCost).Append(" nrg");
-            if (m.cooldown > 0) sb.Append(", cooldown ").Append(m.cooldown);
-            sb.Append(")\n").Append(m.description).Append("\n\n");
-        }
-        movesText.text = sb.ToString().TrimEnd();
+        if (weaponDescriptionText != null)
+            weaponDescriptionText.text = w != null ? w.description : "";
     }
 
     void RefreshItems()
@@ -189,7 +179,7 @@ public class InventoryUI : MonoBehaviour
                 Destroy(go);
                 return;
             }
-            slot.Setup(pair.Key, pair.Value, ShowItem, ShowItem);
+            slot.Setup(pair.Key, pair.Value, OnItemClicked, ShowItem);
         }
     }
 
@@ -197,5 +187,23 @@ public class InventoryUI : MonoBehaviour
     {
         if (itemDescriptionText != null)
             itemDescriptionText.text = item.itemName + "\n" + item.description;
+    }
+
+    // for the antidote item
+    void OnItemClicked(ItemData item)
+    {
+        ShowItem(item);
+        if (item.effect != ItemEffect.Antidote) return;
+
+        string message = "Can't use that right now.";
+        GameManager gm = GameManager.Instance;
+        if (gm != null && gm.TryAddParasiteTime(item.amount, out message))
+        {
+            PlayerProgress.UseItem(item);
+            RefreshItems(); // update the count, remove the slot if it was the last one
+        }
+
+        if (itemDescriptionText != null)
+            itemDescriptionText.text = item.itemName + "\n" + message;
     }
 }

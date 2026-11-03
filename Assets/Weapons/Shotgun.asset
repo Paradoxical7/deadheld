@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Shotgun
-  description: reminder to put description
+  description: Heavy and built for patient setups. Gun Butt is a free, light hit. Aim guarantees a critical hit, and Chamber loads shells for up to 30% extra damage on your next attack. Blast tears through every enemy at once.
   passive: 0
   moves:
   - moveName: Gun Butt

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Machete
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Machete
-  description: reminder to put description
+  description: 'A blade with a passive: every attack stacks Bleed on enemies, which hurts each turn and bursts for 10% of their max HP at 3 stacks. Coat the blade to switch to Poison, which stacks up to 5 times for heavy damage over time. Stab and Flurry hit one enemy (Flurry hits 3 times), and Slash hits them all.'
   passive: 1
   moves:
   - moveName: Coat/Uncoat

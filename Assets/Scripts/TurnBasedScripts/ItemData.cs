@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemEffect { Heal, Adrenaline }
+public enum ItemEffect { Heal, Adrenaline, Antidote }
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Combat/Item")]
 public class ItemData : ScriptableObject

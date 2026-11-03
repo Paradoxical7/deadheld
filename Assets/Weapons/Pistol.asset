@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Pistol
-  description: reminder to put description
+  description: A reliable sidearm for steady damage with burst turns. Pistol Whip is a free, light hit. Aim guarantees a critical hit on your next attack, and Shoot lands a big hit on a single enemy.
   passive: 0
   moves:
   - moveName: Pistol Whip
