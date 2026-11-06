@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5900215343731127564}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Infec_Red_Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 5926065712210016892}
   - component: {fileID: 3125162166858438942}
   - component: {fileID: 7746184277806701318}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5064988831796770941}
   - component: {fileID: 3472829311135321374}
   - component: {fileID: 6499404661112905713}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 1611217635078067884}
   - component: {fileID: 846214961190984893}
   - component: {fileID: 7119070600114284349}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 3816894203096568466}
   - component: {fileID: 1845202978354700875}
   - component: {fileID: 7635101696924585508}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 5903437526140864239}
   - component: {fileID: 9046156651261112615}
   - component: {fileID: 894116904044647626}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 6505998997388281516}
   - component: {fileID: 8338659086094554985}
   - component: {fileID: 3206288894333317318}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (11) 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 7804386788732843275}
   - component: {fileID: 4436057186662667813}
   - component: {fileID: 1481440433542453710}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +824,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 7869224259383891201}
   - component: {fileID: 6005785391630307824}
   - component: {fileID: 2658275174156095535}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +936,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -952,7 +952,7 @@ GameObject:
   - component: {fileID: 7759785044506017201}
   - component: {fileID: 2799724202518741197}
   - component: {fileID: 5274617802922729104}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1048,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 4139489397019717999}
   - component: {fileID: 5228263843696158086}
   - component: {fileID: 4684337697378995543}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (3) 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1160,7 +1160,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 6357636749613676480}
   - component: {fileID: 3488360768114286713}
   - component: {fileID: 6994086024839092472}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1272,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1288,7 +1288,7 @@ GameObject:
   - component: {fileID: 7085219335883318705}
   - component: {fileID: 2893839634558517637}
   - component: {fileID: 4785812923090131694}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1384,7 +1384,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 6392595015579759861}
   - component: {fileID: 5881361299026739880}
   - component: {fileID: 3500909396533790647}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,7 +1496,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
