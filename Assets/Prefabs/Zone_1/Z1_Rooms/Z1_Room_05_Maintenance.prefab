@@ -718,7 +718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5893979491490136288
 Transform:
   m_ObjectHideFlags: 0
@@ -1338,12 +1338,12 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8035648367854246545}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 30
-  m_Range: 10
+  m_Color: {r: 1, g: 0.7529412, b: 0.47058824, a: 1}
+  m_Intensity: 3
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
   m_CookieSize2D: {x: 0.5, y: 0.5}
@@ -4214,7 +4214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 742350314206421040, guid: a7063b0257fae4e598242ba533cda68c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.761237
+      value: 5.38
       objectReference: {fileID: 0}
     - target: {fileID: 742350314206421040, guid: a7063b0257fae4e598242ba533cda68c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6136,7 +6136,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 742350314206421040, guid: a7063b0257fae4e598242ba533cda68c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.56
+      value: 5.07
       objectReference: {fileID: 0}
     - target: {fileID: 742350314206421040, guid: a7063b0257fae4e598242ba533cda68c, type: 3}
       propertyPath: m_LocalPosition.y
