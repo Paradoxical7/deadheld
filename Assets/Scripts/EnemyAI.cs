@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private EnemySight sight;             // reference to the sight script on this enemy
+    private Animator anim;                // the model's animator; stays null for capsule-only enemies
     private int currentPoint = 0;
     private bool combatStarted = false;  // so we only fire the stub once
     public float spawnGraceTime = 3f;    // after (re)spawn, combat won't trigger for this long (lets you run after a loss)
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         sight = GetComponent<EnemySight>();     // grab the sight component on the same object
+        anim = GetComponentInChildren<Animator>();   // the Guard model's animator lives on a child
 
         if (patrolPoints.Length > 0)
             agent.SetDestination(patrolPoints[0].position);
@@ -36,6 +38,10 @@ public class EnemyAI : MonoBehaviour
 
         void Update()
     {
+        // feed the agent's real speed to the animator (same "Speed" the player uses: idle / walk / run)
+        if (anim != null && agent != null)
+            anim.SetFloat("Speed", agent.velocity.magnitude, 0.1f, Time.deltaTime);
+
         // no player found yet, just patrol and skip the rest
         if (sight == null || sight.player == null)
         {

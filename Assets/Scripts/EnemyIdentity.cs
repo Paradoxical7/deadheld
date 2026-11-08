@@ -21,6 +21,8 @@ public class EnemyIdentity : MonoBehaviour
     [Header("Enemy Identity")]
     public EnemyRole role = EnemyRole.Guard;
     public EnemyStage stage = EnemyStage.Stage1;
+    // false for enemies that have a real textured model, so the role colour doesn't paint over it
+    public bool tintModel = true;
 
     private Renderer[] _renderer;    // every mesh under this enemy (a model has several)
 
@@ -63,6 +65,8 @@ public class EnemyIdentity : MonoBehaviour
         {
             baseColor = baseColor * 0.4f;
         }
+
+        if (!tintModel) return;
 
         // tint every part of the model, not just one renderer
         foreach (Renderer r in _renderer)
