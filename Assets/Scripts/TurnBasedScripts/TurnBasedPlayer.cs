@@ -11,6 +11,5 @@ public class TurnBasedPlayer
 
     [Range(0, 100)] public float dodgeChance = 10f; // percent
     [Range(0, 100)] public float critChance = 15f;  // percent
-
-    public int nrgGain; // Chance to gain extra energy
+    [Range(0, 100)] public float nrgGain = 0f; // % chance of +1 extra energy each turn (player only)
 }

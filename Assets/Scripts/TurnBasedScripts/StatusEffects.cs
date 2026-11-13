@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public enum StatusId { Guard, Focus, Aim, Chamber, Fortify }
+public enum StatusId { Guard, Focus, Aim, Chamber, Fortify, Bleed, Poison, Coated, Adrenaline }
 
 public class StatusEffect
 {
@@ -68,6 +68,21 @@ public class StatusEffects
         e.magnitude = magnitude;
         e.turnsLeft = turns;
         e.description = description;
+        Changed?.Invoke();
+    }
+
+    // stacking effect: each call adds a stack, and turns > 0 refreshes the duration
+    public void ApplyStack(StatusId id, string displayName, bool isDebuff, int maxStacks, int turns, Func<int, string> describe)
+    {
+        StatusEffect e = Find(id);
+        if (e == null)
+        {
+            e = new StatusEffect { id = id, displayName = displayName, isDebuff = isDebuff };
+            list.Add(e);
+        }
+        e.stacks = Math.Min(e.stacks + 1, maxStacks);
+        if (turns > 0) e.turnsLeft = turns;
+        e.description = describe(e.stacks);
         Changed?.Invoke();
     }
 

@@ -15,6 +15,7 @@ public class BattleStateMachine : MonoBehaviour
     public enum BattlePhase { PLAYER_PHASE, ENEMY_PHASE }
     public BattlePhase currentPhase;
     private int currentEnemyIndex = 0;
+    public bool battleOver;
 
     // entities currently in scene + turn based logic
     public List<HandleTurn> PerformList = new List<HandleTurn>();
@@ -33,6 +34,12 @@ public class BattleStateMachine : MonoBehaviour
     public GameObject attackPanel;
     public GameObject enemySelectPanel;
     public GameObject moveSelectPanel;
+    public GameObject itemPanel;
+    public Transform itemListParent;     
+    public GameObject itemSlotPrefab;
+    public TMP_Text itemDescriptionText;
+    public GameObject noItemsText;
+    public GameObject backButton;
     public List<Button> attackMoveButtons;
     public List<TMP_Text> attackMoveLabels;
     public BuffBar buffBar;
@@ -60,9 +67,7 @@ public class BattleStateMachine : MonoBehaviour
         PlayerInBattle.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         slotOccupants = new GameObject[enemySpawnPoints.Length];
 
-        attackPanel.SetActive(false);
-        enemySelectPanel.SetActive(false);
-        moveSelectPanel.SetActive(false);
+        HideAllPanels();
 
         // hide every panel until something is bound to it
         foreach (CombatantHUD hud in enemyHuds) if (hud != null) hud.gameObject.SetActive(false);
@@ -268,7 +273,12 @@ public class BattleStateMachine : MonoBehaviour
     // called by EnemyState when an enemy dies (removes its select button and HUD panel)
     public void OnEnemyDied(GameObject enemy)
     {
+        int index = EnemyInBattle.IndexOf(enemy);
         EnemyInBattle.Remove(enemy);
+
+        // keep the enemy-phase pointer on the right enemy when one is removed mid-phase
+        if (currentPhase == BattlePhase.ENEMY_PHASE && index >= 0 && index <= currentEnemyIndex)
+            currentEnemyIndex--;
 
         GameObject btn;
         if (enemyButtonFor.TryGetValue(enemy, out btn))
@@ -289,6 +299,8 @@ public class BattleStateMachine : MonoBehaviour
 
     void Update()
     {
+        if (battleOver) return;
+
         switch (battleState)
         {
             case (performAction.WAIT):
@@ -318,7 +330,7 @@ public class BattleStateMachine : MonoBehaviour
 
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     playerChoice = new HandleTurn();
-                    attackPanel.SetActive(true);
+                    ShowStage(UiStage.Main);
                     playerInput = PlayerGUI.WAITING;
                 }
                 break;
@@ -347,7 +359,9 @@ public class BattleStateMachine : MonoBehaviour
 
         if (banner != null)
         {
-            string actionName = turn.Move != null ? turn.Move.moveName : turn.Action;
+            string actionName = turn.Move != null ? turn.Move.moveName
+                  : (turn.Item != null ? turn.Item.itemName : turn.Action);
+
             yield return StartCoroutine(banner.Show(ActorName(turn, performer) + " used " + actionName));
         }
 
@@ -383,12 +397,12 @@ public class BattleStateMachine : MonoBehaviour
                     }
 
                 case "Heal":
-                    ES.SpendEnergy(turn.Move.energyCost);
+                    ES.BeginMove(turn.Move);
                     ES.DoHeal(turn.AttackersTarget, turn.Move.healAmount);
                     break;
 
                 case "Protect":
-                    ES.SpendEnergy(turn.Move.energyCost);
+                    ES.BeginMove(turn.Move);
                     ES.DoProtect(turn.AttackersTarget);
                     break;
 
@@ -441,6 +455,10 @@ public class BattleStateMachine : MonoBehaviour
 
                 case "Buff":
                     PS.PerformBuff(turn.Move);
+                    break;
+
+                case "Item":
+                    PS.UseItem(turn.Item);
                     break;
 
                 case "Guard":
@@ -506,11 +524,41 @@ public class BattleStateMachine : MonoBehaviour
     }
 
     // player input
-    public void OpenAttackMenu()
+    private enum UiStage { Main, Moves, Enemies, Items }
+    private UiStage uiStage = UiStage.Main;
+
+    void ShowStage(UiStage stage)
+    {
+        uiStage = stage;
+        attackPanel.SetActive(stage == UiStage.Main);
+        moveSelectPanel.SetActive(stage == UiStage.Moves);
+        enemySelectPanel.SetActive(stage == UiStage.Enemies);
+        if (itemPanel != null) itemPanel.SetActive(stage == UiStage.Items);
+        if (backButton != null) backButton.SetActive(stage != UiStage.Main);
+    }
+
+    void HideAllPanels()
     {
         attackPanel.SetActive(false);
-        moveSelectPanel.SetActive(true);
+        moveSelectPanel.SetActive(false);
+        enemySelectPanel.SetActive(false);
+        if (itemPanel != null) itemPanel.SetActive(false);
+        if (backButton != null) backButton.SetActive(false);
+    }
 
+    // Back button: step back one screen. Nothing is committed until a choice is finished.
+    public void GoBack()
+    {
+        switch (uiStage)
+        {
+            case UiStage.Enemies: ShowStage(UiStage.Moves); break; // back to the move list
+            case UiStage.Moves:
+            case UiStage.Items: ShowStage(UiStage.Main); break;
+        }
+    }
+
+    public void OpenAttackMenu()
+    {
         PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
 
         for (int i = 0; i < attackMoveButtons.Count; i++)
@@ -529,6 +577,8 @@ public class BattleStateMachine : MonoBehaviour
             attackMoveLabels[i].text = move.moveName + " (" + move.energyCost + " nrg)"
                                        + (cd > 0 ? "\nCooldown: " + cd : "");
         }
+
+        ShowStage(UiStage.Moves);
     }
 
     public void InputAttack(int moveIndex) // move buttons
@@ -546,19 +596,63 @@ public class BattleStateMachine : MonoBehaviour
         playerChoice.AttackersGameObject = PlayersToManage[0];
         playerChoice.Type = "Player";
         playerChoice.Move = move;
+        playerChoice.Item = null;
+        playerChoice.AttackersTarget = null;
         playerChoice.Action = (move.kind == MoveKind.Buff) ? "Buff" : "Attack";
-
-        attackPanel.SetActive(false);
-        moveSelectPanel.SetActive(false);
 
         if (move.kind == MoveKind.Attack && move.target == MoveTarget.SingleEnemy)
         {
-            enemySelectPanel.SetActive(true); // pick a target
+            ShowStage(UiStage.Enemies); // pick a target (Back returns to the move list)
         }
         else
         {
+            HideAllPanels();
             playerInput = PlayerGUI.DONE; // self buffs and AOE need no target
         }
+    }
+
+    // Item button
+    public void OpenItemMenu()
+    {
+        foreach (Transform child in itemListParent)
+        {
+            child.gameObject.SetActive(false);
+            Destroy(child.gameObject);
+        }
+        if (itemDescriptionText != null) itemDescriptionText.text = "";
+
+        bool any = false;
+        foreach (KeyValuePair<ItemData, int> pair in PlayerProgress.items)
+        {
+            if (pair.Value <= 0) continue;
+            if (pair.Key.effect == ItemEffect.Antidote) continue; // overworld only: the meter is paused in battle
+            any = true;
+            GameObject go = Instantiate(itemSlotPrefab, itemListParent);
+            go.GetComponent<ItemSlot>().Setup(pair.Key, pair.Value, InputItem, ShowItemDescription);
+        }
+
+        if (noItemsText != null) noItemsText.SetActive(!any);
+        ShowStage(UiStage.Items);
+    }
+
+    void ShowItemDescription(ItemData item)
+    {
+        if (itemDescriptionText != null)
+            itemDescriptionText.text = item.itemName + "\n" + item.description;
+    }
+
+    public void InputItem(ItemData item)
+    {
+        playerChoice.Attacker = PlayersToManage[0].name;
+        playerChoice.AttackersGameObject = PlayersToManage[0];
+        playerChoice.Type = "Player";
+        playerChoice.Action = "Item";
+        playerChoice.Item = item;
+        playerChoice.Move = null;
+        playerChoice.AttackersTarget = null;
+
+        HideAllPanels();
+        playerInput = PlayerGUI.DONE;
     }
 
     public void InputGuard()
@@ -567,9 +661,11 @@ public class BattleStateMachine : MonoBehaviour
         playerChoice.AttackersGameObject = PlayersToManage[0];
         playerChoice.Type = "Player";
         playerChoice.Action = "Guard";
+        playerChoice.Move = null;
+        playerChoice.Item = null;
         playerChoice.AttackersTarget = null;
 
-        attackPanel.SetActive(false);
+        HideAllPanels();
         playerInput = PlayerGUI.DONE;
     }
 
@@ -579,9 +675,11 @@ public class BattleStateMachine : MonoBehaviour
         playerChoice.AttackersGameObject = PlayersToManage[0];
         playerChoice.Type = "Player";
         playerChoice.Action = "Focus";
+        playerChoice.Move = null;
+        playerChoice.Item = null;
         playerChoice.AttackersTarget = null;
 
-        attackPanel.SetActive(false);
+        HideAllPanels();
         playerInput = PlayerGUI.DONE;
     }
 
@@ -594,7 +692,7 @@ public class BattleStateMachine : MonoBehaviour
     void playerInputDone()
     {
         PerformList.Add(playerChoice);
-        enemySelectPanel.SetActive(false);
+        HideAllPanels();
         PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(false);
         PlayersToManage.RemoveAt(0);
         playerInput = PlayerGUI.ACTIVATE;
@@ -614,5 +712,12 @@ public class BattleStateMachine : MonoBehaviour
         }
 
         Debug.Log("Fighting " + EnemyInBattle.Count + " enemies");
+    }
+
+    // called by BattleOutcome when the fight is decided
+    public void FreezeBattle()
+    {
+        battleOver = true;
+        HideAllPanels();
     }
 }
