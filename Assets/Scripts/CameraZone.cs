@@ -31,15 +31,6 @@ public class CameraZone : MonoBehaviour
         if(other.CompareTag("Player")) Show(zoneCamera);
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        // Only revert if this zone's camera is still the one showing; a neighbouring zone may already have taken over.
-        if(!other.CompareTag("Player") || !zoneCamera.enabled) return;
-        // No fallback: turn this camera off so the scene's base camera underneath shows again.
-        if(fallbackCamera != null) Show(fallbackCamera);
-        else SetActive(zoneCamera, false);
-    }
-
     private static void Register(Camera cam)
     {
         if(cam != null) registered.Add(cam);
@@ -49,6 +40,10 @@ public class CameraZone : MonoBehaviour
     {
         registered.RemoveWhere(c => c == null);
         foreach(var c in registered) SetActive(c, c == cam);
+        // also switch off any other zone camera still on (stray rig cameras nothing registered); Main Camera is depth -1, so it stays
+        foreach(var c in Camera.allCameras) if(c != cam && c.depth >= 0f) SetActive(c, false);
+        // keep exactly one audio listener: the Main Camera's goes quiet once a zone camera is showing
+        if(Camera.main != null && Camera.main != cam) { var l = Camera.main.GetComponent<AudioListener>(); if(l != null) l.enabled = false; }
     }
 
     private static void SetActive(Camera cam, bool on)

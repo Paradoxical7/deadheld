@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class BattleOutcome : MonoBehaviour
 {
+    public RewardScreen rewards;
+    public float winDelay = 1.0f;
+
     private BattleStateMachine bsm;
     private bool battleStarted = false;
     private bool resolved = false;
@@ -29,14 +33,14 @@ public class BattleOutcome : MonoBehaviour
         if (bsm.EnemyInBattle.Count == 0)
         {
             resolved = true;
+            bsm.FreezeBattle();
             Debug.Log("BattleOutcome: PLAYER WON");
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.lastOutcome = GameManager.Outcome.Won;
                 GameManager.Instance.MarkEnemyDefeated(GameManager.Instance.pendingEnemyId);
             }
-            SavePlayerHP(false);
-            ReturnFromBattle();
+            StartCoroutine(WinSequence());
         }
         else if (bsm.PlayerInBattle.Count == 0)
         {
@@ -48,6 +52,34 @@ public class BattleOutcome : MonoBehaviour
             ReturnFromBattle();
         }
     }
+
+    private IEnumerator WinSequence()
+    {
+        yield return new WaitForSeconds(winDelay);
+
+        // fallback: find the reward screen even if the field is empty or the object is disabled
+        if (rewards == null)
+            rewards = FindAnyObjectByType<RewardScreen>(FindObjectsInactive.Include);
+
+        if (rewards != null)
+        {
+            Debug.Log("BattleOutcome: showing the reward screen");
+            rewards.Show(FinishWin);
+        }
+        else
+        {
+            Debug.LogWarning("BattleOutcome: no RewardScreen found in the scene, skipping rewards");
+            FinishWin();
+        }
+    }
+
+    // runs after the player picks a reward
+    private void FinishWin()
+    {
+        SavePlayerHP(false); // after the reward, so a health boost is included
+        ReturnFromBattle();
+    }
+
 
     // write the player's remaining HP back to GameManager before leaving the battle
     private void SavePlayerHP(bool lost)

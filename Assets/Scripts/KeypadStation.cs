@@ -21,9 +21,8 @@ public class KeypadStation : MonoBehaviour
     [SerializeField] private string promptOpen = "E - CLOSE";
     private TMP_Text promptLabel;
     [SerializeField] private Vector2 promptOffset = new Vector2(-150f, 0f);
-
+    [SerializeField] private Transform promptAnchor;    // empty object above the keypad where the prompt floats
     private const int CodeLength = 4;
-
     private bool playerInside;
     private bool open;
     private bool solved;
@@ -64,9 +63,16 @@ public class KeypadStation : MonoBehaviour
         if (prompt != null)
         {
             bool show = playerInside && !open;
+
             prompt.SetActive(show);
-            if (show && Camera.allCameras.Length > 0) 
-                prompt.transform.position = Camera.allCameras[0].WorldToScreenPoint(transform.position) + (Vector3)promptOffset;
+            if (show && Camera.allCameras.Length > 0)
+            {
+                // project the anchor (or the trigger itself if none is set) through the camera on screen
+                Vector3 screen = NpcInteract.ViewCamera().WorldToScreenPoint((promptAnchor != null ? promptAnchor : transform).position);
+                // negative z means it is behind the camera, so hide the prompt
+                if (screen.z < 0f) prompt.SetActive(false);
+                else prompt.transform.position = screen + (Vector3)promptOffset;
+            }
 
             UpdatePromptText();
         }
