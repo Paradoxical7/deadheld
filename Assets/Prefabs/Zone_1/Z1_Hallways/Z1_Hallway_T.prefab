@@ -1566,7 +1566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5795661621835458840, guid: e9e2e1ab3b9466645bec63d773aa408b, type: 3}
       propertyPath: zoneCamera
-      value: 
+      value:
       objectReference: {fileID: 899200337690961913}
     - target: {fileID: 6429825644142855847, guid: e9e2e1ab3b9466645bec63d773aa408b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1617,7 +1617,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 770865316935039730, guid: 7234c7d9ea34d4a6a85d9c71906129f8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 770865316935039730, guid: 7234c7d9ea34d4a6a85d9c71906129f8, type: 3}
       propertyPath: m_LocalScale.y
