@@ -21,12 +21,14 @@ public class EnemyIdentity : MonoBehaviour
     [Header("Enemy Identity")]
     public EnemyRole role = EnemyRole.Guard;
     public EnemyStage stage = EnemyStage.Stage1;
+    // false for enemies that have a real textured model, so the role colour doesn't paint over it
+    public bool tintModel = true;
 
-    private Renderer _renderer;
+    private Renderer[] _renderer;    // every mesh under this enemy (a model has several)
 
     void Start()
     {
-        _renderer = GetComponent<Renderer>();
+        _renderer = GetComponentsInChildren<Renderer>();    // includes this object's own renderer, so the capsule still works
         SetColor();
     }
 
@@ -64,6 +66,12 @@ public class EnemyIdentity : MonoBehaviour
             baseColor = baseColor * 0.4f;
         }
 
-        _renderer.material.color = baseColor;
+        if (!tintModel) return;
+
+        // tint every part of the model, not just one renderer
+        foreach (Renderer r in _renderer)
+        {
+            r.material.color = baseColor;
+        }
     }
 }
