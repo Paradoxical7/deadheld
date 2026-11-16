@@ -718,7 +718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5893979491490136288
 Transform:
   m_ObjectHideFlags: 0
@@ -2835,7 +2835,7 @@ PrefabInstance:
     - target: {fileID: 345201001920692283, guid: 9adf30d12c0be5c46aa35997fb92c6cd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value:
-      objectReference: {fileID: 2100000, guid: 293092636671c44cf9623dc0d0e68c05, type: 2}
+      objectReference: {fileID: 2100000, guid: d57c4c3ca681a46238ecd90d3673c15c, type: 2}
     - target: {fileID: 1477544237557381972, guid: 9adf30d12c0be5c46aa35997fb92c6cd, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -3447,7 +3447,7 @@ PrefabInstance:
     - target: {fileID: 2345042, guid: 14f2f01264616214ba79f88c8f46c15f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value:
-      objectReference: {fileID: 2100000, guid: 293092636671c44cf9623dc0d0e68c05, type: 2}
+      objectReference: {fileID: 2100000, guid: d57c4c3ca681a46238ecd90d3673c15c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5717,7 +5717,7 @@ PrefabInstance:
     - target: {fileID: 345201001920692283, guid: 9adf30d12c0be5c46aa35997fb92c6cd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value:
-      objectReference: {fileID: 2100000, guid: 293092636671c44cf9623dc0d0e68c05, type: 2}
+      objectReference: {fileID: 2100000, guid: d57c4c3ca681a46238ecd90d3673c15c, type: 2}
     - target: {fileID: 1477544237557381972, guid: 9adf30d12c0be5c46aa35997fb92c6cd, type: 3}
       propertyPath: m_LocalScale.x
       value: 2

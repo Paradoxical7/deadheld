@@ -418,7 +418,7 @@ Light:
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 0.54509807, g: 0.8117647, b: 0.6627451, a: 1}
-  m_Intensity: 3
+  m_Intensity: 10
   m_Range: 9
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -2307,7 +2307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1337789644477908678
 Transform:
   m_ObjectHideFlags: 0
@@ -4532,7 +4532,7 @@ PrefabInstance:
     - target: {fileID: 2313276, guid: 861fea087c7148246939515a3d957d2e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value:
-      objectReference: {fileID: 2100000, guid: 293092636671c44cf9623dc0d0e68c05, type: 2}
+      objectReference: {fileID: 2100000, guid: d57c4c3ca681a46238ecd90d3673c15c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5696,7 +5696,7 @@ PrefabInstance:
     - target: {fileID: 2313276, guid: 861fea087c7148246939515a3d957d2e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value:
-      objectReference: {fileID: 2100000, guid: 293092636671c44cf9623dc0d0e68c05, type: 2}
+      objectReference: {fileID: 2100000, guid: d57c4c3ca681a46238ecd90d3673c15c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
