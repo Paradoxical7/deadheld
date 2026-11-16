@@ -18,3 +18,5 @@ public class DialogueLine
     public bool voiced; // true if the line has a voiceover, false if not
     public string note; // writers note, never shown to the player
     public string[] needs; // story flags that must be set before this line plays
+    public string[] sets; // story flags this line turns on once it has played
+}
