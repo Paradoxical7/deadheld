@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool hubUnlocked = false;              // set by the guide NPC; opens the Main Hub doors
     public bool hasZoneMap = false;               // player can view the Zone 1 map (M)
 
+    private HashSet<string> storyFlags=new HashSet<string>();   // names for dialogue.json "needs"/"sets"
+
     [Header("Battle return")]
     public string returnScene;            // scene to come back to after a battle
     public Vector3 returnPosition;        // where the player stood when combat started
@@ -70,6 +72,21 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         puzzleCode = Random.Range(0, 10000).ToString("D4");
         ResetPlayerStats();
+    }
+
+    // Marks story flags as set; called when a dialogue line's "sets" fire
+    public void SetFlags(string[] flags)
+    {
+        if(flags==null) return;
+        foreach(var f in flags) storyFlags.Add(f);
+    }
+
+    // true when every flags in "needs" is already set
+    public bool HasFlags(string[] needs)
+    {
+        if (needs == null) return true; // no requirements listed, so the line is allowed
+        foreach(var f in needs) if (!storyFlags.Contains(f)) return false;
+        return true;
     }
 
     // fresh run: full health and stamina
