@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Zone 1 progress")]
     public bool hubUnlocked = false;              // set by the guide NPC; opens the Main Hub doors
     public bool hasZoneMap = false;               // player can view the Zone 1 map (M)
+    public bool introPlayed = false;              // cryo wake-up intro (CryoIntro) has run this run; untick to replay
 
     [Header("Battle return")]
     public string returnScene;            // scene to come back to after a battle

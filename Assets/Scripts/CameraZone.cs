@@ -13,8 +13,11 @@ public class CameraZone : MonoBehaviour
     [Tooltip("Turn this zone's camera and AudioListener off at startup. Use on CameraRig pieces; leave off for the scene's starting camera.")]
     [SerializeField] private bool startDisabled;
 
+    // FirstPersonLook sets this while it owns the view, so walking through zones no longer cuts to fixed cameras.
+    public static bool Suspended;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ResetRegistry() => registered.Clear();
+    private static void ResetRegistry() { registered.Clear(); Suspended = false; }
 
     private void Awake()
     {
@@ -28,7 +31,7 @@ public class CameraZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player")) Show(zoneCamera);
+        if(!Suspended && other.CompareTag("Player")) Show(zoneCamera);
     }
 
     private static void Register(Camera cam)
