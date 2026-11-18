@@ -19,6 +19,8 @@ public class NpcInteract : MonoBehaviour
     private bool talking;
     private int lineIndex;
     private string[] current;
+    // the lines being spoken now, so EndTalk can read their "sets" flags
+    private List<DialogueLine>spoken;
     private TankController player;
 
     // NpcPatrol stops walking while the player is close or talking.
@@ -66,7 +68,10 @@ public class NpcInteract : MonoBehaviour
     private void StartTalk()
     {
         var gm = GameManager.Instance;
+        
         bool alreadyHelped = gm != null && gm.hubUnlocked && gm.parasiteActive;
+        // A repeat talk sets no flags, so forget the last conversation first.
+        spoken=null;
         if (alreadyHelped) current = new[] { repeatLine };
         else current=BuildLines();
         lineIndex = 0;
@@ -79,14 +84,15 @@ public class NpcInteract : MonoBehaviour
     // Turns the section's lines into "Speaker: text" strings, in order.
     private string[] BuildLines()
     {
+        // Keep the section's lines so EndTalk can set their flags later.
+        spoken=DialogueDatabase.GetSection(section);
         var result=new List<string>();
-        foreach(var l in DialogueDatabase.GetSection(section))
+        foreach(var l in spoken)
         {
-            result.Add(l.speaker+ ": " + l.text);
+            result.Add(l.speaker+": "+l.text);
         }
-        // Empty section (a typo in "section"): never return an empty list.
+        // Empty section (a typo in "section"): never return an empty list
         if(result.Count==0) return new[] { repeatLine };
-
 
         return result.ToArray();
     }
@@ -115,6 +121,16 @@ public class NpcInteract : MonoBehaviour
         }
         // Checked on its own so the meter still starts if the hub was opened another way (e.g. the F8 debug key).
         if (!gm.parasiteActive) gm.ActivateParasite();
+
+        // The talk finished, so set the story flag its lines carry.
+        // A repeat talk leaves spoken as null,m so check for that first.
+        if(spoken!=null)
+        {
+            foreach(var l in spoken)
+            {
+                gm.SetFlags(l.sets);
+            }
+        }
     }
 
     private void PlacePrompt()
