@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Collections.Generic;
 
 public class NpcInteract : MonoBehaviour
 {
@@ -10,17 +11,9 @@ public class NpcInteract : MonoBehaviour
     [SerializeField] private ZoneMapUI zoneMap;
     [SerializeField] private float promptHeight = 2.1f;
 
-    [SerializeField, TextArea] private string[] lines =
-    {
-        "You're awake... good. Not many come out of cryo anymore.",
-        "The Main Hub is sealed. I've patched my access into its doors - they'll open for you now.",
-        "Take this map of Zone 1. Press M to look at it.",
-        "And stay out of the dark corners."
-    };
     [SerializeField, TextArea] private string repeatLine = "The Hub is open. Check your map with M. Go.";
-    // Kept separate from `lines` because the scene already saves its own copy of those.
-    [SerializeField, TextArea] private string parasiteLine =
-        "Check your parasite meter. That's all the time you've got. Don't let it hit zero - that's how they get you.";
+    // Which dialogue.json section the NPC speaks. S3 is Minerva's first meeting.
+    [SerializeField] private string section ="S3";
 
     private bool playerInside;
     private bool talking;
@@ -75,18 +68,27 @@ public class NpcInteract : MonoBehaviour
         var gm = GameManager.Instance;
         bool alreadyHelped = gm != null && gm.hubUnlocked && gm.parasiteActive;
         if (alreadyHelped) current = new[] { repeatLine };
-        else if (string.IsNullOrEmpty(parasiteLine)) current = lines;
-        else
-        {
-            current = new string[lines.Length + 1];
-            lines.CopyTo(current, 0);
-            current[lines.Length] = parasiteLine;   // closing line: the parasite handoff
-        }
+        else current=BuildLines();
         lineIndex = 0;
         talking = true;
         dialogueText.text = current[0];
         dialoguePanel.SetActive(true);
         LockPlayer(true);
+    }
+
+    // Turns the section's lines into "Speaker: text" strings, in order.
+    private string[] BuildLines()
+    {
+        var result=new List<string>();
+        foreach(var l in DialogueDatabase.GetSection(section))
+        {
+            result.Add(l.speaker+ ": " + l.text);
+        }
+        // Empty section (a typo in "section"): never return an empty list.
+        if(result.Count==0) return new[] { repeatLine };
+
+
+        return result.ToArray();
     }
 
     private void NextLine()
