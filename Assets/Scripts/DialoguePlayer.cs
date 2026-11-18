@@ -13,7 +13,7 @@ public class DialoguePlayer : MonoBehaviour
     // Which section of dialogue.json to play, for example S1.
     [SerializeField] private string section="S1";
 
-    // That sectin's lines in order
+    // That sections's lines in order
     private List<DialogueLine> lines;
         
     // Which entry of lines is showing
@@ -24,14 +24,7 @@ public class DialoguePlayer : MonoBehaviour
         // Fetch the whole section once.
         lines=DialogueDatabase.GetSection(section);
 
-        // No lines for this section: hide the box and stop.
-        if(lines.Count==0)
-        {
-            dialogueText.gameObject.SetActive(false);
-            return;
-        }
-
-        ShowLine(index);
+        ShowFrom(0);
     }
 
     void Update()
@@ -43,29 +36,52 @@ public class DialoguePlayer : MonoBehaviour
         // Only react on the frame the key goes down.
         if(kb.eKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame)
         {
-            index++;
-            if(index >= lines.Count)
-            {
-                // The conversation is over, so hide the dialogue box.
-                dialogueText.gameObject.SetActive(false);
-
-                // Keep index at the end so more key presses do nothing
-                index=lines.Count;
-                return;
-            }
-            ShowLine(index);
+            ShowFrom(index + 1);
         }
     }
-    
-    // Show lines[i] on screen
-    void ShowLine(int i)
+
+    // True if this line should play right now.
+    bool CanPlay(DialogueLine line)
     {
-        // Take the line from the section list.
-        var line=lines[i];
+        // Question 1: are all the story flags this line needs set?
+        bool flagsOk=GameManager.Instance.HasFlags(line.needs);
 
-        if(!GameManager.Instance.HasFlags(line.needs)) return;
+        // Question 2: does it have no stage, or is it the current stage?
+        bool stageOk=string.IsNullOrEmpty(line.stage)|| line.stage==GameManager.Instance.GetStage();
 
-        dialogueText.text=line.speaker+ ": "+line.text;
-        GameManager.Instance.SetFlags(line.sets);
+        //play only if both answers are yes
+        return flagsOk && stageOk;
+        
+    }
+    
+    // Shows the first playable line at or after start, or ends
+    void ShowFrom(int start)
+    {
+        for(int i=start; i<lines.Count; i++)
+        {
+            // Not playable (wrong stage or flags): try the next one.
+            if(!CanPlay(lines[i])) continue;
+
+            index=i;
+            var line=lines[i];
+            dialogueText.text=line.speaker+": "+line.text;
+            // Test aid: tint the text by the line's stage
+            dialogueText.color=StageColor(line.stage);
+            GameManager.Instance.SetFlags(line.sets);
+            return;
+        }
+
+        // Nothing playable left: the conversation is over. 
+        dialogueText.gameObject.SetActive(false);
+        index=lines.Count;
+    }
+
+    // Test aid: a color for each stage so we can see which variant played
+    Color StageColor(string stage)
+    {
+        if(stage=="G") return Color.green;
+        if(stage=="Y") return Color.yellow;
+        if(stage=="R") return Color.red;
+        return Color.white;
     }
 }

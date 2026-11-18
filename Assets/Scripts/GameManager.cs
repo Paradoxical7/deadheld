@@ -89,6 +89,25 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    
+
+    // Which timer stage we are in. Matches "stage" in dialogue.json.
+    public string GetStage()
+    {
+        // Before the guides gives the parasite, the clock is always green.
+        if(!parasiteActive) return "G";
+
+        // How much of the meter is left, from 0 to 1.
+        float left = parasiteCurrent / parasiteMax;
+        
+        // if parasiteCurrent has more than 2/3 of the time left play green line
+        if(left > 2f/3f) return "G";
+        // if parasiteCurrent has more than 1/3 of the timer left play yellow line
+        if(left > 1f/3f) return "Y";
+        // if parasiteCurrent has less than 1/3 of the timer left play red line
+        return "R";
+    }
+
     // fresh run: full health and stamina
     public void ResetPlayerStats()
     {
