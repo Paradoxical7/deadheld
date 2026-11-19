@@ -172,8 +172,9 @@ public class BattleStateMachine : MonoBehaviour
         foreach (GameObject placed in GameObject.FindGameObjectsWithTag("Enemy"))
             placed.SetActive(false);
 
-        // random total, including the enemy that touched the player
-        int total = UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
+        // random total, including the enemy that touched the player (boss fights are solo)
+        bool solo = enemyRoster.Any(e => e.prefab == mainPrefab && e.soloEncounter);
+        int total = solo ? 1 : UnityEngine.Random.Range(minEnemies, maxEnemies + 1);
         total = Mathf.Clamp(total, 1, enemySpawnPoints.Length);
 
         SpawnEnemyInSlot(mainPrefab, 0); // guaranteed: the enemy that hit you
@@ -326,6 +327,7 @@ public class BattleStateMachine : MonoBehaviour
                 {
                     PlayerState PS = PlayersToManage[0].GetComponent<PlayerState>();
                     PS.OnTurnStart();
+                    if (!PS.IsAlive) break; // bled out at the start of its turn; the next frame handles the next player
                     if (buffBar != null) buffBar.Bind(PS.statuses);
 
                     PlayersToManage[0].transform.Find("Selector").gameObject.SetActive(true);
@@ -410,6 +412,14 @@ public class BattleStateMachine : MonoBehaviour
                     ES.PerformBuff(turn.Move);
                     break;
 
+                case "Debuff":
+                    GameObject victim = turn.AttackersTarget;
+                    if ((victim == null || !victim.activeInHierarchy) && PlayerInBattle.Count > 0)
+                        victim = PlayerInBattle[Random.Range(0, PlayerInBattle.Count)];
+
+                    ES.PerformDebuff(turn.Move, victim);
+                    break;
+
                 case "Guard":
                     ES.DoGuard();
                     break;
@@ -483,6 +493,14 @@ public class BattleStateMachine : MonoBehaviour
     void StartEnemyPhase()
     {
         currentPhase = BattlePhase.ENEMY_PHASE;
+
+        // debuffs placed on players (Fear) count down here
+        foreach (GameObject p in PlayerInBattle)
+        {
+            PlayerState ps = p.GetComponent<PlayerState>();
+            if (ps != null) ps.OnEnemyPhaseStart();
+        }
+
         currentEnemyIndex = 0;
         TakeNextEnemyTurn();
     }

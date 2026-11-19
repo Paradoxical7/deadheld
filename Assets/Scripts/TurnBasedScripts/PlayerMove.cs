@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public enum MoveKind { Attack, Heal, Buff, Summon, Protect }
+public enum MoveKind { Attack, Heal, Buff, Summon, Protect, Debuff }
 public enum MoveTarget { SingleEnemy, AllEnemies, Self }
-public enum MoveEffect { None, Aim, Chamber, Fortify, CoatToggle }
+public enum MoveEffect { None, Aim, Chamber, Fortify, CoatToggle, Fear, Surge, BleedChance, Siphon }
 
 [System.Serializable]
 public class PlayerMove
