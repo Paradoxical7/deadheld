@@ -1,0 +1,6113 @@
+[
+  {
+    "id": "SH_S1_001",
+    "speaker": "Simon",
+    "section": "S1",
+    "section_title": "Waking (Simon alone)",
+    "stage": "",
+    "text": "Cold.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S1_002",
+    "speaker": "Simon",
+    "section": "S1",
+    "section_title": "Waking (Simon alone)",
+    "stage": "",
+    "text": "That's not the schedule. We should still be under.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S1_003",
+    "speaker": "Simon",
+    "section": "S1",
+    "section_title": "Waking (Simon alone)",
+    "stage": "",
+    "text": "Hands work. Legs work. Good enough.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S1_004",
+    "speaker": "Simon",
+    "section": "S1",
+    "section_title": "Waking (Simon alone)",
+    "stage": "",
+    "text": "Technician's me, I guess.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_001",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Mine. Still warm. Last in the line.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_002",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Last bay. Last night of the install.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_003",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Someone's still in there. Not for long.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_004",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Code's on the panel. And a tag. 'Final bay load check: OK. Simon.'",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_005",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Simon. That's me. I was so tired.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_006_G",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "G",
+    "text": "My stamp. My signature.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_007_Y",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "Y",
+    "text": "I should have walked the whole run. I didn't.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_008_R",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "R",
+    "text": "I signed it. I signed it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_009_G",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "G",
+    "text": "Four digits. Standard Guild panel. I wired a hundred of these.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_010_Y",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "Y",
+    "text": "Come on. Four digits.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_011_R",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "R",
+    "text": "The numbers keep moving. Steady.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_012_G",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "G",
+    "text": "Not that one.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_013_Y",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "Y",
+    "text": "Not that. Think.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_014_R",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "R",
+    "text": "Wrong. It's wrong. Again.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_015",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Sealed from the other side.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S2_016",
+    "speaker": "Simon",
+    "section": "S2",
+    "section_title": "Room 01 objects (Simon alone)",
+    "stage": "",
+    "text": "Open.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_001",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "You're awake. Slowly. You'll be dizzy. I saw your pod come online on my monitor and ran.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_001",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "You're not in a pod.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_002",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "No. I'm on the science team. The trip is my research. Or it was.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_003",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Crew sleep in rotation. A hundred and twenty days up, then you go under so the dark doesn't get you. I should have gone under a year ago.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_002",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "What happened to everyone?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_004",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "The pods failed, one at a time. The people in them didn't die. They woke up wrong. You'll see.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_003",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Wrong how?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_005",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "I've been watching your vitals from my room. Everyone around me has been going mad, and I'm not sure why. The signs start around the eyes. Then you start seeing things. Then the things get worse. Everyone becoming... more... less...",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_006",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Anyway! You're awake. That's what matters.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_004",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Signs of what? How long have I got?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_007",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "About a quarter of an hour before your body stops fighting it. Less, actually. Your clock started before you woke. The signal was working on you before you noticed.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_005",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "A quarter of an hour. Less. Fine. I've worked worse deadlines.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "knows_timer",
+      "met_student"
+    ]
+  },
+  {
+    "id": "SA_S3_008",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Something odd. The others eased for a while after the violent episodes. The things they saw went quiet. I don't understand it. Take that however you like.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_006",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "What happens when the clock runs out?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_009",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "I don't know. I've only seen it from far away. There's something. Don't ask me to describe it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_010",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Take this map of Zone 1. Press M to look at it. I've patched your access to the hub doors.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "has_map"
+    ]
+  },
+  {
+    "id": "SH_S3_007",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Why help me?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_011",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Because I'd rather not be the only one left who can still talk.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_008",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "You seem fine. Why aren't you like the others?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_012",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "I take something. A prescription, from home. It keeps the edges soft. I'm running low.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_013",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Maybe it's that. Maybe it's luck. Don't ask me why.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S3_014",
+    "speaker": "Minerva",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "Stay out of the dark corners. The main hub is through that door. It's quiet there. I'll meet you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S3_009",
+    "speaker": "Simon",
+    "section": "S3",
+    "section_title": "Meeting the student (outside Room 01)",
+    "stage": "",
+    "text": "I'll be there.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_001",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Big room for a ship this size.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_002",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Some kind of showpiece. Expensive.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_001",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Told you it's quiet. It's the only room that is.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_002",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "I should say who I am. Minerva. Signal analysis, mostly. It was supposed to be the quiet job.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_003",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Simon. Welder. Engineers' Guild.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_003",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "A welder. Then you know the bones of this ship better than I do.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_004",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "I'm from a small town. My dad wanted me to go further than he did. This trip was my one real chance. A paper, a future.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_004",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "No stars I know.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_005",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "There aren't any. Not ones with names.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_006",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Don't look too long. It isn't the dark that gets you. It's how far.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_007",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Tea? It's the last real tea on the ship. I've been saving it for company.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_005",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Real? Not the powder?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_008",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Real. Don't tell Deimos. He'd write a report.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "had_tea"
+    ]
+  },
+  {
+    "id": "SH_S4_006",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "So what now?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_009",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "You need time. I can't make it. But Deimos might.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_010",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "He's the chief engineer. He's been working on something with the drive for months. If anyone can find a way to buy you more time, it's him.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_007",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Then why aren't you there?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_011",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "He doesn't answer my knocks anymore. And the drive corridor, the hum bothers me. He's Guild, though. He might talk to another tradesman.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_008",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Where?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_012",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "East, past the drive corridor. It's on your map. Look for the door ringed with lead beams. There's a peephole. He won't open the door for anyone. Go quietly. It's full of them. Also.. if you hear 'it' whatever you do don't listen to what it wants..",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_009",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "...What's 'it'? What does it want?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_013",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Hm? Oh, nothing. Just be careful out there.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S4_010",
+    "speaker": "Simon",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "I'll go.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S4_014",
+    "speaker": "Minerva",
+    "section": "S4",
+    "section_title": "The main hub (Minerva's story)",
+    "stage": "",
+    "text": "Come back after and tell me what he says. I keep watching them, so I can tell you where it's safe.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "knows_engineering",
+      "visited_hub"
+    ]
+  },
+  {
+    "id": "JU_S5_001",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Who's there?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_001",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Simon. Minerva sent me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_002",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Minerva. She knocks. She wants to talk about the signal. I'd rather not.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_003",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Hold up your wrist to the shutter.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_004",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "A Guild stamp on that wristband. I didn't think I'd see another.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_002",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Guild man. Good.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_005",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Good. I don't open the door. Not to anyone. You've seen the marks on it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_003",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "The scratches.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_006",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "They come at night. They want in. In here I'm safe. Mostly.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_004",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Quiet at the door. The hum dropped off.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_007",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Lead. The old way. It keeps the room honest.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_005",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Minerva says the signal did this. All of it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_008",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "The signal didn't do anything, Simon. It has no interest in us. That's what the others never understood. Something hostile, you could hate. We were standing where it happened to be listening.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_006",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Listening for what?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_009",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "That is the question I can't leave alone.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_007",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "What are you building in there?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_010",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "A coupling regulator. It evens the load between the drive and the loop.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_011",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "The drive's been running rough. If I finish this, I can steady the loop. Power for the pods. Life support. Real time, maybe.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_008",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "A cure?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_012",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "No. There's no cure. Time. That's all anyone gets.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_009",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "What do you need?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_013",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "A wrench. A length of the heavy plate from the maintenance bay. Put them in the drawer under the shutter. I can't go out there myself. Not anymore.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S5_010",
+    "speaker": "Simon",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "Why not?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S5_014",
+    "speaker": "Deimos",
+    "section": "S5",
+    "section_title": "Meeting the engineer (at the peephole)",
+    "stage": "",
+    "text": "The hum is louder out there. In here, I can think.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_engineering"
+    ],
+    "sets": [
+      "met_engineer"
+    ]
+  },
+  {
+    "id": "SH_S6_001",
+    "speaker": "Simon",
+    "section": "S6",
+    "section_title": "The maintenance bay (Simon alone)",
+    "stage": "",
+    "text": "Property of Deimos. He left it here. Trusted it to hang until someone came.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S6_002",
+    "speaker": "Simon",
+    "section": "S6",
+    "section_title": "The maintenance bay (Simon alone)",
+    "stage": "",
+    "text": "Torque-rated. Somebody looked after this.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S6_003",
+    "speaker": "Simon",
+    "section": "S6",
+    "section_title": "The maintenance bay (Simon alone)",
+    "stage": "",
+    "text": "Forty millimeter. Heavy. Figures.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": [
+      "has_plate",
+      "has_wrench"
+    ]
+  },
+  {
+    "id": "SH_S6_004",
+    "speaker": "Simon",
+    "section": "S6",
+    "section_title": "The maintenance bay (Simon alone)",
+    "stage": "",
+    "text": "Stores C. Someone cut the padlock from below. I'll leave it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_001_G",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "G",
+    "text": "Good steel. Thank you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_002_Y",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "Y",
+    "text": "Good steel. Hurry the next one. It's harder to hear yourself think out there, isn't it?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_003_R",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "R",
+    "text": "In the drawer. THE DRAWER. It likes the weight. Faster.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": [
+      "delivered_wrench_plate"
+    ]
+  },
+  {
+    "id": "SH_S7_001",
+    "speaker": "Simon",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "",
+    "text": "Warm air coming out of the shutter. It wasn't before.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_004",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "",
+    "text": "Next, two things from Minerva. A vial of the calibration fluid she used on the signal readings, for flushing the coolant lines. And one sentence, into this.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_005",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "",
+    "text": "She says it exactly: 'I am Minerva, and I am awake, and I am listening.' A voice check for the intercom.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S7_002",
+    "speaker": "Simon",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "",
+    "text": "That fluid's for sensors. And a sentence, for an intercom?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S7_006",
+    "speaker": "Deimos",
+    "section": "S7",
+    "section_title": "First delivery, and two things from Minerva",
+    "stage": "",
+    "text": "Clean and inert, and a voice that means what it says. Calibration needs both.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_plate",
+      "has_wrench"
+    ],
+    "sets": [
+      "asked_for_recording",
+      "asked_for_vial"
+    ]
+  },
+  {
+    "id": "SA_S8_001",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "You're back. What did he say?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S8_001",
+    "speaker": "Simon",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "He thinks he can steady the drive. Power for the pods and life support. Real time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_002",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "Time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_003",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "That's more than I've managed. Just remember he's been alone in there a long time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S8_002",
+    "speaker": "Simon",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "Deimos wants a vial of your calibration fluid. And a sentence from you, for the intercom. Into this.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_004",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "My calibration fluid? For coolant?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_005",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "Odd. Take it. I've finished with it for now.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": [
+      "has_vial"
+    ]
+  },
+  {
+    "id": "SH_S8_003",
+    "speaker": "Simon",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "'I am Minerva, and I am awake, and I am listening.'",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_006",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "That's... an odd thing to ask for an intercom.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_007_G",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "G",
+    "text": "I am Minerva, and I am awake, and I am listening.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "Recorded sentence. She laughs once and reads it clearly",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_008_G",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "G",
+    "text": "There. Happy?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_009_Y",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "Y",
+    "text": "I am Minerva, and I am awake, and I am listening.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "Recorded sentence. She stops halfway, looks at the recorder, and finishes in a smaller voice",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_010_R",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "R",
+    "text": "I am Minerva, and I am awake, and I am listening.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "Recorded sentence. Her voice arrives half a second late, with a second voice under it that is a little too calm. The hub's hum catches the note and holds it",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S8_004",
+    "speaker": "Simon",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "That didn't sound like you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8_011",
+    "speaker": "Minerva",
+    "section": "S8",
+    "section_title": "Minerva, the vial and the recording",
+    "stage": "",
+    "text": "It sounded exactly like me. That's what I don't like.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": [
+      "has_recording"
+    ]
+  },
+  {
+    "id": "SH_S8b_001",
+    "speaker": "Simon",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "Your lamp's got a loose lead. Give me a minute.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S8b_002",
+    "speaker": "Simon",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "Ten seconds.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_001",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "You fixed my lamp. I've been staring at that flicker for a week.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_002",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "Thank you. I mean it. Nobody's fixed anything for me in a long time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": [
+      "fixed_minerva_lamp"
+    ]
+  },
+  {
+    "id": "SH_S8b_003",
+    "speaker": "Simon",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "Tell me about the headphones.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_003",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "My dad made them. He works with materials. He never told me what the cups are lined with. He said they'd help me concentrate. I wore them to launch. I haven't taken them off since.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_004",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "And the tablets. One a day, since I was nineteen. I counted this morning. I'm not telling you the number.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_005",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "I haven't told him I'm not coming back.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_006_G",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "G",
+    "text": "Tell me about yours. Your family.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_007_Y",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "Y",
+    "text": "You don't have to tell me. But it helps to say it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_008_R",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "R",
+    "text": "Say it quickly. I might not remember.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": [
+      "heard_minerva_story_1"
+    ]
+  },
+  {
+    "id": "SH_S8b_004",
+    "speaker": "Simon",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "Nora. Nine. Draws horses with too many legs. She says that's how they run.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S8b_009",
+    "speaker": "Minerva",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "I'd buy one.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S8b_005",
+    "speaker": "Simon",
+    "section": "S8b",
+    "section_title": "Minerva, a quiet hour (optional)",
+    "stage": "",
+    "text": "She'd charge you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "met_engineer"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_001_G",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "G",
+    "text": "Perfect. The coupling takes it like it was thirsty. And her voice, so warm. It's exactly what it needs.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_002_Y",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "Y",
+    "text": "Beautiful. She has such a good voice. I can't wait to give the ship my life.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_003_Y",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "Y",
+    "text": "A figure of speech. Habit.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_004_R",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "R",
+    "text": "It's learning her. LISTEN. Listen! She had it in her all along.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": [
+      "delivered_recording",
+      "delivered_vial"
+    ]
+  },
+  {
+    "id": "SH_S9_001",
+    "speaker": "Simon",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "There's frost on the inside of the shutter. In a room that warm.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S9_002",
+    "speaker": "Simon",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Your family? The photo.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_005",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Marisol. My son's a plumber. My daughter teaches. They're in Bay Four, asleep. I wrote on it the day we passed the halfway mark. 'Almost home.' It was a joke, then.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S9_003",
+    "speaker": "Simon",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Bay Four. Are they...",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_006",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Holding. For now. That is what this is for.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S9_004",
+    "speaker": "Simon",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Almost home. I'd have written it too.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_007",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Next. The pods use a foam headrest. The foam is the right density for the damper. Take one from a pod that's already failed. They won't miss it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S9_005",
+    "speaker": "Simon",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Foam for a damper? From a pod with a person in it?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S9_008",
+    "speaker": "Deimos",
+    "section": "S9",
+    "section_title": "The vial and the recording delivered, and the pillow",
+    "stage": "",
+    "text": "Density, Simon. Just density.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_recording",
+      "has_vial"
+    ],
+    "sets": [
+      "asked_for_pillow"
+    ]
+  },
+  {
+    "id": "SA_S10_001",
+    "speaker": "Minerva",
+    "section": "S10",
+    "section_title": "Her story, part 2: the discovery",
+    "stage": "",
+    "text": "Day 1,071. A pattern in the background noise. Too regular to be noise. I checked it a hundred times.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S10_002",
+    "speaker": "Minerva",
+    "section": "S10",
+    "section_title": "Her story, part 2: the discovery",
+    "stage": "",
+    "text": "It doesn't sound like anything. It isn't sound. It felt like being invited.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S10_003_G",
+    "speaker": "Minerva",
+    "section": "S10",
+    "section_title": "Her story, part 2: the discovery",
+    "stage": "G",
+    "text": "I still think it might be worth knowing about.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S10_004_Y",
+    "speaker": "Minerva",
+    "section": "S10",
+    "section_title": "Her story, part 2: the discovery",
+    "stage": "Y",
+    "text": "I used to think I understood it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S10_005_R",
+    "speaker": "Minerva",
+    "section": "S10",
+    "section_title": "Her story, part 2: the discovery",
+    "stage": "R",
+    "text": "It understood me first.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "heard_minerva_story_2"
+    ]
+  },
+  {
+    "id": "JU_S11_001",
+    "speaker": "Deimos",
+    "section": "S11",
+    "section_title": "Deimos, a quiet moment (optional)",
+    "stage": "",
+    "text": "You have children?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "delivered_recording"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S11_001",
+    "speaker": "Simon",
+    "section": "S11",
+    "section_title": "Deimos, a quiet moment (optional)",
+    "stage": "",
+    "text": "A daughter. Nine.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "delivered_recording"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S11_002",
+    "speaker": "Deimos",
+    "section": "S11",
+    "section_title": "Deimos, a quiet moment (optional)",
+    "stage": "",
+    "text": "Nine. They still think you can lift the ship.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "delivered_recording"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S11_002",
+    "speaker": "Simon",
+    "section": "S11",
+    "section_title": "Deimos, a quiet moment (optional)",
+    "stage": "",
+    "text": "She'll learn.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "delivered_recording"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S11_003",
+    "speaker": "Deimos",
+    "section": "S11",
+    "section_title": "Deimos, a quiet moment (optional)",
+    "stage": "",
+    "text": "She will. Better she learns slowly.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "delivered_recording"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S12_001",
+    "speaker": "Simon",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "",
+    "text": "Another bay. The pods go back farther than the light.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S12_002_G",
+    "speaker": "Simon",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "G",
+    "text": "Don't look in. Just take the pad.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S12_003_Y",
+    "speaker": "Simon",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "Y",
+    "text": "Their lips are moving. They aren't. They're not.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S12_004_R",
+    "speaker": "Simon",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "R",
+    "text": "They're all awake. They've been awake the whole time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "IT_S12_001",
+    "speaker": "It",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "",
+    "text": "Stay.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "IT_S12_002",
+    "speaker": "It",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "",
+    "text": "You are not alone. You are never alone. That is the kindness of it.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S12_005",
+    "speaker": "Simon",
+    "section": "S12",
+    "section_title": "The crew pod bay (Simon alone)",
+    "stage": "",
+    "text": "Sorry. I need it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_pillow"
+    ],
+    "sets": [
+      "has_pillow"
+    ]
+  },
+  {
+    "id": "JU_S13_001_G",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "G",
+    "text": "Dense, as I hoped. Thank you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_002_Y",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "Y",
+    "text": "Still warm? No. It never is. Forgive me. Quickly now.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_003_R",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "R",
+    "text": "They're dreaming in there. Did you hear them dreaming? Don't stop. Don't stop now.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": [
+      "delivered_pillow"
+    ]
+  },
+  {
+    "id": "SH_S13_001",
+    "speaker": "Simon",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "It's humming through the shutter. Almost a word.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_004",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "You're a good man, Simon. I'm glad it was you who woke.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_005",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "One last piece. The emitter core. It's a lattice cylinder the length of your hand. It went missing from Stores C when I put the order in.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13_002",
+    "speaker": "Simon",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "Missing?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_006",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "Innox. The stores hand. He took it down there and he's been there since. He's changed. He's gone furthest of any of them. Take what you need and come back.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13_003",
+    "speaker": "Simon",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "Take it how?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S13_007",
+    "speaker": "Deimos",
+    "section": "S13",
+    "section_title": "The pillow delivered, and the last piece",
+    "stage": "",
+    "text": "Any way you have to.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_pillow"
+    ],
+    "sets": [
+      "asked_for_core"
+    ]
+  },
+  {
+    "id": "SH_S13b_001",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Twelve pods. Three wiped clean.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_002",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Colder in here. The vents are blowing warm. It's colder.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_003",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "A folding chair. A blanket folded on the seat. A ring on the floor where a thermos stood and the dust is gone.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_004",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Somebody sat here every day. Until he couldn't.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_005_G",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "G",
+    "text": "The chair faces the glass. Their faces are turned to the chair.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_006_Y",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "Y",
+    "text": "All three lights pulse together, on the beat of the hum. Then on mine.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_007_R",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "R",
+    "text": "All three are turned toward the door. They're smiling. Pods don't do that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "IT_S13b_001",
+    "speaker": "It",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Hold still.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_008",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "A hand-built coupling. His. It's already running on them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_009",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Same pattern as the drive log. Row for row.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_010",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "He said 'holding.' He didn't say what for.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_011",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "I should have sat in a chair like this. For a recital.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_012",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "The frost is on the outside. The inside was already clear. Somebody's been looking out.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S13b_013",
+    "speaker": "Simon",
+    "section": "S13b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Her eyes are open. They're on the chair.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "knows_julio_family"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_001",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I'll tell you the rest.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_002",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "Day 1,078. I wrote the request in four minutes. Just a few more months. A closer pass. There was a box on the form to put off our rest, so we could stay awake with it. I ticked it. I sent it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_003",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "It came back in four seconds. 'Fine. Don't make it a thing.' I thought: good. Then I thought: he didn't read it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_001",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "And you went ahead.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_004",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "Yes. I went ahead.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_005",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "Signal strength went up 340 percent. I told myself that's what a closer pass does. Then the pods started failing. It doesn't matter how I run the numbers.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_002",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "You couldn't have known.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_006",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "That's what I tell myself. 'I couldn't have known.' It sounds more like a sentence than a defense.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_003",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I signed off the bay I woke up in. I didn't walk the full run.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_007",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "...We all signed something.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_004",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I told myself I had nothing back there. That the ship was a second chance.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_008",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "And?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_005",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I missed my daughter's recital. A double shift. I told myself I'd make it up to her.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_009",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "Did you?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_006",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I got on a ship.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_010",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "Take them. They're the only thing that's ever made it quiet. Maybe they'll do that for you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_007",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "You'll be without them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S14_011",
+    "speaker": "Minerva",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "",
+    "text": "I'm fine in my room. I've still got a few tablets. Bring them back when you're done.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "has_headphones",
+      "heard_minerva_story_3"
+    ]
+  },
+  {
+    "id": "SH_S14_008_G",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "G",
+    "text": "Heavier than they look.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_009_Y",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "Y",
+    "text": "The hum's softer. Like a hand over a speaker.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S14_010_R",
+    "speaker": "Simon",
+    "section": "S14",
+    "section_title": "Minerva's story (part 3) and the headphones",
+    "stage": "R",
+    "text": "It's not gone. It's just... farther.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_001",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "Someone's been living down here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_002",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "'No one is coming.' 'I checked.' That's what I'd write.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "CA_S15_001",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "—st... stop... there—",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "Stop there."
+  },
+  {
+    "id": "SH_S15_003",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "That's a voice. They talk now.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "CA_S15_002",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "—he sent... you—",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "He sent you."
+  },
+  {
+    "id": "SH_S15_004",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "Stay where you are.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "CA_S15_003",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "—not... letting... him—",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "I'm not letting him build it."
+  },
+  {
+    "id": "SH_S15_005",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "The hum's dull. Like it's far off.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_006",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "That hum goes straight through my teeth.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "CA_S15_004",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "NNgh... back...",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "Stay back."
+  },
+  {
+    "id": "CA_S15_005",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "—plea... plea—",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "Please. Please."
+  },
+  {
+    "id": "CA_S15_006",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "—the door... his door—",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [],
+    "true_text": "I have to get to his door."
+  },
+  {
+    "id": "CA_S15_007",
+    "speaker": "Innox",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "Don't give it to him.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_007",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "...",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_008",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "No.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_009",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "They were people. They were all people.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_010",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "They thought I was the monster. They were scared of me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_011",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "I shouldn't feel better. I do.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_012",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "He was wearing a name badge.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_013",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "'I'm not letting him build it.' He said that. I heard 'ngh.'",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_014",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "A cylinder. Lattice alloy. Stamped STORES C-9.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_015",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "The emitter core. He had it on him the whole time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S15_016",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "Sorry, Innox.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": [
+      "has_core",
+      "killed_boss",
+      "knows_amplifier"
+    ]
+  },
+  {
+    "id": "SH_S15_017",
+    "speaker": "Simon",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "'He'll send someone.' He knew I was coming.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S15_001",
+    "speaker": "Minerva",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "You're shaking. Sit. You've been down there.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SA_S15_002",
+    "speaker": "Minerva",
+    "section": "S15",
+    "section_title": "The lower deck (Innox)",
+    "stage": "",
+    "text": "Oh. You've been busy.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "asked_for_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S16_001",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "The hum's louder here. In the corridor. It wasn't this loud at the door before.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_001_G",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "G",
+    "text": "You're quiet. Did you find what I asked for?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_002_Y",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "Y",
+    "text": "You took your time. Did you find it?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_003_R",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "R",
+    "text": "I heard you in the corridor. Did you bring it? THE CORE. Did you bring it?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_004",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Someone wiped Marisol's glass. The camera in Bay Four showed me. Thank you. She hasn't had a clear view in some time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S16_002",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Innox said, 'Don't give it to him.' What are you building?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_005_G",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "G",
+    "text": "A regulator, Simon. Power for the pods. I told you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_006_Y",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "Y",
+    "text": "A voice. It has been listening to us for three years. It is only fair that something answers. Nobody has to be alone with it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_007_R",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "R",
+    "text": "An amplifier. Earth hears it. Every house. Every school. All of them, hearing it together. Nobody alone. Everyone, Simon. You too. Give it to me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": [
+      "asked_what_for"
+    ]
+  },
+  {
+    "id": "SH_S16_003",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Earth. Nora's on Earth.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_008",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Then she will hear it too. Isn't that what you wanted? To be near her?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S16_004",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Earth's already dying.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_009",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Slowly. One house at a time, in the dark, alone. I have read the models. I would end the alone.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S16_005",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "They were people, Deimos. The ones I killed.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_010",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "They were suffering, Simon. I'm trying to end it. For all of them. For everyone.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "SH_S16_006",
+    "speaker": "Simon",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Here. Take it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S16_011",
+    "speaker": "Deimos",
+    "section": "S16",
+    "section_title": "The last piece",
+    "stage": "",
+    "text": "Thank you. That was kind of you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [
+      "has_core"
+    ],
+    "sets": []
+  },
+  {
+    "id": "JU_S17_001",
+    "speaker": "Deimos",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "It's only a part.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_001",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "No. I've signed enough things.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S17_002",
+    "speaker": "Deimos",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Give it to me. Give it to me. It's mine. I earned it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_002",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Go to hell, Deimos.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S17_003",
+    "speaker": "Deimos",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "You'll watch it happen slowly. With the rest of us. It's already in every pod.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S17_004",
+    "speaker": "Deimos",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Bay Four will wake to whatever is out there. I only hoped to choose what.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_001",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "You came back. Sit.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_003",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I wanted to hear you say the rest.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_002",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "The rest is that I'm sorry. For the course change. For the pods. For all of it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_004",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I'm sorry too. I signed something I shouldn't have.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_003",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Tell me about her. Your daughter.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_005",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Nora. She's nine.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_004",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "The lamp's still on. You fixed that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "NO_S17_001",
+    "speaker": "Nora",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Dad. I don't need the money. Please don't go. You missed the recital, but it's okay. I kept your seat empty anyway.",
+    "kind": "voicemail",
+    "voiced": false,
+    "note": "recording",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_005",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Say something back. Even if she can't hear it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_006",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I'm okay. I should have come to the recital.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_006",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "You kept them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_007",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I'm sorry. I can give them back.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_007",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Don't. It's too late for that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S17_008",
+    "speaker": "Minerva",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I'm sorry. I'm not usually like this. I think I'm... usually someone else.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "NO_S17_002",
+    "speaker": "Nora",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Dad. I don't need the money. Please don't go. You missed the recital, but it's okay. I kept your seat empty anyway.",
+    "kind": "voicemail",
+    "voiced": false,
+    "note": "recording",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_008",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "I'm okay. I should have come to the recital.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S17_001",
+    "speaker": "It",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "Open.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S17_009",
+    "speaker": "Simon",
+    "section": "S17",
+    "section_title": "Quiet ending (refusing the last piece)",
+    "stage": "",
+    "text": "No.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S18_001",
+    "speaker": "Deimos",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Thank you. Thank you. You were the best of us.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S18_002",
+    "speaker": "Deimos",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "I can hear it now. Not as a hum. As a voice. It's so patient.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S18_001",
+    "speaker": "Simon",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "What did you do?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S18_003",
+    "speaker": "Deimos",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "I finished.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S18_004",
+    "speaker": "Deimos",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Almost home, Marisol. Almost home, everyone.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S18_001",
+    "speaker": "Minerva",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Oh. Oh, no.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S18_002",
+    "speaker": "Simon",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "It's going to Earth.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S18_003",
+    "speaker": "Simon",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Nora's on Earth.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S18_004",
+    "speaker": "Simon",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "I did what I was told. Again.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S18_005",
+    "speaker": "Simon",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "I did it for the time. Again.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S18_001",
+    "speaker": "It",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Open.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "NO_S18_001",
+    "speaker": "Nora",
+    "section": "S18",
+    "section_title": "Harsh ending (handing over the core)",
+    "stage": "",
+    "text": "Dad. I don't need the money. Please don't go. You missed the recital, but it's okay. I kept your seat empty anyway.",
+    "kind": "voicemail",
+    "voiced": false,
+    "note": "recording",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_001_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "The vent just stopped. I didn't hear it stop.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_002_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "The light just flickered. Wait. It didn't.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_003_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "I can hear it breathing. No. That's me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_004_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Sorry.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_005_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Time. Take it. Quieter.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_006_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "More. No. Not more. But it stopped. It stopped.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_007_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "That went badly.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_008_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Don't do that again.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_009_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "I'm still here. Why am I still here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_010",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Why do I keep coming back here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_011_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Quiet. Too quiet.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_012_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "The centerpiece. It wasn't humming before.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_013_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "It's grown. Or I'm seeing things. Both.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_014_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Nobody's coming. Fine. I've worked alone before.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_015_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Nora would be asleep now. Is it night where she is? Where is she?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_016_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "I keep thinking someone just said my name.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_017_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "That corner's darker than it was.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_018_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Something moved. I turned. Nothing. I turned back. It moved again.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_019_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "I keep turning my head. I don't know why.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_020_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "I'd kill for a coffee. Bad choice of words.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_021_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Eight bucks for a sandwich at the yard. I'd pay it now.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_022_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "Nora's horses have seven legs. She says that's how they run.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_023_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Forty meters on the map. Feels longer.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_024_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "I paced it twice. Forty-one. Then fifty-three.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_025_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "The weld seam runs on past the end of the wall. Nobody welded that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_026_G",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "A shape by the door. It was a coat rack. I think it was a coat rack.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_027_Y",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "Three of them down the corridor. Now one. Now none. They don't walk. They're just closer.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_028_R",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "They're everywhere. They have faces. They have my face.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_029",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "There's a word for that color. I had it a second ago.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_030",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Nora? ...No.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S19_031",
+    "speaker": "Simon",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "It's gone. It was never there.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "NO_S19_001",
+    "speaker": "Nora",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Dad. Come home.",
+    "kind": "hallucination",
+    "voiced": false,
+    "note": "hallucinated",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S19_001",
+    "speaker": "It",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Stay.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S19_002",
+    "speaker": "It",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Closer.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S19_003",
+    "speaker": "It",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Hold still.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S19_004",
+    "speaker": "It",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Say your name.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "IT_S19_005",
+    "speaker": "It",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Open.",
+    "kind": "signal",
+    "voiced": false,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_001_G",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Back already? Good. Ask me anything.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_002_Y",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "You look tired. Sit a second. Don't take long.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_003_R",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "Your eyes. They're doing the thing. Don't trust them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_004_G",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "These headphones are my dad's work. He made the lining himself.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_005_Y",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "I never take them off. They make it quiet, some days.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_006_R",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "Without them I'd be... never mind. Never mind.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_007_G",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "One a day. It keeps the edges soft. I'm rationing.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_008_Y",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "I'm splitting them now. Don't tell me it's a bad idea.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_009_R",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "That's the last one. It's fine. It's fine. I'll be fine.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_010_G",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Odd thing. When I think about the hub, I feel a tug. Silly, isn't it?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_011_Y",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "The others seem afraid of the hub. I don't know why.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_012_R",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "Everything in me says go there. Don't. Or do. I can't tell.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_013",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "The drive corridor is east. It's full of them. Go quietly.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_014_G",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "What do you want.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_015_Y",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "You're still here. Why are you still here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_016_R",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "Give them back. Give them back. Get out.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SA_S19_017",
+    "speaker": "Minerva",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "",
+    "text": "Oh. Thank you. It's quiet again. How strange.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S19_001_G",
+    "speaker": "Deimos",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "G",
+    "text": "Good to hear you. The ship thanks you.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S19_002_Y",
+    "speaker": "Deimos",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "Y",
+    "text": "There you are. What took so long? It's quieter in here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "JU_S19_003_R",
+    "speaker": "Deimos",
+    "section": "S19",
+    "section_title": "Anywhere lines",
+    "stage": "R",
+    "text": "It's listening. Can you hear it? THE PATTERN. It's so elegant. Don't keep me waiting.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_S20_001",
+    "speaker": "Simon",
+    "section": "S20",
+    "section_title": "The end of the timer (the entity)",
+    "stage": "",
+    "text": "Oh.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_001",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Panel's cracked. Code on the front. Tag on the side.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "has_pod_code",
+      "read_bay_tag"
+    ]
+  },
+  {
+    "id": "SH_E1_002",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "The glass is fogged from the inside. Something is moving against it, slowly, like a hand wiping a window.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_003",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "It isn't a hand. Don't look.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_004",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Released at launch. So she got it. And a place on the next ship.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_005",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "If there's a next ship.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_006",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Dark. Frost on the inside of the glass, thick as a coat of paint.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_007",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Deferred. There was never a window.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_008",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "One unplayed message. I'll listen later.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_009",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Saturn. Rings and all. It isn't moving.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_010",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "It's a screen. They left the last of home on for the sleepers.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_011_R",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "R",
+    "text": "It's a loop. It shouldn't have changed.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E1_012",
+    "speaker": "Simon",
+    "section": "E1",
+    "section_title": "Room 01 (Bay Seven)",
+    "stage": "",
+    "text": "Technician's me, I guess.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E2_001",
+    "speaker": "Simon",
+    "section": "E2",
+    "section_title": "The corridor outside Room 01",
+    "stage": "",
+    "text": "Somebody still pins things up.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E2_002",
+    "speaker": "Simon",
+    "section": "E2",
+    "section_title": "The corridor outside Room 01",
+    "stage": "",
+    "text": "Wet floor. Who's left to slip?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E2_003",
+    "speaker": "Simon",
+    "section": "E2",
+    "section_title": "The corridor outside Room 01",
+    "stage": "",
+    "text": "Scratches at hip height. Too many. Not in a line.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_001_G",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "G",
+    "text": "Marketing. It's a very nice rock.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_002_Y",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "Y",
+    "text": "Not tested. On a ship made of it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_003_R",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "R",
+    "text": "I read it twice. It wasn't there the first time. Or it was.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_plaque_late"
+    ]
+  },
+  {
+    "id": "SH_E3_004_G",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "G",
+    "text": "Polished and cold. My reflection's perfect. Almost too perfect.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_005_Y",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "Y",
+    "text": "Faint veins under the surface. A low hum. It wasn't doing that when I came in.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_006_R",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "R",
+    "text": "The floor's cracked around it. It pulses. I'm counting along and I don't remember starting.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_007",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "No stars I know.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_008",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "Seven years of nothing behind us. And whatever's ahead.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_009",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "Halcyon. Calm. Somebody picked a name for it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_010",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "Three. Counting me, that's three.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_011",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "Four hundred fifty-two. The limit's a hundred and twenty. Nobody could stand that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_012",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "Tidy. A tea mug. A desk lamp with a loose lead. It flickers.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_013",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "She counts them. Every slot has a day on it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E3_014",
+    "speaker": "Simon",
+    "section": "E3",
+    "section_title": "The main hub",
+    "stage": "",
+    "text": "She didn't leave this room all week. It shows.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "saw_minerva_room_changed"
+    ]
+  },
+  {
+    "id": "SH_E4_001_G",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "G",
+    "text": "That hum. I can feel it in my teeth.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E4_002_Y",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "Y",
+    "text": "It's not a hum. It's a note. It's holding one note.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E4_003_R",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "R",
+    "text": "It stopped. Why did it stop? It's waiting for something.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E4_004",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "",
+    "text": "A printout. Someone's written on it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_power_log"
+    ]
+  },
+  {
+    "id": "SH_E4_005_R",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "R",
+    "text": "That isn't what it said before. I think I'm the one who's been reading it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E4_006",
+    "speaker": "Simon",
+    "section": "E4",
+    "section_title": "The drive corridor",
+    "stage": "",
+    "text": "A uniform. Empty. Folded as if someone stepped out of it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_001",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "Lead beams. The old way.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_002",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "Deep gouges in the metal. Four lines, at head height. Over and over.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_003",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "Something's been trying to get in.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_004",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "Push to talk. Like a ship from fifty years ago.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_005",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "A steel shutter. A hand's width. A lens behind it, the size of a coin.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_006",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "It's looking at me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_007",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "A drawer under the shutter. Nothing goes through but what fits in it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_008",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "'Approved above me.' We all say that.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_signoff_record"
+    ]
+  },
+  {
+    "id": "SH_E5_009",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "A bare bulb. The edge of a bench. A thermos. A sheet of spirals, each one redrawn closer than the last.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_010",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "A woman and two grown kids on a beach. Somebody wrote across the top.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_011",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "A coupling regulator, he said. Neat work. Everything's welded clean.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E5_012",
+    "speaker": "Simon",
+    "section": "E5",
+    "section_title": "The engineering door (Deimos's peephole)",
+    "stage": "",
+    "text": "Every line runs out the wall.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E6_001",
+    "speaker": "Simon",
+    "section": "E6",
+    "section_title": "The maintenance bay",
+    "stage": "",
+    "text": "There's a wrench-shaped hole in the board. The wrench is here, hanging by its strap.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E6_002",
+    "speaker": "Simon",
+    "section": "E6",
+    "section_title": "The maintenance bay",
+    "stage": "",
+    "text": "Forty millimeter plate. Heavy. Someone chalked ENGINEERING on the top one.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E6_003",
+    "speaker": "Simon",
+    "section": "E6",
+    "section_title": "The maintenance bay",
+    "stage": "",
+    "text": "Nobody initialed. Because the bay was already signed. By me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E6_004",
+    "speaker": "Simon",
+    "section": "E6",
+    "section_title": "The maintenance bay",
+    "stage": "",
+    "text": "Dry now. The fork's bent. Whoever it was, they didn't come back.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E6_005",
+    "speaker": "Simon",
+    "section": "E6",
+    "section_title": "The maintenance bay",
+    "stage": "",
+    "text": "The padlock's been cut. From below.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E7_001",
+    "speaker": "Simon",
+    "section": "E7",
+    "section_title": "The science lab (Minerva's research terminal, clue)",
+    "stage": "",
+    "text": "Her terminal. Still logged in.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_minerva_terminal"
+    ]
+  },
+  {
+    "id": "SH_E7_002_R",
+    "speaker": "Simon",
+    "section": "E7",
+    "section_title": "The science lab (Minerva's research terminal, clue)",
+    "stage": "R",
+    "text": "Day 1,413 hasn't happened.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E8_001",
+    "speaker": "Simon",
+    "section": "E8",
+    "section_title": "The supervisor's office (clue)",
+    "stage": "",
+    "text": "Four seconds. He didn't open it. He didn't need to.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_supervisor_log"
+    ]
+  },
+  {
+    "id": "SH_E8_002",
+    "speaker": "Simon",
+    "section": "E8",
+    "section_title": "The supervisor's office (clue)",
+    "stage": "",
+    "text": "He signed because Deimos signed. Deimos signed because he approved. Round and round.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E8_003",
+    "speaker": "Simon",
+    "section": "E8",
+    "section_title": "The supervisor's office (clue)",
+    "stage": "",
+    "text": "A pill organizer. Thursday's still full.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E9_001",
+    "speaker": "Simon",
+    "section": "E9",
+    "section_title": "The medical bay",
+    "stage": "",
+    "text": "He was the only one who could have asked.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_001",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "Someone made a list in marker. Different hands.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_002",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "They wrote my name. I was asleep.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_003",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "Eleven crew. Ten names. Who ran Stores?",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_004",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "HAPPY BIRTHDAY HADDAD. A candle stub under it. Nobody lit it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_005",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "The lights are on in here. A table set for six. The kettle's warm.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_006",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "Nobody's been in this room in weeks.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E10_007",
+    "speaker": "Simon",
+    "section": "E10",
+    "section_title": "The mess and crew lounge",
+    "stage": "",
+    "text": "Out of everything but a flavor called MORNING.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_001",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Another bay. The pods go back farther than the light.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_002_G",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "G",
+    "text": "Frost on the glass. A face under it. Eyes closed.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_003_Y",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "Y",
+    "text": "Hands on the glass. Count the knuckles. Don't count the knuckles.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_004_R",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "R",
+    "text": "Eyes open. Looking through me. At whatever's behind me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_005",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Dense, even. Still warm where a head was.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_006",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Sorry. I need it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_007",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Holding. The same word he used.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_008",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Twenty-two crew down here. One watch up, two asleep. That's the rule. Somebody made it so nobody'd crack.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11_009",
+    "speaker": "Simon",
+    "section": "E11",
+    "section_title": "The crew pod bay (Bay Two)",
+    "stage": "",
+    "text": "Nobody got to sleep when the key went.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11b_001",
+    "speaker": "Simon",
+    "section": "E11b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "The frost is on the outside. On the inside the glass is clear, at the height of a seated man's face.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11b_002",
+    "speaker": "Simon",
+    "section": "E11b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Wife. Son. Daughter. He wrote it on all three.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_bay_four"
+    ]
+  },
+  {
+    "id": "SH_E11b_003_R",
+    "speaker": "Simon",
+    "section": "E11b",
+    "section_title": "Bay Four (optional)",
+    "stage": "R",
+    "text": "That wasn't on there a second ago.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E11b_004",
+    "speaker": "Simon",
+    "section": "E11b",
+    "section_title": "Bay Four (optional)",
+    "stage": "",
+    "text": "Frost on the glass. Nobody's wiped these in a long time.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_001",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Crates stacked to the ceiling. Someone painted on them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_002",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Somebody still made a joke down here.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_003",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Cargo cutter. The edge is cut from lattice alloy. It hums at the same note as the hub.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_004",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "A cot. Tins of food, stacked by size. A tally on the wall. Every tin has a face drawn on it in marker.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_005",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "More scratches. On the inside of the hatch. Four lines. The same four lines as the lead door upstairs.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_006",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "He wasn't hiding down here. He was waiting to get out.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_007",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Two signatures on a course change. One on this. He approved it himself.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_requisition"
+    ]
+  },
+  {
+    "id": "SH_E12_008",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Not a regulator. An amplifier. For the signal.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_009",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "He's been fetching it through me.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "knows_amplifier",
+      "read_drawing"
+    ]
+  },
+  {
+    "id": "SH_E12_010",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "A girl, maybe eight, gap-toothed, holding a fish.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E12_011",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "Three pages, folded small.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "read_innox_diary"
+    ]
+  },
+  {
+    "id": "SH_E12_012",
+    "speaker": "Simon",
+    "section": "E12",
+    "section_title": "The lower deck (Stores C)",
+    "stage": "",
+    "text": "He was wearing a name badge.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": [
+      "has_core"
+    ]
+  },
+  {
+    "id": "SH_E13_001",
+    "speaker": "Simon",
+    "section": "E13",
+    "section_title": "After the reveal",
+    "stage": "",
+    "text": "Not responding. They were. They answered. I couldn't hear them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E13_002",
+    "speaker": "Simon",
+    "section": "E13",
+    "section_title": "After the reveal",
+    "stage": "",
+    "text": "That wasn't a creature on the floor. It was Lindqvist, folded small. She was hiding.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E13_003",
+    "speaker": "Simon",
+    "section": "E13",
+    "section_title": "After the reveal",
+    "stage": "",
+    "text": "HAPPY BIRTHDAY HADDAD. The candle stub is in his pocket. Someone brought it with them.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  },
+  {
+    "id": "SH_E13_004",
+    "speaker": "Simon",
+    "section": "E13",
+    "section_title": "After the reveal",
+    "stage": "",
+    "text": "One glove. Left hand. REWARD: A FAVOR. BRANDT. He found it.",
+    "kind": "spoken",
+    "voiced": true,
+    "note": "",
+    "needs": [],
+    "sets": []
+  }
+]
