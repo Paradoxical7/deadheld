@@ -124,10 +124,14 @@ public class NpcInteract : MonoBehaviour
         prompt.transform.position = screen;
     }
 
-    // The fixed zone cameras sit above the Main Camera by depth, so the deepest enabled one is what's on screen.
+    // In first person the head camera is the view. Otherwise the fixed zone cameras sit above the Main Camera
+    // by depth, so the deepest enabled one is what's on screen.
     // Public so the keypad and pod prompts place themselves with the same camera.
     public static Camera ViewCamera()
     {
+        var fp = FirstPersonLook.Active;
+        if (fp != null && fp.Camera.enabled) return fp.Camera;
+
         Camera best = null;
         foreach (var c in Camera.allCameras)
             if (best == null || c.depth > best.depth) best = c;
