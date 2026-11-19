@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 786457837083626719}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.2}
+  m_LocalPosition: {x: 0, y: 0, z: -0.814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ Light:
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 0.7019608, g: 0.14901961, b: 0.16862746, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 3
   m_Range: 2.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -360,6 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 770865316935039730}
+  - component: {fileID: 7533561829205127367}
   m_Layer: 0
   m_Name: EmergencyLight_Strip
   m_TagString: Untagged
@@ -377,7 +378,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3414300894440666342}
@@ -385,3 +386,23 @@ Transform:
   - {fileID: 2975681826880749984}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7533561829205127367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282140001198111875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc750124b1fa541cfae10eff60513a35, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::EmergencyLightFlicker
+  emergencyLight: {fileID: 6132069298575561985}
+  emissiveRenderer: {fileID: 3929236522497874948}
+  minWaitTime: 1
+  maxWaitTime: 4
+  minFlickerSpeed: 0.1
+  maxFlickerSpeed: 5
+  minFlickers: 1
+  maxFlickers: 10
