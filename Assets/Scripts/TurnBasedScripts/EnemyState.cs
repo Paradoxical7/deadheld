@@ -246,6 +246,7 @@ public class EnemyState : MonoBehaviour
         }
 
         GainEnergy(1f);
+        if (statuses.Has(StatusId.Surge)) GainEnergy(statuses.Magnitude(StatusId.Surge)); // Surge: bonus energy
 
         if (!TickDamageOverTime())
         {
@@ -255,9 +256,14 @@ public class EnemyState : MonoBehaviour
 
         statuses.Remove(StatusId.Guard);
         statuses.Remove(StatusId.Focus);
-        statuses.Tick(); // timed effects (Fortify, Poison) count down on this enemy's turn
+        statuses.Tick(); // timed effects (Fortify, Surge, Poison) count down on this enemy's turn
         TickCooldowns();
         ClearProtection();
+
+        // players who aren't already afraid (Scream is wasted on them)
+        List<GameObject> fearTargets = BSM.PlayerInBattle
+            .Where(p => !p.GetComponent<PlayerState>().IsFeared).ToList();
+        System.Func<PlayerMove, bool> usefulDebuff = m => m.effect != MoveEffect.Fear || fearTargets.Count > 0;
 
         List<PlayerMove> affordable = attackMoves.Where(m => CanUse(m)).ToList(); // energy AND cooldown
         List<PlayerMove> summons = affordable.Where(m => m.kind == MoveKind.Summon && m.summonPrefab != null).ToList();
@@ -265,17 +271,21 @@ public class EnemyState : MonoBehaviour
         List<PlayerMove> attacks = affordable.Where(m => m.kind == MoveKind.Attack).ToList();
         List<PlayerMove> protects = affordable.Where(m => m.kind == MoveKind.Protect).ToList();
         List<PlayerMove> buffs = affordable.Where(m => m.kind == MoveKind.Buff
-            && m.effect == MoveEffect.Fortify && !statuses.Has(StatusId.Fortify)).ToList();
+            && ((m.effect == MoveEffect.Fortify && !statuses.Has(StatusId.Fortify))
+             || (m.effect == MoveEffect.Surge && !statuses.Has(StatusId.Surge)))).ToList();
+        List<PlayerMove> debuffs = affordable.Where(m => m.kind == MoveKind.Debuff && usefulDebuff(m)).ToList();
         GameObject healTarget = FindMostHurtAlly();
         GameObject protectTarget = FindAllyToProtect();
 
-        // saving energy section
-        // 1) saving for a summon we can't afford yet
+        attacks = attacks.Where(m => m.effect != MoveEffect.Siphon || enemy.currentHP < enemy.baseHP).ToList();
+
+        // 1) saving for a summon or a debuff we can't afford yet (it's ready now or next turn)
         PlayerMove savingFor = attackMoves.FirstOrDefault(m =>
-            m.kind == MoveKind.Summon && m.summonPrefab != null
+            ((m.kind == MoveKind.Summon && m.summonPrefab != null && BSM.HasFreeEnemySlot())
+             || (m.kind == MoveKind.Debuff && usefulDebuff(m)))
             && !HasEnoughEnergy(m.energyCost)
             && m.energyCost <= enemy.baseNRG
-            && BSM.HasFreeEnemySlot());
+            && CooldownRemaining(m) <= 1);
 
         // 2) keep enough energy banked for Protect while there are allies to protect
         PlayerMove protectMove = attackMoves.Where(m => m.kind == MoveKind.Protect)
@@ -292,6 +302,7 @@ public class EnemyState : MonoBehaviour
             m.energyCost <= 0f || (savingFor == null && enemy.currentNRG - m.energyCost >= reserve);
         attacks = attacks.Where(canSpend).ToList();
         buffs = buffs.Where(canSpend).ToList();
+        debuffs = debuffs.Where(canSpend).ToList();
 
         HandleTurn myTurn = new HandleTurn();
         myTurn.Attacker = gameObject.name;
@@ -321,6 +332,15 @@ public class EnemyState : MonoBehaviour
             myTurn.Action = "Buff";
             myTurn.Move = buffs[Random.Range(0, buffs.Count)];
             myTurn.AttackersTarget = null;
+        }
+        else if (debuffs.Count > 0)
+        {
+            PlayerMove debuff = debuffs[Random.Range(0, debuffs.Count)];
+            myTurn.Action = "Debuff";
+            myTurn.Move = debuff;
+            myTurn.AttackersTarget = debuff.effect == MoveEffect.Fear
+                ? fearTargets[Random.Range(0, fearTargets.Count)]
+                : BSM.PlayerInBattle[Random.Range(0, BSM.PlayerInBattle.Count)];
         }
         else if (attacks.Count > 0)
         {
@@ -385,8 +405,25 @@ public class EnemyState : MonoBehaviour
             statuses.ApplyTimed(StatusId.Fortify, "Fortify", false, move.effectValue, move.effectDuration,
                 "Take " + Mathf.RoundToInt(move.effectValue * 100f) + "% less damage.");
         }
+        else if (move.effect == MoveEffect.Surge)
+        {
+            statuses.ApplyTimed(StatusId.Surge, "Surge", false, move.effectValue, move.effectDuration,
+                "Gain " + Mathf.RoundToInt(move.effectValue) + " extra energy at the start of each turn.");
+        }
 
         StartCoroutine(FinishAfter(0.6f)); // short pause so the buff reads
+    }
+
+    public void PerformDebuff(PlayerMove move, GameObject target)
+    {
+        BeginMove(move);
+        Debug.Log(gameObject.name + " used " + move.moveName);
+
+        PlayerState ps = target != null ? target.GetComponent<PlayerState>() : null;
+        if (ps != null && move.effect == MoveEffect.Fear)
+            ps.ApplyFear(Mathf.Max(1, move.effectDuration));
+
+        StartCoroutine(FinishAfter(0.6f));
     }
 
     private IEnumerator FinishAfter(float seconds)
@@ -409,7 +446,9 @@ public class EnemyState : MonoBehaviour
         if (actionStarted) yield break;
         actionStarted = true;
 
+        // one crit roll covers every hit of the move
         AttackRoll roll = Combat.PrepareAttack(currentMove.damage + stageDamageBonus, enemy.critChance, statuses);
+        int hits = Mathf.Max(1, currentMove.hits);
 
         Vector3 playerPosition = new Vector3(playerToAttack.transform.position.x + 1.5f, playerToAttack.transform.position.y, playerToAttack.transform.position.z);
         while (MoveTo(playerPosition)) { yield return null; }
@@ -419,8 +458,28 @@ public class EnemyState : MonoBehaviour
         PlayerState target = playerToAttack.GetComponent<PlayerState>();
         if (target != null)
         {
-            Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
-            target.TakeDamage(roll.damage, roll.isCrit);
+            for (int h = 0; h < hits; h++)
+            {
+                if (!target.IsAlive) break;
+
+                Debug.Log(gameObject.name + " used " + currentMove.moveName + " on " + playerToAttack.name);
+                float dealt = target.TakeDamage(roll.damage, roll.isCrit); // HP actually lost (0 if dodged)
+
+                // Mortal Wounds: each hit that lands has a chance to inflict bleed
+                if (dealt > 0f && target.IsAlive
+                    && currentMove.effect == MoveEffect.BleedChance
+                    && Random.value * 100f < currentMove.effectValue)
+                    target.ApplyBleedStack();
+
+                // Siphon: heal for the HP actually taken (Effect Value = fraction, 0 counts as 1)
+                if (currentMove.effect == MoveEffect.Siphon && dealt > 0f)
+                {
+                    float fraction = currentMove.effectValue > 0f ? currentMove.effectValue : 1f;
+                    Heal(dealt * fraction);
+                }
+
+                if (h < hits - 1) yield return new WaitForSeconds(0.25f);
+            }
         }
 
         while (MoveTo(startPosition)) { yield return null; }

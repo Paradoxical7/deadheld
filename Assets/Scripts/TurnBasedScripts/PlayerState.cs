@@ -29,6 +29,9 @@ public class PlayerState : MonoBehaviour
     private readonly Dictionary<PlayerMove, int> cooldowns = new Dictionary<PlayerMove, int>();
     private PlayerMove pendingMove;
 
+    public bool IsAlive { get { return currentState != TurnState.DEAD; } }
+    public bool IsFeared { get { return statuses.Has(StatusId.Fear); } }
+
     void Start()
     {
         startPosition = transform.position;
@@ -68,10 +71,12 @@ public class PlayerState : MonoBehaviour
 
     public void OnTurnStart()
     {
+        if (!TickDamageOverTime()) return; // bled out at the start of its turn
+
         GainEnergy(1f);
 
         // random chance for a bonus energy (player only)
-        if (Random.value * 100f < player.nrgGain)
+        if (!IsFeared && Random.value * 100f < player.nrgGain)
         {
             GainEnergy(1f);
             Debug.Log(player.name + " gained a bonus energy!");
@@ -95,6 +100,11 @@ public class PlayerState : MonoBehaviour
     // energy and cooldowns
     public void GainEnergy(float amount)
     {
+        if (statuses.Has(StatusId.Fear))
+        {
+            Debug.Log(player.name + " is too afraid to gain energy");
+            return;
+        }
         player.currentNRG = Mathf.Min(player.currentNRG + amount, player.baseNRG);
     }
 
@@ -265,34 +275,90 @@ public class PlayerState : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float amount, bool wasCrit = false)
+    // returns the HP actually lost (0 if dodged)
+    public float TakeDamage(float amount, bool wasCrit = false)
     {
         if (Combat.RollDodge(player.dodgeChance))
         {
             Debug.Log(player.name + " dodged the attack!");
-            return;
+            return 0f;
         }
 
         float finalDamage = amount;
         if (statuses.Has(StatusId.Guard)) { finalDamage *= (1f - guardDamageReduction); }
         if (statuses.Has(StatusId.Focus)) { finalDamage *= (1f + focusDamageIncrease); }
 
+        float dealt = Mathf.Min(finalDamage, Mathf.Max(0f, player.currentHP));
+
         player.currentHP -= finalDamage;
         Debug.Log(player.name + (wasCrit ? " took a CRITICAL hit: " : " took ") + finalDamage + " damage. HP now: " + player.currentHP);
 
-        if (player.currentHP <= 0)
-        {
-            player.currentHP = 0;
-            currentState = TurnState.DEAD;
-            Debug.Log(player.name + " has died.");
-            BSM.PlayerInBattle.Remove(this.gameObject);
-            BSM.PlayersToManage.Remove(this.gameObject);
-            gameObject.SetActive(false);
-        }
+        if (player.currentHP <= 0) Die();
+        return dealt;
     }
 
     private bool MoveTo(Vector3 target)
     {
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, animSpeed));
+    }
+
+    public void ApplyFear(int turns)
+    {
+        statuses.ApplyTimed(StatusId.Fear, "Fear", true, 0f, turns,
+            "You are terrified and cannot gain any energy.", true);
+    }
+
+    // called by the battle manager when the enemy phase begins
+    public void OnEnemyPhaseStart()
+    {
+        statuses.TickEnemyPhase();
+    }
+
+    public void ApplyBleedStack()
+    {
+        statuses.ApplyStack(StatusId.Bleed, "Bleed", true, PassiveRules.BleedBurstStacks, 0,
+            s => s + "/" + PassiveRules.BleedBurstStacks + " stacks. You take " + PassiveRules.BleedTickDamage
+                 + " damage at the start of each turn. At " + PassiveRules.BleedBurstStacks
+                 + " stacks it bursts for " + Mathf.RoundToInt(PassiveRules.BleedBurstPercent * 100f) + "% of your max HP.");
+
+        if (statuses.Stacks(StatusId.Bleed) >= PassiveRules.BleedBurstStacks)
+        {
+            statuses.Remove(StatusId.Bleed);
+            float burst = player.baseHP * PassiveRules.BleedBurstPercent;
+            Debug.Log(player.name + " bleed burst for " + burst);
+            LoseHP(burst);
+        }
+    }
+
+    // bleed hurts at the start of the player's turn. Returns false if the player died.
+    private bool TickDamageOverTime()
+    {
+        if (!statuses.Has(StatusId.Bleed)) return true;
+        Debug.Log(player.name + " bleeds for " + PassiveRules.BleedTickDamage);
+        return LoseHP(PassiveRules.BleedTickDamage);
+    }
+
+    // true damage: no dodge or guard
+    private bool LoseHP(float amount)
+    {
+        player.currentHP -= amount;
+        if (player.currentHP <= 0)
+        {
+            Die();
+            return false;
+        }
+        return true;
+    }
+
+    private void Die()
+    {
+        if (currentState == TurnState.DEAD) return;
+
+        player.currentHP = 0;
+        currentState = TurnState.DEAD;
+        Debug.Log(player.name + " has died.");
+        BSM.PlayerInBattle.Remove(this.gameObject);
+        BSM.PlayersToManage.Remove(this.gameObject);
+        gameObject.SetActive(false);
     }
 }
