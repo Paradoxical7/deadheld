@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8990572496354636426
 Transform:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     description: 
     hits: 1
   - moveName: Mortal Wounds
-    energyCost: 2
+    energyCost: 1
     damage: 6
     cooldown: 0
     kind: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
     description: 
     hits: 3
   - moveName: Siphon
-    energyCost: 2
+    energyCost: 1
     damage: 20
     cooldown: 0
     kind: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     effect: 6
     healAmount: 0
     summonPrefab: {fileID: 0}
-    effectValue: 0
+    effectValue: 1
     effectDuration: 3
     description: 
     hits: 1
@@ -273,5 +273,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1290373508a5fc44da2761a1da0dd11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyIdentity
-  role: 1
+  role: 3
   stage: 0

@@ -194,11 +194,24 @@ public class BattleStateMachine : MonoBehaviour
         Transform point = enemySpawnPoints[slot];
         GameObject enemy = Instantiate(prefab, point.position, point.rotation);
 
+        // a prefab saved with its root switched off would spawn invisible and never run Start
+        if (!enemy.activeSelf)
+        {
+            Debug.LogWarning("Prefab '" + prefab.name + "' has its root GameObject disabled. Enabling it.");
+            enemy.SetActive(true);
+        }
+
         enemySpawnCount++;
         enemy.name = prefab.name + " " + enemySpawnCount; // unique object names
 
         slotOccupants[slot] = enemy;
         RegisterEnemy(enemy, slot, prefab.name);
+
+        EnemyIdentity id = enemy.GetComponentInChildren<EnemyIdentity>(true);
+        Debug.Log("Spawned '" + enemy.name + "' from prefab '" + prefab.name + "'"
+            + " | pos=" + enemy.transform.position
+            + " | renderers=" + enemy.GetComponentsInChildren<Renderer>(true).Length
+            + " | identity role=" + (id != null ? id.role.ToString() : "none"));
         return enemy;
     }
 
