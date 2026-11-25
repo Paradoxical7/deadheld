@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public enum StatusId { Guard, Focus, Aim, Chamber, Fortify, Bleed, Poison, Coated, Adrenaline }
+public enum StatusId { Guard, Focus, Aim, Chamber, Fortify, Bleed, Poison, Coated, Adrenaline, Fear, Surge }
 
 public class StatusEffect
 {
@@ -12,6 +12,7 @@ public class StatusEffect
     public int stacks;
     public int turnsLeft;   // 0 = lasts until consumed or cleared
     public float magnitude; // e.g. 0.2 = 20%
+    public bool tickOnEnemyPhase; // counts down when the enemy phase starts (debuffs placed on the player)
 
     public string Title()
     {
@@ -56,7 +57,7 @@ public class StatusEffects
     }
 
     // timed effect: re-applying refreshes the duration
-    public void ApplyTimed(StatusId id, string displayName, bool isDebuff, float magnitude, int turns, string description)
+    public void ApplyTimed(StatusId id, string displayName, bool isDebuff, float magnitude, int turns, string description, bool tickOnEnemyPhase = false)
     {
         StatusEffect e = Find(id);
         if (e == null)
@@ -67,6 +68,7 @@ public class StatusEffects
         e.stacks = 1;
         e.magnitude = magnitude;
         e.turnsLeft = turns;
+        e.tickOnEnemyPhase = tickOnEnemyPhase;
         e.description = description;
         Changed?.Invoke();
     }
@@ -92,7 +94,21 @@ public class StatusEffects
         bool changed = false;
         for (int i = list.Count - 1; i >= 0; i--)
         {
-            if (list[i].turnsLeft <= 0) continue;
+            if (list[i].tickOnEnemyPhase || list[i].turnsLeft <= 0) continue;
+            list[i].turnsLeft--;
+            if (list[i].turnsLeft <= 0) list.RemoveAt(i);
+            changed = true;
+        }
+        if (changed) Changed?.Invoke();
+    }
+
+    // call when the enemy phase starts (counts down debuffs the enemies placed on the player)
+    public void TickEnemyPhase()
+    {
+        bool changed = false;
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            if (!list[i].tickOnEnemyPhase || list[i].turnsLeft <= 0) continue;
             list[i].turnsLeft--;
             if (list[i].turnsLeft <= 0) list.RemoveAt(i);
             changed = true;

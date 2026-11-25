@@ -8,7 +8,8 @@ public class EnemyIdentity : MonoBehaviour
     {
         Guard,
         Medic,
-        Engineer
+        Engineer,
+        Boss
     }
 
     public enum EnemyStage
@@ -49,6 +50,9 @@ public class EnemyIdentity : MonoBehaviour
                 break;
             case EnemyRole.Engineer:
                 baseColor = Color.red;
+                break;
+            case EnemyRole.Boss:
+                baseColor = new Color(0.55f, 0.1f, 0.7f);
                 break;
             default:
                 baseColor = Color.white;
