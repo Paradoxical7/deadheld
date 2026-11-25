@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool hubUnlocked = false;              // set by the guide NPC; opens the Main Hub doors
     public bool hasZoneMap = false;               // player can view the Zone 1 map (M)
 
+    private HashSet<string> storyFlags=new HashSet<string>();   // names for dialogue.json "needs"/"sets"
+
     [Header("Battle return")]
     public string returnScene;            // scene to come back to after a battle
     public Vector3 returnPosition;        // where the player stood when combat started
@@ -70,6 +72,40 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         puzzleCode = Random.Range(0, 10000).ToString("D4");
         ResetPlayerStats();
+    }
+
+    // Marks story flags as set; called when a dialogue line's "sets" fire
+    public void SetFlags(string[] flags)
+    {
+        if(flags==null) return;
+        foreach(var f in flags) storyFlags.Add(f);
+    }
+
+    // true when every flags in "needs" is already set
+    public bool HasFlags(string[] needs)
+    {
+        if (needs == null) return true; // no requirements listed, so the line is allowed
+        foreach(var f in needs) if (!storyFlags.Contains(f)) return false;
+        return true;
+    }
+
+    
+
+    // Which timer stage we are in. Matches "stage" in dialogue.json.
+    public string GetStage()
+    {
+        // Before the guides gives the parasite, the clock is always green.
+        if(!parasiteActive) return "G";
+
+        // How much of the meter is left, from 0 to 1.
+        float left = parasiteCurrent / parasiteMax;
+        
+        // if parasiteCurrent has more than 2/3 of the time left play green line
+        if(left > 2f/3f) return "G";
+        // if parasiteCurrent has more than 1/3 of the timer left play yellow line
+        if(left > 1f/3f) return "Y";
+        // if parasiteCurrent has less than 1/3 of the timer left play red line
+        return "R";
     }
 
     // fresh run: full health and stamina
