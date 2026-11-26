@@ -19,6 +19,10 @@ public class BattleEnemyLook : MonoBehaviour
 
         foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             foreach (var r in enemy.GetComponentsInChildren<Renderer>())
+            {
+                // a textured model (like the Guard) brings its own battle material, so leave it alone
+                if (r.sharedMaterial != null && r.sharedMaterial.HasProperty("_BaseMap") && r.sharedMaterial.GetTexture("_BaseMap") != null) continue;
                 if (r.sharedMaterial != enemyMaterial) r.sharedMaterial = enemyMaterial;
+            }
     }
 }
