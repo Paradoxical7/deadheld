@@ -15,6 +15,8 @@ public class NpcPatrol : MonoBehaviour
     private NpcInteract npc;
     private bool towardB;
     private float pauseUntil;
+    // Where she stood last frame; if she moved since, she is walking.
+    private Vector3 lastPosition;
 
     private void Awake() { npc = GetComponent<NpcInteract>(); }
 
@@ -43,6 +45,14 @@ public class NpcPatrol : MonoBehaviour
 
         TurnTowards(toTarget);
         transform.position = Vector3.MoveTowards(transform.position, target, walkSpeed * Time.deltaTime);
+    }
+    // Runs after Update has moved her, so it sees this fram's final position
+    private void LateUpdate()
+    {
+        float speed=Vector3.Distance(transform.position, lastPosition)/Time.deltaTime;
+        lastPosition=transform.position;
+        if(npc.NpcAnimator!=null) npc.NpcAnimator.SetBool("Walking", speed>0.1f);
+        
     }
 
     private void TurnTowards(Vector3 direction)
