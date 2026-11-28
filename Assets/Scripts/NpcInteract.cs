@@ -9,7 +9,8 @@ public class NpcInteract : MonoBehaviour
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private ZoneMapUI zoneMap;
     [SerializeField] private float promptHeight = 2.1f;
-
+    // Optional: the NPC's Animator, so talking can switch her into the Talk animation
+    [SerializeField] private Animator npcAnimator;
     [SerializeField, TextArea] private string[] lines =
     {
         "You're awake... good. Not many come out of cryo anymore.",
@@ -31,6 +32,8 @@ public class NpcInteract : MonoBehaviour
     // NpcPatrol stops walking while the player is close or talking.
     public bool Busy => playerInside || talking;
     public Transform Player => player != null ? player.transform : null;
+    // Npc Patrol reads this to switch the walk animation on and off
+    public Animator NpcAnimator=>npcAnimator;
 
     // Play Mode Options skips the reload, so these keep their last-session values.
     private void OnEnable() { playerInside = false; talking = false; lineIndex = 0; }
@@ -87,6 +90,8 @@ public class NpcInteract : MonoBehaviour
         dialogueText.text = current[0];
         dialoguePanel.SetActive(true);
         LockPlayer(true);
+        // Switch the NPC into her Talk animation while the panel is open.
+        if(npcAnimator!=null) npcAnimator.SetBool("Talking", true);
     }
 
     private void NextLine()
@@ -102,6 +107,10 @@ public class NpcInteract : MonoBehaviour
         talking = false;
         dialoguePanel.SetActive(false);
         LockPlayer(false);
+
+        // Back to idle; placed beffore the early return so Escape also stops
+        // the Talk animation.
+        if(npcAnimator!=null) npcAnimator.SetBool("Talking", false);
 
         var gm = GameManager.Instance;
         if (!finished || gm == null) return;
