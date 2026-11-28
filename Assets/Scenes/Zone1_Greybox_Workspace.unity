@@ -7747,7 +7747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &562944710
 Transform:
   m_ObjectHideFlags: 0
@@ -29272,7 +29272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1795287425
 Transform:
   m_ObjectHideFlags: 0
@@ -32833,6 +32833,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024224581}
   m_CullTransparentMesh: 1
+--- !u!1001 &2024318559
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2103573980}
+    m_Modifications:
+    - target: {fileID: 5975604824183475966, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_Name
+      value: Minerva
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+--- !u!4 &2024318560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6459934561678742596, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+  m_PrefabInstance: {fileID: 2024318559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2024318561 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1100673353890172478, guid: 70bb112ebb3c66a44b41351e6d665f06, type: 3}
+  m_PrefabInstance: {fileID: 2024318559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2035854640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34153,6 +34220,7 @@ Transform:
   - {fileID: 562944710}
   - {fileID: 1795287425}
   - {fileID: 456335946}
+  - {fileID: 2024318560}
   m_Father: {fileID: 867034029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2103573981
@@ -34172,6 +34240,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1078312131}
   zoneMap: {fileID: 1703158453}
   promptHeight: 2.1
+  npcAnimator: {fileID: 2024318561}
   lines:
   - You're awake... good. Not many come out of cryo anymore.
   - The Main Hub is sealed. I've patched my access into its doors - they'll open for you now.
